@@ -32,6 +32,13 @@ Route::get('/admin/UbahJenisJasa{id_jenisJasa}','MengelolaJenisJasaController@ed
 Route::post('/admin/AksiUbahJenisJasa{id_jenisJasa}','MengelolaJenisJasaController@update');
 Route::get('/admin/HapusJenisJasa{id_jenisJasa}','MengelolaJenisJasaController@delete');
 
+Route::get('/admin/MengelolaArea','MengelolaAreaController@index');
+Route::get('/admin/TambahArea','MengelolaAreaController@tambah');
+Route::post('/admin/AksiTambahArea','MengelolaAreaController@store');
+Route::get('/admin/UbahArea{id_area}','MengelolaAreaController@edit');
+Route::post('/admin/AksiUbahArea{id_area}','MengelolaAreaController@update');
+Route::get('/admin/HapusArea{id_area}','MengelolaAreaController@delete');
+
 //----------------------Admin---------------------//
 
 

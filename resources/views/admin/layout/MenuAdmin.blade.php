@@ -28,7 +28,14 @@
           <span>Jenis Jasa</span>
         </a>  
       </li>
-      
+
+      <li class="nav-item {{ Request::is('admin/MengelolaArea')? "active":""}}">
+        <a class="nav-link" href="{{url ('admin/MengelolaArea')}}">
+          <i class="fas fa-fw fa-palette"></i>
+          <span>Area</span>
+        </a>  
+      </li>
+
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap1"
           aria-expanded="true" aria-controls="collapseBootstrap1">
