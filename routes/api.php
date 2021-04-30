@@ -37,13 +37,25 @@ Route::put('customer/{id_customer}', 'API\CustomerController@update');
 // Menghapus Customer
 Route::delete('customer/{id_customer}', 'API\CustomerController@destroy');
 
-// Ambil Semua Data Jenis jasa
-Route::get('jenis_jasa', 'API\jenis_jasaController@index');
-// Membuat Customer Baru
-Route::post('jenis_jasa', 'API\jenis_jasaController@store');
-// Mengambil Satu jenis_jasa
-Route::get('jenis_jasa/{id_jenis_jasa}', 'API\jenis_jasaController@show');
-// Mengubah jenis_jasa
-Route::put('jenis_jasa/{id_jenis_jasa}', 'API\jenis_jasaController@update');
-// Menghapus jenis_jasa
-Route::delete('jenis_jasa/{id_jenis_jasa}', 'API\jenis_jasaController@destroy');
+// Ambil Semua Data Admin
+Route::get('admin', 'API\AdminController@index');
+// Membuat Admin Baru
+Route::post('admin', 'API\AdminController@store');
+// Mengambil Satu Admin
+Route::get('admin/{id_admin}', 'API\AdminController@show');
+// Mengubah Admin
+Route::put('admin/{id_admin}', 'API\AdminController@update');
+// Menghapus Admin
+Route::delete('admin/{id_admin}', 'API\AdminController@destroy');
+
+// Ambil Semua Jasa
+Route::get('jenis', 'API\JenisJasaController@index');
+// Membuat Jasa Baru
+Route::post('jenis', 'API\JenisJasaController@store');
+// Mengambil Satu Jasa
+Route::get('jenis/{id_jenisjasa}', 'API\JenisJasaController@show');
+// Mengubah Jasa
+Route::put('jenis/{id_jenisjasa}', 'API\JenisJasaController@update');
+// Menghapus Jasa
+Route::delete('jenis/{id_jenisjasa}', 'API\JenisJasaController@destroy');
+
