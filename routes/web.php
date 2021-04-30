@@ -45,6 +45,19 @@ Route::get('/admin/HapusCustomer{id_customer}','MengelolaCustomerController@dele
 
 //----------------------Admin---------------------//
 
+//----------------------TenagaKerja-----------------//
+
+Route::get('/tenagakerja', function () {
+    return view('/tenagakerja/halaman/TenagaKerja');
+});
+
+Route::get('/tenagakerja/RegisterTenagakerja','TenagakerjaController@tambah');
+Route::post('/tenagakerja/AksiTambahTenagakerja','TenagaKerjaController@store');
+Route::get('/tenagakerja/UbahTenagakerja{id_tenagaKerja}','TenagaKerjaController@edit');
+Route::post('/tenagakerja/AksiUbahTenagakerja{id_tenagaKerja}','TenagaKerjaController@update');
+
+//----------------------TenagaKerja-----------------//
+
 
 Route::get('/', function () {
     return view('index');
