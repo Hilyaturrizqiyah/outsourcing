@@ -59,3 +59,4 @@ Route::get('/pengguna_jasa/index', function () {
 });
 
 Route::get('/','UtamaController@tampil');
+Route::get('/index/area/cari','UtamaController@cari');
