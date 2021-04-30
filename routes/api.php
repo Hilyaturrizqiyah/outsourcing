@@ -47,3 +47,15 @@ Route::get('admin/{id_admin}', 'API\AdminController@show');
 Route::put('admin/{id_admin}', 'API\AdminController@update');
 // Menghapus Admin
 Route::delete('admin/{id_admin}', 'API\AdminController@destroy');
+
+// Ambil Semua Jasa
+Route::get('jenis', 'API\JenisJasaController@index');
+// Membuat Jasa Baru
+Route::post('jenis', 'API\JenisJasaController@store');
+// Mengambil Satu Jasa
+Route::get('jenis/{id_jenisjasa}', 'API\JenisJasaController@show');
+// Mengubah Jasa
+Route::put('jenis/{id_jenisjasa}', 'API\JenisJasaController@update');
+// Menghapus Jasa
+Route::delete('jenis/{id_jenisjasa}', 'API\JenisJasaController@destroy');
+
