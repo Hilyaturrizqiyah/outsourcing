@@ -24,3 +24,5 @@ Route::get('/login', function () {
 Route::get('/pengguna_jasa/index', function () {
     return view('/pengguna_jasa/index');
 });
+
+Route::get('/','UtamaController@tampil');

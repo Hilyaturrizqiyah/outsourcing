@@ -117,54 +117,24 @@
         </div>
 
         <div class="row">
+            @foreach ($jasa as $jasa)
           <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mt-3 mb-lg-0">
             <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
               <div class="icon"><i class="fas fa-user-shield"></i></div>
-              <h4 class="title"><a href="">SECURITY CONSULTANT</a></h4>
+              <h4 class="title"><a href="">{{$jasa->nama_jasa}}</a></h4>
               <p class="description">Memberikan pelayanan konsultasi untuk pengamanan gedung,
                   perkantoran perusahaan dan pribadi di seluruh Indonesia dengan biaya yang murah
                   terjangkau melalui penawaran outsourcing jasa satpam security yang tersedia di seluruh
                   Indonesia dengan harga yang fleksibel.</p>
             </div>
           </div>
-
-          <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mt-3 mb-lg-0">
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
-              <div class="icon"><i class="fas fa-users"></i></div>
-              <h4 class="title"><a href="">DRIVER BODYGUARD</a></h4>
-              <p class="description"> Menyediakan satuan khusus sebagai driver (sopir pribadi) yang merangkap
-                  sebagai bodyguard (pengawal pribadi) yang dilatih secara khusus oleh personel terlatih untuk
-                  pengawalan personal, VVIP atau individual lain yang sesuai yang anda inginkan.</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mt-3 mb-lg-0">
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
-              <div class="icon"><i class="fas fa-users-cog"></i></div>
-              <h4 class="title"><a href="">BACK OFFICE STAFF</a></h4>
-              <p class="description">Menyediakan tenaga kerja handal untuk bidang operational harian di area back
-                  office seperti: cleaning service, office boy, operator produksi, kurir, storage keeper, staff administrasi,
-                  penjaga gudang, buruh produksi, accounting, IT support, Teknisi dst.</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mt-3 mb-lg-0">
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="400">
-              <div class="icon"><i class="fas fa-male"></i></div>
-              <h4 class="title"><a href="">JASA SECURITY</a></h4>
-              <p class="description">Menyiapkan petugas personel satuan satpam security terlatih,
-                  professional dan terampil yang bisa di tempatkan di berbagai area perusahaan
-                  (gedung, perumahan, pusat perbelanjaan, kantor dll). Outsourcing satpam security kami
-                  sangat bisa untuk andalkan.</p>
-            </div>
-          </div>
-
+          @endforeach
         </div>
 
       </div>
     </section><!-- End Services Section -->
 
-    
+
     <!-- ======= Team Section ======= -->
     <section id="team" class="team section-bg">
       <div class="container">

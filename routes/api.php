@@ -36,3 +36,14 @@ Route::get('customer/{id_customer}', 'API\CustomerController@show');
 Route::put('customer/{id_customer}', 'API\CustomerController@update');
 // Menghapus Customer
 Route::delete('customer/{id_customer}', 'API\CustomerController@destroy');
+
+// Ambil Semua Data Jenis jasa
+Route::get('jenis_jasa', 'API\jenis_jasaController@index');
+// Membuat Customer Baru
+Route::post('jenis_jasa', 'API\jenis_jasaController@store');
+// Mengambil Satu jenis_jasa
+Route::get('jenis_jasa/{id_jenis_jasa}', 'API\jenis_jasaController@show');
+// Mengubah jenis_jasa
+Route::put('jenis_jasa/{id_jenis_jasa}', 'API\jenis_jasaController@update');
+// Menghapus jenis_jasa
+Route::delete('jenis_jasa/{id_jenis_jasa}', 'API\jenis_jasaController@destroy');

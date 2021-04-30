@@ -13,6 +13,7 @@ class CustomerTableSeeder extends Seeder
     public function run()
     {
         $customer = new CustomerModel();
+            $customer->id_area = 1;
             $customer->nama_customer = "Zulfa Khoerul";
             $customer->alamat = "Indramayu";
             $customer->no_telp = "089123456789";
@@ -21,6 +22,7 @@ class CustomerTableSeeder extends Seeder
             $customer->save();
 
             $customer2 = new CustomerModel();
+            $customer2->id_area = 1;
             $customer2->nama_customer = "Hilya";
             $customer2->alamat = "Indramayu";
             $customer2->no_telp = "089123456456";
