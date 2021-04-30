@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\jasaModel;
 use App\jenis_jasaModel;
+use App\AreaModel;
 use Illuminate\Http\Request;
 
 class UtamaController extends Controller
@@ -32,4 +33,16 @@ class UtamaController extends Controller
     // 		// mengirim data pegawai ke view index
 	// 	return view('/obat', compact('Obat'));
     // }
+
+    public function cari(Request $request)
+	{
+		// menangkap data pencarian
+		$cari = $request->cari;
+
+    		// mengambil data dari table pegawai sesuai pencarian data
+        $area = AreaModel::where('kecamatan','like',"%".$cari."%")->paginate();
+
+    		// mengirim data pegawai ke view index
+		return view('index', compact('area'));
+	}
 }
