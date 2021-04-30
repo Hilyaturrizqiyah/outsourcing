@@ -22,6 +22,13 @@
         </a>  
       </li>
 
+      <li class="nav-item {{ Request::is('admin/MengelolaCustomer')? "active":""}}">
+        <a class="nav-link" href="{{url ('admin/MengelolaCustomer')}}">
+          <i class="fas fa-fw fa-palette"></i>
+          <span>Customer</span>
+        </a>  
+      </li>
+
       <li class="nav-item {{ Request::is('admin/MengelolaJenisJasa')? "active":""}}">
         <a class="nav-link" href="{{url ('admin/MengelolaJenisJasa')}}">
           <i class="fas fa-fw fa-palette"></i>
@@ -35,6 +42,12 @@
           <span>Area</span>
         </a>  
       </li>
+
+
+
+
+
+
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap1"

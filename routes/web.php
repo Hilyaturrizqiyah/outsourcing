@@ -39,6 +39,10 @@ Route::get('/admin/UbahArea{id_area}','MengelolaAreaController@edit');
 Route::post('/admin/AksiUbahArea{id_area}','MengelolaAreaController@update');
 Route::get('/admin/HapusArea{id_area}','MengelolaAreaController@delete');
 
+Route::get('/admin/MengelolaCustomer','MengelolaCustomerController@index');
+Route::get('/admin/HapusCustomer{id_customer}','MengelolaCustomerController@delete');
+
+
 //----------------------Admin---------------------//
 
 
