@@ -37,6 +37,16 @@ Route::put('customer/{id_customer}', 'API\CustomerController@update');
 // Menghapus Customer
 Route::delete('customer/{id_customer}', 'API\CustomerController@destroy');
 
+// Ambil Semua Data Admin
+Route::get('admin', 'API\AdminController@index');
+// Membuat Admin Baru
+Route::post('admin', 'API\AdminController@store');
+// Mengambil Satu Admin
+Route::get('admin/{id_admin}', 'API\AdminController@show');
+// Mengubah Admin
+Route::put('admin/{id_admin}', 'API\AdminController@update');
+// Menghapus Admin
+Route::delete('admin/{id_admin}', 'API\AdminController@destroy');
 
 // Ambil Semua Jasa
 Route::get('jenis', 'API\JenisJasaController@index');
@@ -48,3 +58,4 @@ Route::get('jenis/{id_jenisjasa}', 'API\JenisJasaController@show');
 Route::put('jenis/{id_jenisjasa}', 'API\JenisJasaController@update');
 // Menghapus Jasa
 Route::delete('jenis/{id_jenisjasa}', 'API\JenisJasaController@destroy');
+
