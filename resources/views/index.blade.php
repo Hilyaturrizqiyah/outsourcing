@@ -211,21 +211,7 @@
         </center>
         <br> <br>
         <div class="row">
-        @foreach($area as $area)
-        <div class="col-lg-6 col-md-4 mb-4 mb-lg-4" data-aos="fade-up">
-            <div class="block-team-member-1 text-left rounded">
-            @if(isset($area->kecamatan))
-                            <span class="badge badge-success">Tersedia</span>
-                        @elseif($area->kota_kabupaten)
-                            <td><span class="badge badge-danger">Tersedia</span></td><br>
-                          @else
-                          <td><span class="badge badge-danger">Belum Tersedia</span></td><br>
-                        @endif
-                       
-            </div>
-        </div>   
-        <br> <br>
-        @endforeach
+        
         </div>
           <div class="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="100">
             <div class="contact-about">
