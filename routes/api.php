@@ -25,6 +25,7 @@ Route::put('area/{id_area}', 'API\AreaController@update');
 // Menghapus area
 Route::delete('area/{id_area}', 'API\AreaController@destroy');
 
+---
 
 // Ambil Semua Data Customer
 Route::get('customer', 'API\CustomerController@index');
@@ -37,6 +38,8 @@ Route::put('customer/{id_customer}', 'API\CustomerController@update');
 // Menghapus Customer
 Route::delete('customer/{id_customer}', 'API\CustomerController@destroy');
 
+---
+
 // Ambil Semua Data Admin
 Route::get('admin', 'API\AdminController@index');
 // Membuat Admin Baru
@@ -47,6 +50,8 @@ Route::get('admin/{id_admin}', 'API\AdminController@show');
 Route::put('admin/{id_admin}', 'API\AdminController@update');
 // Menghapus Admin
 Route::delete('admin/{id_admin}', 'API\AdminController@destroy');
+
+---
 
 // Ambil Semua Jasa
 Route::get('jenis', 'API\JenisJasaController@index');
@@ -59,3 +64,39 @@ Route::put('jenis/{id_jenisjasa}', 'API\JenisJasaController@update');
 // Menghapus Jasa
 Route::delete('jenis/{id_jenisjasa}', 'API\JenisJasaController@destroy');
 
+---
+
+// Ambil Semua Outsourcing
+Route::get('outsourcing', 'API\OutsourcingController@index');
+// Membuat Outsourcing Baru
+Route::post('outsourcing', 'API\OutsourcingController@store');
+// Mengambil Satu Outsourcing
+Route::get('outsourcing/{id_outsourcing}', 'API\OutsourcingController@show');
+// Mengubah Outsourcing
+Route::put('outsourcing/{id_outsourcing}', 'API\OutsourcingController@update');
+// Menghapus Outsourcing
+Route::delete('outsourcing/{id_outsourcing}', 'API\OutsourcingController@destroy');
+
+---
+
+// Ambil Semua Outsourcing
+Route::get('outsourcing', 'API\OutsourcingController@index');
+// Membuat Outsourcing Baru
+Route::post('outsourcing', 'API\OutsourcingController@store');
+// Mengambil Satu Outsourcing
+Route::get('outsourcing/{id_outsourcing}', 'API\OutsourcingController@show');
+// Mengubah Outsourcing
+Route::put('outsourcing/{id_outsourcing}', 'API\OutsourcingController@update');
+// Menghapus Outsourcing
+Route::delete('outsourcing/{id_outsourcing}', 'API\OutsourcingController@destroy');
+
+---
+
+// Ambil Semua DataKeluarga
+Route::get('datakeluarga', 'API\DataKeluargaController@index');
+// Membuat DataKeluarga Baru
+Route::post('datakeluarga', 'API\DataKeluargaController@store');
+// Mengambil Satu DataKeluarga
+Route::get('datakeluarga/{id_data_keluarga}', 'API\DataKeluargaController@show');
+// Mengubah DataKeluarga
+Route::put('datakeluarga/{id_data_keluarga}', 'API\DataKeluargaController@update');
