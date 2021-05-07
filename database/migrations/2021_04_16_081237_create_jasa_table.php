@@ -17,6 +17,7 @@ class CreateJasaTable extends Migration
             $table->id('id_jasa');
             $table->foreignId('id_jenisJasa');
             $table->string('nama_jasa');
+            $table->string('foto_profil')->nullable();
             $table->timestamps();
 
             $table->foreign('id_jenisJasa')->references('id_jenisJasa')->on('jenis_jasa');

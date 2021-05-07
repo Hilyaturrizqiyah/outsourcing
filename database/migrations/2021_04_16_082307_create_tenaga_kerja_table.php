@@ -15,13 +15,14 @@ class CreateTenagaKerjaTable extends Migration
     {
         Schema::create('tenaga_kerja', function (Blueprint $table) {
             $table->id('id_tenagaKerja');
-            $table->foreignId('id_area');
-            $table->foreignId('id_jasa');
+            $table->foreignId('id_area')->nullable();
+            $table->foreignId('id_jasa')->nullable();
             $table->string('nama_tenagaKerja');
             $table->string('no_ktp');
             $table->string('email');
             $table->string('password');
             $table->string('status_tenagaKerja');
+            $table->string('foto_profil')->nullable();
             $table->timestamps();
 
             $table->foreign('id_area')->references('id_area')->on('area');

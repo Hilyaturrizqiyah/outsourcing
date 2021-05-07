@@ -19,7 +19,8 @@ class CreateDataKeluargaTable extends Migration
             $table->string('nama_keluarga');
             $table->string('status_keluarga');
             $table->string('pekerjaan');
-            $table->string('ttl');
+            $table->string('tempat_lahir');
+            $table->date('tanggal_lahir');
             $table->timestamps();
 
             $table->foreign('id_tenagaKerja')->references('id_tenagaKerja')->on('tenaga_kerja');

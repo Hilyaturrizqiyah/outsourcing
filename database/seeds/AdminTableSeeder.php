@@ -17,7 +17,7 @@ class AdminTableSeeder extends Seeder
         $admin->alamat = "Cirebon";
         $admin->no_telp = "0987654321";
         $admin->email = "rizqi@gmail.com";
-        $admin->password = "12345678";
+        $admin->password = bcrypt('12345678');
         $admin->save();
     }
 }
