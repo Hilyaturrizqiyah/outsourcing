@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\CustomerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -13,10 +14,21 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+//==================Mobile Customer=========
+Route::middleware('auth:sanctum')->group(function(){
+    Route::get('customer', [CustomerController::class, 'fetch']);
+    Route::post('customer', [CustomerController::class, 'updateProfile']);
+    Route::post('customer/photo', [CustomerController::class, 'updatePhoto']);
+    Route::post('logout', [CustomerController::class, 'logout']);
+});
 
-// Ambil Semua Data Customer
+Route::post('login', [CustomerController::class, 'login']);
+Route::post('register', [CustomerController::class, 'register']);
+
+
+// Ambil Semua Data area
 Route::get('area', 'API\AreaController@index');
-// Membuat Customer Baru
+// Membuat area Baru
 Route::post('area', 'API\AreaController@store');
 // Mengambil Satu area
 Route::get('area/{id_area}', 'API\AreaController@show');
