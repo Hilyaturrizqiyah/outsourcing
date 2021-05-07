@@ -10,4 +10,8 @@ class biaya_tenagaModel extends Model
     protected $primaryKey = 'id_biayaTenaga';
     protected $fillable = ['id_jasa', 'nama_biayaTenaga', 'biaya'];
 
+    public function jasa() {
+        return $this->belongsTo(jasaModel::class,'id_jasa');
+    }
+
 }

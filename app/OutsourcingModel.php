@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class outsourcingModel extends Model
+class OutsourcingModel extends Model
 {
     protected $table = 'outsourcing';
     protected $primaryKey = 'id_area';

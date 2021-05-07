@@ -74,4 +74,5 @@ Route::get('/pengguna_jasa/index', function () {
     return view('/pengguna_jasa/index');
 });
 
-?>
+Route::get('/','UtamaController@tampil');
+Route::get('/index/area/cari','UtamaController@cari');
