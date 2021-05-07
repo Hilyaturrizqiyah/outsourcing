@@ -18,7 +18,8 @@ class CreatePendNonFormalTable extends Migration
             $table->foreignId('id_tenagaKerja');
             $table->string('kursus');
             $table->string('nama_institusi');
-            $table->string('periode');
+            $table->string('periode_masuk');
+            $table->string('periode_keluar');
             $table->string('lokasi');
             $table->timestamps();
 

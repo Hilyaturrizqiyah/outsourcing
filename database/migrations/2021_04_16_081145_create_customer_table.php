@@ -21,6 +21,7 @@ class CreateCustomerTable extends Migration
             $table->string('no_telp');
             $table->string('email');
             $table->string('password');
+            $table->string('foto_profil');
             $table->timestamps();
 
             $table->foreign('id_area')->references('id_area')->on('area');

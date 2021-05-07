@@ -25,6 +25,14 @@ class CreateOutsourcingTable extends Migration
             $table->string('no_rekening');
             $table->string('email');
             $table->string('password');
+            $table->string('scan_siup');
+            $table->string('scan_tdp');
+            $table->string('scan_ktp');
+            $table->string('no_siup');
+            $table->string('no_tdp');
+            $table->string('no_ktp');
+            $table->string('foto_profil');
+            $table->string('status_outsourcing');
             $table->timestamps();
 
             $table->foreign('id_area')->references('id_area')->on('area');

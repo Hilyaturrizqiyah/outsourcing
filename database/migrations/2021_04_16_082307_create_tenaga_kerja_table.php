@@ -22,6 +22,7 @@ class CreateTenagaKerjaTable extends Migration
             $table->string('email');
             $table->string('password');
             $table->string('status_tenagaKerja');
+            $table->string('foto_profil');
             $table->timestamps();
 
             $table->foreign('id_area')->references('id_area')->on('area');

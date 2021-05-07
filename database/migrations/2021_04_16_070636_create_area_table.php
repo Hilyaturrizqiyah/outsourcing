@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateJasaTable extends Migration
+class CreateAreaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,13 @@ class CreateJasaTable extends Migration
      */
     public function up()
     {
-        Schema::create('jasa', function (Blueprint $table) {
-            $table->id('id_jasa');
-            $table->foreignId('id_jenisJasa');
-            $table->string('nama_jasa');
-            $table->string('foto_profil');
+        Schema::create('area', function (Blueprint $table) {
+            $table->id('id_area');
+            $table->foreignId('id_kotaKabupaten');
+            $table->string('nama_area');
             $table->timestamps();
 
-            $table->foreign('id_jenisJasa')->references('id_jenisJasa')->on('jenis_jasa');
-
+            $table->foreign('id_kotaKabupaten')->references('id')->on('kota_kabupaten');
         });
     }
 
@@ -32,6 +30,6 @@ class CreateJasaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jasa');
+        Schema::dropIfExists('area');
     }
 }
