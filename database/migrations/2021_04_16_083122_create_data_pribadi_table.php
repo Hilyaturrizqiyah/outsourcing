@@ -20,7 +20,8 @@ class CreateDataPribadiTable extends Migration
             $table->string('nama_lengkap');
             $table->string('nama_panggilan');
             $table->string('foto');
-            $table->string('ttl');
+            $table->string('tempat_lahir');
+            $table->date('tanggal_lahir');
             $table->string('alamat_rumah');
             $table->string('agama');
             $table->string('kewarganegaraan');

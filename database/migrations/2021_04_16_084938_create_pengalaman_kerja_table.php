@@ -17,7 +17,8 @@ class CreatePengalamanKerjaTable extends Migration
             $table->id('id_pengalaman');
             $table->foreignId('id_tenagaKerja');
             $table->string('nama_perusahaan');
-            $table->string('periode');
+            $table->string('periode_masuk');
+            $table->string('periode_keluar');
             $table->string('posisi');
             $table->integer('gaji');
             $table->string('alasan_berhenti');
