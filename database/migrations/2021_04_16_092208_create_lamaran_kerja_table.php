@@ -17,7 +17,7 @@ class CreateLamaranKerjaTable extends Migration
             $table->id('id_lamaran');
             $table->foreignId('id_tenagaKerja');
             $table->foreignId('id_jasa');
-            $table->date('waktu_diterima');
+            $table->date('waktu_diterima')->nullable();
             $table->string('status_lamaran');
             $table->timestamps();
 

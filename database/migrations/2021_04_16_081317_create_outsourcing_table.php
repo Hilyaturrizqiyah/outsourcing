@@ -15,23 +15,23 @@ class CreateOutsourcingTable extends Migration
     {
         Schema::create('outsourcing', function (Blueprint $table) {
             $table->id('id_outsourcing');
-            $table->foreignId('id_area');
-            $table->foreignId('id_admin');
+            $table->foreignId('id_area')->nullable();
+            $table->foreignId('id_admin')->nullable();
             $table->string('nama_outsourcing');
             $table->string('alamat');
             $table->string('no_telp');
-            $table->string('nama_pemilikRekening');
-            $table->string('nama_bank');
-            $table->string('no_rekening');
+            $table->string('nama_pemilikRekening')->nullable();
+            $table->string('nama_bank')->nullable();
+            $table->string('no_rekening')->nullable();
             $table->string('email');
             $table->string('password');
-            $table->string('scan_siup');
-            $table->string('scan_tdp');
-            $table->string('scan_ktp');
-            $table->string('no_siup');
-            $table->string('no_tdp');
-            $table->string('no_ktp');
-            $table->string('foto_profil');
+            $table->string('scan_siup')->nullable();
+            $table->string('scan_tdp')->nullable();
+            $table->string('scan_ktp')->nullable();
+            $table->string('no_siup')->nullable();
+            $table->string('no_tdp')->nullable();
+            $table->string('no_ktp')->nullable();
+            $table->string('foto_profil')->nullable();
             $table->string('status_outsourcing');
             $table->timestamps();
 
