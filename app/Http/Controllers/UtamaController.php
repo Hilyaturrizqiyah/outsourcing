@@ -40,7 +40,7 @@ class UtamaController extends Controller
 		$cari = $request->cari;
 
     		// mengambil data dari table pegawai sesuai pencarian data
-        $area = AreaModel::where('kecamatan','like',"%".$cari."%")->paginate();
+        $area = AreaModel::where('nama_area','like',"%".$cari."%")->paginate();
 
     		// mengirim data pegawai ke view index
 		return view('index', compact('area'));

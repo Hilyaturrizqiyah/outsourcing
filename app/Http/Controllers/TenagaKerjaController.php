@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\tenaga_kerjaModel;
 use App\data_pribadiModel;
-use App\data_keluargaModel;
+use App\DataKeluargaModel;
+use App\pendidikan_formalModel;
 
 use Illuminate\Http\Request;
 use Session;
@@ -66,10 +67,10 @@ class TenagaKerjaController extends Controller
             $countDataPribadi = data_pribadiModel::where('id_tenagaKerja',$id_tenagaKerja)->count();
             $dataPribadi = data_pribadiModel::where('id_tenagaKerja',$id_tenagaKerja)->get();
             
-            $countDataKeluarga = data_keluargaModel::where('id_tenagaKerja',$id_tenagaKerja)->count();
-            $dataKeluarga = data_keluargaModel::where('id_tenagaKerja',$id_tenagaKerja)->get();
+            $countDataKeluarga = DataKeluargaModel::where('id_tenagaKerja',$id_tenagaKerja)->count();
+            $dataKeluarga = DataKeluargaModel::where('id_tenagaKerja',$id_tenagaKerja)->get();
             
-        	return view('tenagakerja.halaman.TenagaKerja',compact('datas','id_tenagaKerja','countDataPribadi','dataPribadi','countDataKeluarga','dataKeluarga'));
+        	return view('tenagakerja.halaman.ProfilTenagaKerja',compact('datas','id_tenagaKerja','countDataPribadi','dataPribadi','countDataKeluarga','dataKeluarga'));
         }
     }
 
@@ -112,7 +113,30 @@ class TenagaKerjaController extends Controller
         $data->status_tenagaKerja = "Pelamar";
     	$data->save();
 
-    	return redirect('/tenagakerja/LoginTenagaKerja')->with('alert-success','Data berhasil ditambahkan!');
+    	return redirect('/tenagakerja/LoginTenagaKerja')->with('alert-success','Data Akun berhasil ditambahkan!');
+    }
+
+    public function edit() {
+
+        if(!Session::get('loginTenagaKerja')){
+            return redirect('tenagakerja/LoginTenagakerja')->with('alert','Anda harus login dulu');
+        }
+        else{
+            $id_tenagaKerja = Session::get('id_tenagaKerja');
+            $datas = tenaga_kerjaModel::find($id_tenagaKerja);
+            
+            $countDataPribadi = data_pribadiModel::where('id_tenagaKerja',$id_tenagaKerja)->count();
+            $dataPribadi = data_pribadiModel::where('id_tenagaKerja',$id_tenagaKerja)->get();
+            
+            $countDataKeluarga = DataKeluargaModel::where('id_tenagaKerja',$id_tenagaKerja)->count();
+            $dataKeluarga = DataKeluargaModel::where('id_tenagaKerja',$id_tenagaKerja)->get();
+
+            $countPddkFormal = pendidikan_formalModel::where('id_tenagaKerja',$id_tenagaKerja)->count();
+            $pddkFormal = pendidikan_formalModel::where('id_tenagaKerja',$id_tenagaKerja)->get();
+            
+        	return view('tenagakerja.halaman.UbahProfilTenagaKerja',compact('datas','id_tenagaKerja','countDataPribadi','dataPribadi','countDataKeluarga','dataKeluarga','countPddkFormal','pddkFormal'));
+        }
+        
     }
 
     public function update($id_tenagaKerja, Request $request) {
@@ -124,30 +148,40 @@ class TenagaKerjaController extends Controller
             'unique' => ':attribute sudah ada',
             'email' => ':attribute harus berupa email',
             'image' => ':attribute harus berupa gambar',
+            'foto_profil.max' => 'tidak boleh lebih 2 Mb'
         ];
 
     	$this->validate($request, [
     		'nama_tenagaKerja' => 'nullable|max:50',
     		'no_ktp' => 'nullable|numeric|digits_between:0,50',
             'email' => 'nullable|email|max:50',
-    		'password' => 'nullable|max:255'
+    		'password' => 'nullable|max:255',
+            'foto_profil' => 'nullable|image|max:2048'
     	], $messages);
+
+        
 
         $datas = tenaga_kerjaModel::find($id_tenagaKerja);
         $datas->nama_tenagaKerja = $request->nama_tenagaKerja;
         $datas->no_ktp = $request->no_ktp;
         $datas->email = $request->email;        
         $datas->password = bcrypt($request->password);
+
+        if (empty($request->foto_profil)){
+            $datas->foto_profil = $datas->foto_profil;
+        }
+        else{
+            $file = $request->file('foto_profil'); // menyimpan data gambar yang diupload ke variabel $file
+            $nama_file = time()."_".$file->getClientOriginalName();
+            $file->move('pengguna/assets/images/foto_profil',$nama_file); // isi dengan nama folder tempat kemana file diupload
+            
+            $datas->foto_profil = $nama_file;
+
+        }
+
         $datas->save();
 
-        return redirect('/tenagaKerja')->with('alert-success','Data berhasil diubah!');
+        return redirect('/tenagakerja/UbahProfilTenagaKerja')->with('alert-success','Data Akun berhasil diubah!');
     }
-
-    public function delete($id_admin) {
-    	$datas = AdminModel::find($id_admin);
-    	$datas->delete();
-    	return redirect('/admin/MengelolaAdmin')->with('alert-success','Data berhasil dihapus!');
-    }
-
 
 }

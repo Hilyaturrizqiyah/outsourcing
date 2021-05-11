@@ -27,13 +27,10 @@
                     </a>
                     <ul class="submenu ">
                         <li class="submenu-item ">
-                            <a href="auth-login.html">Login</a>
+                            <a href="{{url ('tenagakerja/')}}">Profil</a>
                         </li>
                         <li class="submenu-item ">
-                            <a href="auth-register.html">Register</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="auth-forgot-password.html">Forgot Password</a>
+                            <a href="{{url ('tenagakerja/UbahProfilTenagaKerja')}}">Ubah Profil</a>
                         </li>
                     </ul>
                 </li>

@@ -17,38 +17,38 @@
               <!-- Form Basic -->
               <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Tambah Data Area</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Tambah Data Kota Kabupaten</h6>
                 </div>
                 <div class="card-body">
 
-                  <form enctype="multipart/form-data" class="contact-form-area contact-page-form contact-form text-left" action="{{url('admin/AksiTambahArea')}}" method="post">
+                  <form enctype="multipart/form-data" class="contact-form-area contact-page-form contact-form text-left" action="{{url('admin/AksiTambahKoKab')}}" method="post">
 
                     {{csrf_field()}}
 
                     <div class="form-group">
-                      <select name = "kotaKabupaten" class="form-control">
-                        <option value="">Pilih Kota Kabupaten</option>
-                         @foreach($kota_kabupaten as $tampil)
-                         <option value="{{$tampil->id}}">{{$tampil->nama_kotaKabupaten}}</option>
+                      <select name = "provinsi" class="form-control">
+                        <option value="">Pilih Provinsi</option>
+                         @foreach($provinsi as $tampil)
+                         <option value="{{$tampil->id}}">{{$tampil->nama_provinsi}}</option>
                          @endforeach
                       </select>
 
-                    @if ($errors->has('kota_kabupaten'))
-                        <span class="text-danger"><p class="text-right">* {{ $errors->first('kota_kabupaten') }}</p></span>
+                    @if ($errors->has('provinsi'))
+                        <span class="text-danger"><p class="text-right">* {{ $errors->first('provinsi') }}</p></span>
                     @endif
 
                     </div>
 
-                      <div class="form-group">
-                        <label><b>Kecamatan</b></label>
-                        <input type="text" class="form-control" name="nama_area" placeholder="Masukkan Kecamatan">
+                    <div class="form-group">
+                        <label><b>Kota Kabupaten</b></label>
+                        <input type="text" class="form-control" name="nama_kotaKabupaten" placeholder="Masukkan Kota Kabupaten">
   
-                      @if ($errors->has('nama_area'))
-                          <span class="text-danger"><p class="text-right">* {{ $errors->first('nama_area') }}</p></span>
+                      @if ($errors->has('kota_kabupaten'))
+                          <span class="text-danger"><p class="text-right">* {{ $errors->first('kota_kabupaten') }}</p></span>
                       @endif
   
                       </div>
-                   
+                  
                     <div class="form-group"> 
                         <input type="reset" class="btn btn-secondary"  value="Batal">
                         <input type="submit" class="btn btn-primary" value="Simpan">

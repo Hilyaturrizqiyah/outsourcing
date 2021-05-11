@@ -17,37 +17,23 @@
               <!-- Form Basic -->
               <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Tambah Data Area</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Tambah Data Provinsi</h6>
                 </div>
                 <div class="card-body">
 
-                  <form enctype="multipart/form-data" class="contact-form-area contact-page-form contact-form text-left" action="{{url('admin/AksiTambahArea')}}" method="post">
+                  <form enctype="multipart/form-data" class="contact-form-area contact-page-form contact-form text-left" action="{{url('admin/AksiTambahProvinsi')}}" method="post">
 
                     {{csrf_field()}}
 
                     <div class="form-group">
-                      <select name = "kotaKabupaten" class="form-control">
-                        <option value="">Pilih Kota Kabupaten</option>
-                         @foreach($kota_kabupaten as $tampil)
-                         <option value="{{$tampil->id}}">{{$tampil->nama_kotaKabupaten}}</option>
-                         @endforeach
-                      </select>
+                      <label><b>Nama Provinsi</b></label>
+                      <input type="text" class="form-control" name="nama_provinsi" placeholder="Masukkan Provinsi">
 
-                    @if ($errors->has('kota_kabupaten'))
-                        <span class="text-danger"><p class="text-right">* {{ $errors->first('kota_kabupaten') }}</p></span>
+                    @if ($errors->has('nama_provinsi'))
+                        <span class="text-danger"><p class="text-right">* {{ $errors->first('nama_provinsi') }}</p></span>
                     @endif
 
                     </div>
-
-                      <div class="form-group">
-                        <label><b>Kecamatan</b></label>
-                        <input type="text" class="form-control" name="nama_area" placeholder="Masukkan Kecamatan">
-  
-                      @if ($errors->has('nama_area'))
-                          <span class="text-danger"><p class="text-right">* {{ $errors->first('nama_area') }}</p></span>
-                      @endif
-  
-                      </div>
                    
                     <div class="form-group"> 
                         <input type="reset" class="btn btn-secondary"  value="Batal">

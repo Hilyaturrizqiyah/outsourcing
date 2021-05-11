@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\jenis_jasaModel;
+use App\JenisJasaModel;
 use Illuminate\Http\Request;
 use Session;
 
@@ -15,7 +15,7 @@ class MengelolaJenisJasaController extends Controller
         //}
         //else{
 
-        $datas = jenis_jasaModel::get();         
+        $datas = JenisJasaModel::get();         
         	return view('admin.halaman.MengelolaJenisJasa',compact('datas'));     
         //}  
     }
@@ -51,7 +51,7 @@ class MengelolaJenisJasaController extends Controller
     		'nama_jenisJasa' => 'required|max:50',
     	], $messages);
 
-        $data = new jenis_jasaModel();
+        $data = new JenisJasaModel();
         $data->nama_jenisJasa = $request->nama_jenisJasa;
     	$data->save();
 
@@ -65,7 +65,7 @@ class MengelolaJenisJasaController extends Controller
         //}
         //else{
 
-        	$datas = jenis_jasaModel::find($id_jenisJasa);
+        	$datas = JenisJasaModel::find($id_jenisJasa);
         	return view('admin.halaman.ubah_data.UbahJenisJasa',compact('datas'));
         //}
     }
@@ -89,7 +89,7 @@ class MengelolaJenisJasaController extends Controller
             'nama_jenisJasa' => 'required|max:50',
         ], $messages);
 
-        $datas = jenis_jasaModel::find($id_jenisJasa);
+        $datas = JenisJasaModel::find($id_jenisJasa);
         $datas->nama_jenisJasa = $request->nama_jenisJasa;
         $datas->save();
 
@@ -97,7 +97,7 @@ class MengelolaJenisJasaController extends Controller
     }
 
     public function delete($id_jenisJasa) {
-    	$datas = jenis_jasaModel::find($id_jenisJasa);
+    	$datas = JenisJasaModel::find($id_jenisJasa);
     	$datas->delete();
     	return redirect('/admin/MengelolaJenisJasa')->with('alert-success','Data berhasil dihapus!');
     }

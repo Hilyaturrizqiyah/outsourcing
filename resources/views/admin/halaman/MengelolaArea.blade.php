@@ -21,7 +21,7 @@
                     </div>
                   @endif
                   
-          <!-- DataTable with Hover -->
+          <!-- DataTable Area -->
             <div class="col-lg-12">
               <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -32,9 +32,8 @@
                     <thead class="thead-light">
                       <tr>
                         <th>No</th>
-                        <th>Provinsi</th>
                         <th>Kota Kabupaten</th>
-                        <th>Kecamatan</th>
+                        <th>Nama Area</th>
                         <th></th>
                       </tr>
                     </thead>
@@ -43,12 +42,11 @@
                       @php
                         $no=1;
                       @endphp
-                      @foreach($datas as $tampil)
+                      @foreach($area as $tampil)
                       <tr>
                         <td>{{$no++}}</td>
-                        <td>{{$tampil->provinsi}}</td>
-                        <td>{{$tampil->kota_kabupaten}}</td>
-                        <td>{{$tampil->kecamatan}}</td>
+                        <td>{{$tampil->KotaKabupaten->nama_kotaKabupaten}}</td>
+                        <td>{{$tampil->nama_area}}</td>
                         <td>
                           <a href="/admin/UbahArea{{$tampil->id_area}}" class="btn btn-warning">
                             <i class="fas fa-pencil-alt"></i>
@@ -63,7 +61,9 @@
                   </table>
                 </div>
               </div>
-            </div>
 
-        <!---Container Fluid-->
+              <!-- DataTable Area -->
+
+            </div>
+         
 @endsection

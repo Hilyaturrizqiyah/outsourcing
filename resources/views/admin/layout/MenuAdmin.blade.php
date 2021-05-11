@@ -36,30 +36,18 @@
         </a>  
       </li>
 
-      <li class="nav-item {{ Request::is('admin/MengelolaArea')? "active":""}}">
-        <a class="nav-link" href="{{url ('admin/MengelolaArea')}}">
-          <i class="fas fa-fw fa-palette"></i>
-          <span>Area</span>
-        </a>  
-      </li>
-
-
-
-
-
-
-
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap1"
+        <a class="nav-link {{ Request::is('admin/MengelolaArea')? "active":""}} {{ Request::is('admin/MengelolaKotaKabupaten')? "active":""}} {{ Request::is('admin/MengelolaProvinsi')? "active":""}} collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap1"
           aria-expanded="true" aria-controls="collapseBootstrap1">
           <i class="far fa-fw fa-user"></i>
-          <span>hfhh</span>
+          <span>Area</span>
         </a>
         <div id="collapseBootstrap1" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Akun</h6>
-            <a class="collapse-item" href="">contoh</a>
-            <a class="collapse-item" href="">cek</a>
+            <h6 class="collapse-header">Data Area</h6>
+            <a class="collapse-item" href="{{url ('admin/MengelolaArea')}}">Kecamatan</a>
+            <a class="collapse-item" href="{{url ('admin/MengelolaKoKab')}}">Kota Kabupaten</a>
+            <a class="collapse-item" href="{{url ('admin/MengelolaProvinsi')}}">Provinsi</a>
           </div>
         </div>
       </li>

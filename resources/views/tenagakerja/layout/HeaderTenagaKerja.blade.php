@@ -20,7 +20,13 @@
                             </div>
                             <div class="user-img d-flex align-items-center">
                                 <div class="avatar avatar-md">
-                                    <img src="assets/images/faces/1.jpg">
+                                    <img 
+                                        @if ($datas->foto_profi == "NULL")
+                                            src="{{ asset('pengguna/assets/images/faces/1.jpg')}}"
+                                        @else
+                                            src="{{ url('pengguna/assets/images/foto_profil/'.$datas->foto_profil)}}"
+                                        @endif
+                                    >
                                 </div>
                             </div>
                         </div>
