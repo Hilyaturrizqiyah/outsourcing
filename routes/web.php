@@ -54,6 +54,12 @@ Route::get('/admin/HapusCustomer{id_customer}','MengelolaCustomerController@dele
 //----------------------Admin---------------------//
 
 //----------------------TenagaKerja-----------------//
+Route::get('/chained_dopdown','AreaController@chained_dopdown');
+Route::get('tenagakerja/getKotaKabupaten/{param}', 'AreaController@getKotaKabupaten');
+
+Route::get('/chained_dopdown/getKotaKabupaten/{param}','AreaController@getKotaKabupaten');
+
+Route::get('/chained_dopdown/getArea/{param}','AreaController@getArea');
 
 Route::get('/tenagakerja','TenagakerjaController@index');
 Route::get('/tenagakerja/LoginTenagakerja','TenagakerjaController@login');
@@ -66,13 +72,30 @@ Route::get('/tenagakerja/UbahProfilTenagaKerja','TenagaKerjaController@edit');
 Route::post('/tenagakerja/AksiTambahTenagakerja','TenagaKerjaController@store');
 Route::post('/tenagakerja/AksiUbahTenagakerja{id_tenagaKerja}','TenagaKerjaController@update');
 
+Route::post('/tenagakerja/AksiTambahDataPribadi','DataPribadiController@store');
+Route::post('/tenagakerja/AksiUbahDataPribadi{id_data_pribadi}','DataPribadiController@update');
+
 Route::post('/tenagakerja/AksiTambahDataKeluarga','DataKeluargaController@store');
-Route::post('/tenagakerja/AksiUbahDataKeluarga{id_dataKeluarga}','DataKeluargaController@update');
-Route::get('/tenagakerja/HapusDataKeluarga{id_dataKeluarga}','DataKeluargaController@delete');
+Route::post('/tenagakerja/AksiUbahDataKeluarga{id_data_keluarga}','DataKeluargaController@update');
+Route::get('/tenagakerja/HapusDataKeluarga{id_data_keluarga}','DataKeluargaController@delete');
 
 Route::post('/tenagakerja/AksiTambahPddkFormal','PddkFormalController@store');
 Route::post('/tenagakerja/AksiUbahPddkFormal{id_pendFormal}','PddkFormalController@update');
 Route::get('/tenagakerja/HapusPddkFormal{id_pendFormal}','PddkFormalController@delete');
+
+Route::post('/tenagakerja/AksiTambahPddkNonFormal','PddkNonFormalController@store');
+Route::post('/tenagakerja/AksiUbahPddkNonFormal{id_pendNonFormal}','PddkNonFormalController@update');
+Route::get('/tenagakerja/HapusPddkNonFormal{id_pendNonFormal}','PddkNonFormalController@delete');
+
+Route::post('/tenagakerja/AksiTambahKeterampilan','KeterampilanController@store');
+Route::post('/tenagakerja/AksiUbahKeterampilan{id_keterampilan}','KeterampilanController@update');
+Route::get('/tenagakerja/HapusKeterampilan{id_keterampilan}','KeterampilanController@delete');
+
+Route::post('/tenagakerja/AksiTambahPengalamanKerja','PengalamanKerjaController@store');
+Route::post('/tenagakerja/AksiUbahPengalamanKerja{id_pengalaman}','PengalamanKerjaController@update');
+Route::get('/tenagakerja/HapusPengalamanKerja{id_pengalaman}','PengalamanKerjaController@delete');
+
+Route::get('/tenagakerja/JasaTenagaKerja','TenagaKerjaController@jasa');
 
 //----------------------TenagaKerja-----------------//
 

@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\provinsiModel;
 use App\tenaga_kerjaModel;
 use App\data_pribadiModel;
 use App\DataKeluargaModel;
 use App\pendidikan_formalModel;
+use App\pendidikan_nonFormalModel;
+use App\keterampilanModel;
+use App\pengalaman_kerjaModel;
+use App\jasaModel;
 
 use Illuminate\Http\Request;
 use Session;
@@ -66,11 +71,8 @@ class TenagaKerjaController extends Controller
             
             $countDataPribadi = data_pribadiModel::where('id_tenagaKerja',$id_tenagaKerja)->count();
             $dataPribadi = data_pribadiModel::where('id_tenagaKerja',$id_tenagaKerja)->get();
-            
-            $countDataKeluarga = DataKeluargaModel::where('id_tenagaKerja',$id_tenagaKerja)->count();
-            $dataKeluarga = DataKeluargaModel::where('id_tenagaKerja',$id_tenagaKerja)->get();
-            
-        	return view('tenagakerja.halaman.ProfilTenagaKerja',compact('datas','id_tenagaKerja','countDataPribadi','dataPribadi','countDataKeluarga','dataKeluarga'));
+                      
+        	return view('tenagakerja.halaman.ProfilTenagaKerja',compact('datas','id_tenagaKerja','countDataPribadi','dataPribadi'));
         }
     }
 
@@ -122,11 +124,14 @@ class TenagaKerjaController extends Controller
             return redirect('tenagakerja/LoginTenagakerja')->with('alert','Anda harus login dulu');
         }
         else{
+            // Fetch departments
+            $provinsi['data'] = provinsiModel::all();
+
             $id_tenagaKerja = Session::get('id_tenagaKerja');
             $datas = tenaga_kerjaModel::find($id_tenagaKerja);
             
             $countDataPribadi = data_pribadiModel::where('id_tenagaKerja',$id_tenagaKerja)->count();
-            $dataPribadi = data_pribadiModel::where('id_tenagaKerja',$id_tenagaKerja)->get();
+            $dataPribadi = data_pribadiModel::where('id_tenagaKerja',$id_tenagaKerja)->first();
             
             $countDataKeluarga = DataKeluargaModel::where('id_tenagaKerja',$id_tenagaKerja)->count();
             $dataKeluarga = DataKeluargaModel::where('id_tenagaKerja',$id_tenagaKerja)->get();
@@ -134,7 +139,16 @@ class TenagaKerjaController extends Controller
             $countPddkFormal = pendidikan_formalModel::where('id_tenagaKerja',$id_tenagaKerja)->count();
             $pddkFormal = pendidikan_formalModel::where('id_tenagaKerja',$id_tenagaKerja)->get();
             
-        	return view('tenagakerja.halaman.UbahProfilTenagaKerja',compact('datas','id_tenagaKerja','countDataPribadi','dataPribadi','countDataKeluarga','dataKeluarga','countPddkFormal','pddkFormal'));
+            $countPddkNonFormal = pendidikan_nonFormalModel::where('id_tenagaKerja',$id_tenagaKerja)->count();
+            $pddkNonFormal = pendidikan_nonFormalModel::where('id_tenagaKerja',$id_tenagaKerja)->get();
+            
+            $countKeterampilan = keterampilanModel::where('id_tenagaKerja',$id_tenagaKerja)->count();
+            $keterampilan = keterampilanModel::where('id_tenagaKerja',$id_tenagaKerja)->get();
+            
+            $countPengalamanKerja = pengalaman_kerjaModel::where('id_tenagaKerja',$id_tenagaKerja)->count();
+            $pengalamanKerja = pengalaman_kerjaModel::where('id_tenagaKerja',$id_tenagaKerja)->get();
+            
+        	return view('tenagakerja.halaman.UbahProfilTenagaKerja',compact('provinsi','datas','id_tenagaKerja','countDataPribadi','dataPribadi','countDataKeluarga','dataKeluarga','countPddkFormal','pddkFormal','countPddkNonFormal','pddkNonFormal','countKeterampilan','keterampilan','countPengalamanKerja','pengalamanKerja'))->with("provinsi",$provinsi);
         }
         
     }
@@ -165,7 +179,13 @@ class TenagaKerjaController extends Controller
         $datas->nama_tenagaKerja = $request->nama_tenagaKerja;
         $datas->no_ktp = $request->no_ktp;
         $datas->email = $request->email;        
-        $datas->password = bcrypt($request->password);
+
+        if (empty($request->password)){
+            $datas->password = $datas->password;
+        }
+        else{
+            $datas->password = bcrypt($request->password);
+        }
 
         if (empty($request->foto_profil)){
             $datas->foto_profil = $datas->foto_profil;
@@ -180,8 +200,35 @@ class TenagaKerjaController extends Controller
         }
 
         $datas->save();
+        $datas->foto_profil;
+
+        $countDataPribadi = data_pribadiModel::where('id_tenagaKerja',$id_tenagaKerja)->count();
+
+        if ($countDataPribadi == !null) {
+            $pribadi = data_pribadiModel::find($id_tenagaKerja);
+            $pribadi->no_ktp = $request->no_ktp;
+            $pribadi->foto = $datas->foto_profil;
+            $pribadi->save();
+        } else {
+            
+        }
+        
 
         return redirect('/tenagakerja/UbahProfilTenagaKerja')->with('alert-success','Data Akun berhasil diubah!');
+    }
+
+    public function jasa() {
+
+        if(!Session::get('loginTenagaKerja')){
+            return redirect('tenagakerja/LoginTenagakerja')->with('alert','Anda harus login dulu');
+        }
+        else{
+            $id_tenagaKerja = Session::get('id_tenagaKerja');
+            $datas = tenaga_kerjaModel::find($id_tenagaKerja);
+            $jasas = jasaModel::all();
+            
+        	return view('tenagakerja.halaman.JasaTenagaKerja',compact('datas','jasas','id_tenagaKerja'));
+        }
     }
 
 }

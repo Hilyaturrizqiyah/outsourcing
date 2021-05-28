@@ -112,3 +112,81 @@ Route::post('datakeluarga', 'API\DataKeluargaController@store');
 Route::get('datakeluarga/{id_data_keluarga}', 'API\DataKeluargaController@show');
 // Mengubah DataKeluarga
 Route::put('datakeluarga/{id_data_keluarga}', 'API\DataKeluargaController@update');
+
+//---------------------------------------
+
+// Ambil Semua DataPribadi
+Route::get('datapribadi', 'API\DataPribadiController@index');
+// Membuat DataPribadi Baru
+Route::post('datapribadi', 'API\DataPribadiController@store');
+// Mengambil Satu DataPribadi
+Route::get('datapribadi/{id_data_pribadi', 'API\DataPribadiController@show');
+// Mengubah DataPribadi
+Route::put('datapribadi/{id_data_pribadi', 'API\DataPribadiController@update');
+// Menghapus DataPribadi
+Route::delete('datapribadi/{id_data_pribadi}', 'API\DataPribadiController@destroy');
+
+//---------------------------------------
+
+// Ambil Semua PendidikanFormal
+Route::get('pendidikanformal', 'API\PendidikanFormalController@index');
+// Membuat PendidikanFormal Baru
+Route::post('pendidikanformal', 'API\PendidikanFormalController@store');
+// Mengambil Satu PendidikanFormal
+Route::get('pendidikanformal/{id_pendFormal', 'API\PendidikanFormalController@show');
+// Mengubah PendidikanFormal
+Route::put('pendidikanformal/{id_pendFormal', 'API\PendidikanFormalController@update');
+// Menghapus PendidikanFormal
+Route::delete('pendidikanformal/{id_pendFormal}', 'API\PendidikanFormalController@destroy');
+
+//---------------------------------------
+
+// Ambil Semua PendidikanNonFormal
+Route::get('pendidikannonformal', 'API\PendidikanNonFormalController@index');
+// Membuat PendidikanNonFormal Baru
+Route::post('pendidikannonformal', 'API\PendidikanNonFormalController@store');
+// Mengambil Satu PendidikanNonFormal
+Route::get('pendidikannonformal/{id_pendNonFormal', 'API\PendidikanNonFormalController@show');
+// Mengubah PendidikanNonFormal
+Route::put('pendidikannonformal/{id_pendNonFormal', 'API\PendidikanNonFormalController@update');
+// Menghapus PendidikanNonFormal
+Route::delete('pendidikannonformal/{id_pendNonFormal}', 'API\PendidikanNonFormalController@destroy');
+
+//---------------------------------------
+
+// Ambil Semua Keterampilan
+Route::get('keterampilan', 'API\KeterampilanController@index');
+// Membuat Keterampilan Baru
+Route::post('keterampilan', 'API\KeterampilanController@store');
+// Mengambil Satu Keterampilan
+Route::get('keterampilan/{id_keterampilan', 'API\KeterampilanController@show');
+// Mengubah Keterampilan
+Route::put('keterampilan/{id_keterampilan', 'API\KeterampilanController@update');
+// Menghapus Keterampilan
+Route::delete('keterampilan/{id_keterampilan}', 'API\KeterampilanController@destroy');
+
+//---------------------------------------
+
+// Ambil Semua PengalamanKerja
+Route::get('pengalamankerja', 'API\PengalamanKerjaController@index');
+// Membuat PengalamanKerja Baru
+Route::post('pengalamankerja', 'API\PengalamanKerjaController@store');
+// Mengambil Satu PengalamanKerja
+Route::get('pengalamankerja/{id_pengalaman', 'API\PengalamanKerjaController@show');
+// Mengubah PengalamanKerja
+Route::put('pengalamankerja/{id_pengalaman', 'API\PengalamanKerjaController@update');
+// Menghapus PengalamanKerja
+Route::delete('pengalamankerja/{id_pengalaman}', 'API\PengalamanKerjaController@destroy');
+
+//---------------------------------------
+
+// Ambil Semua TenagaKerja
+Route::get('tenagakerja', 'API\TenagaKerjaController@index');
+// Membuat TenagaKerja Baru
+Route::post('tenagakerja', 'API\TenagaKerjaController@store');
+// Mengambil Satu TenagaKerja
+Route::get('tenagakerja/{id_tenagaKerja', 'API\TenagaKerjaController@show');
+// Mengubah TenagaKerja
+Route::put('tenagakerja/{id_tenagaKerja', 'API\TenagaKerjaController@update');
+// Menghapus TenagaKerja
+Route::delete('tenagakerja/{id_tenagaKerja}', 'API\TenagaKerjaController@destroy');
