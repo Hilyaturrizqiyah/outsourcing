@@ -17,8 +17,8 @@ class MengelolaJenisJasaController extends Controller
 
         $datas = JenisJasaModel::get();
         	return view('admin.halaman.MengelolaJenisJasa',compact('datas'));
-        //}
-    }
+        }
+    
 
     public function tambah() {
 

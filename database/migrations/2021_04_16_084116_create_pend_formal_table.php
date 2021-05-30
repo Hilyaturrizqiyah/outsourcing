@@ -19,7 +19,8 @@ class CreatePendFormalTable extends Migration
             $table->string('pendidikan');
             $table->string('nama_institusi');
             $table->string('jurusan');
-            $table->string('periode');
+            $table->string('periode_masuk');
+            $table->string('periode_keluar');
             $table->string('lokasi');
             $table->timestamps();
 

@@ -28,7 +28,8 @@ class DataKeluargaController extends Controller
         $dataKeluarga->nama_keluarga = $request->input('nama_keluarga');
         $dataKeluarga->status_keluarga = $request->input('status_keluarga');
         $dataKeluarga->pekerjaan = $request->input('pekerjaan');
-        $dataKeluarga->ttl = $request->input('ttl');
+        $dataKeluarga->tempat_lahir = $request->input('tempat_lahir');
+        $dataKeluarga->tanggal_lahir = $request->input('tanggal_lahir');
 
         if($dataKeluarga->save()) {
             return new DataKeluarga($dataKeluarga);
@@ -48,7 +49,8 @@ class DataKeluargaController extends Controller
         $dataKeluarga->nama_keluarga = $request->input('nama_keluarga');
         $dataKeluarga->status_keluarga = $request->input('status_keluarga');
         $dataKeluarga->pekerjaan = $request->input('pekerjaan');
-        $dataKeluarga->ttl = $request->input('ttl');
+        $dataKeluarga->tempat_lahir = $request->input('tempat_lahir');
+        $dataKeluarga->tanggal_lahir = $request->input('tanggal_lahir');
 
         if($dataKeluarga->save()) {
             return new DataKeluarga($dataKeluarga);
