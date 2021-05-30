@@ -15,11 +15,13 @@ class CreateJasaTable extends Migration
     {
         Schema::create('jasa', function (Blueprint $table) {
             $table->id('id_jasa');
+            $table->foreignId('id_outsourcing');
             $table->foreignId('id_jenisJasa');
             $table->string('nama_jasa');
             $table->string('foto_profil')->nullable();
             $table->timestamps();
 
+            $table->foreign('id_outsourcing')->references('id_outsourcing')->on('outsourcing');
             $table->foreign('id_jenisJasa')->references('id_jenisJasa')->on('jenis_jasa');
 
         });

@@ -50,7 +50,6 @@ Route::get('/admin/HapusArea{id_area}','MengelolaAreaController@delete');
 Route::get('/admin/MengelolaCustomer','MengelolaCustomerController@index');
 Route::get('/admin/HapusCustomer{id_customer}','MengelolaCustomerController@delete');
 
-
 //----------------------Admin---------------------//
 
 //----------------------TenagaKerja-----------------//
@@ -96,6 +95,7 @@ Route::post('/tenagakerja/AksiUbahPengalamanKerja{id_pengalaman}','PengalamanKer
 Route::get('/tenagakerja/HapusPengalamanKerja{id_pengalaman}','PengalamanKerjaController@delete');
 
 Route::get('/tenagakerja/JasaTenagaKerja','TenagaKerjaController@jasa');
+
 
 //----------------------TenagaKerja-----------------//
 

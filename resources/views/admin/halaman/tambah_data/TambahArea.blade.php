@@ -26,6 +26,16 @@
                     {{csrf_field()}}
 
                     <div class="form-group">
+                      <label><b>ID Area</b></label>
+                      <input type="text" class="form-control" name="id_area" placeholder="Masukkan ID Area">
+
+                    @if ($errors->has('id_area'))
+                        <span class="text-danger"><p class="text-right">* {{ $errors->first('id_area') }}</p></span>
+                    @endif
+
+                    </div>
+
+                    <div class="form-group">
                       <select name = "kotaKabupaten" class="form-control">
                         <option value="">Pilih Kota Kabupaten</option>
                          @foreach($kota_kabupaten as $tampil)

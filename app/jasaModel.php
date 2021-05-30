@@ -8,10 +8,14 @@ class jasaModel extends Model
 {
     protected $table = 'jasa';
     protected $primaryKey = 'id_jasa';
-    protected $fillable = ['id_jenisJasa', 'nama_jasa'];
+    protected $fillable = ['id_outsourcing','id_jenisJasa', 'nama_jasa'];
 
     public function jenis_jasa() {
         return $this->belongsTo(jenis_jasaModel::class,'id_jenisJasa');
+    }
+
+    public function outsourcing() {
+        return $this->belongsTo(OutsourcingModel::class,'id_outsourcing');
     }
 
     public function biaya_perlengkapan() {
