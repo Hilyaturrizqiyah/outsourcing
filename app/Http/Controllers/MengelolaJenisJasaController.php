@@ -8,17 +8,17 @@ use Session;
 
 class MengelolaJenisJasaController extends Controller
 {
-        public function index()     {  
+        public function index()     {
 
         //if(!Session::get('login')){
         //    return redirect('LoginAdmin')->with('alert','Anda harus login dulu');
         //}
         //else{
 
-        $datas = JenisJasaModel::get();         
-        	return view('admin.halaman.MengelolaJenisJasa',compact('datas'));     
-        //}  
-    }
+        $datas = JenisJasaModel::get();
+        	return view('admin.halaman.MengelolaJenisJasa',compact('datas'));
+        }
+    
 
     public function tambah() {
 

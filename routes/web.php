@@ -18,12 +18,12 @@ Route::get('/admin/DashboardAdmin', function () {
     return view('admin.halaman.DashboardAdmin');
 });
 
-Route::get('/admin/MengelolaAdmin','MengelolaAdminController@index');
-Route::get('/admin/TambahAdmin','MengelolaAdminController@tambah');
-Route::post('/admin/AksiTambahAdmin','MengelolaAdminController@store');
-Route::get('/admin/UbahAdmin{id_admin}','MengelolaAdminController@edit');
-Route::post('/admin/AksiUbahAdmin{id_admin}','MengelolaAdminController@update');
-Route::get('/admin/HapusAdmin{id_admin}','MengelolaAdminController@delete');
+Route::get('/admin/MengelolaAdmin', 'MengelolaAdminController@index');
+Route::get('/admin/TambahAdmin', 'MengelolaAdminController@tambah');
+Route::post('/admin/AksiTambahAdmin', 'MengelolaAdminController@store');
+Route::get('/admin/UbahAdmin{id_admin}', 'MengelolaAdminController@edit');
+Route::post('/admin/AksiUbahAdmin{id_admin}', 'MengelolaAdminController@update');
+Route::get('/admin/HapusAdmin{id_admin}', 'MengelolaAdminController@delete');
 
 Route::get('/admin/MengelolaJenisJasa','MengelolaJenisJasaController@index');
 Route::get('/admin/TambahJenisJasa','MengelolaJenisJasaController@tambah');
@@ -99,6 +99,10 @@ Route::get('/tenagakerja/JasaTenagaKerja','TenagaKerjaController@jasa');
 
 //----------------------TenagaKerja-----------------//
 
+//====================Customer======================//
+Route::get('customer/login', function () {
+    return view('customer/login');
+});
 
 Route::get('/', function () {
     return view('index');
@@ -112,5 +116,5 @@ Route::get('/pengguna_jasa/index', function () {
     return view('/pengguna_jasa/index');
 });
 
-Route::get('/','UtamaController@tampil');
-Route::get('/index/area/cari','UtamaController@cari');
+Route::get('/', 'UtamaController@tampil');
+Route::get('/index/area/cari', 'UtamaController@cari');

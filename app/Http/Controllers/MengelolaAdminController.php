@@ -8,16 +8,16 @@ use Session;
 
 class MengelolaAdminController extends Controller
 {
-        public function index()     {  
+        public function index()     {
 
         //if(!Session::get('login')){
         //    return redirect('LoginAdmin')->with('alert','Anda harus login dulu');
         //}
         //else{
 
-        $datas = AdminModel::get();         
-        	return view('admin.halaman.MengelolaAdmin',compact('datas'));     
-        //}  
+        $datas = AdminModel::get();
+        	return view('admin.halaman.MengelolaAdmin',compact('datas'));
+        //}
     }
 
     public function tambah() {
@@ -59,7 +59,7 @@ class MengelolaAdminController extends Controller
         $data->nama_admin = $request->nama_admin;
         $data->alamat = $request->alamat;
         $data->no_telp = $request->no_telp;
-        $data->email = $request->email;        
+        $data->email = $request->email;
         $data->password = $request->password;
 
     	$data->save();
@@ -102,11 +102,11 @@ class MengelolaAdminController extends Controller
         ], $messages);
 
         $datas = AdminModel::find($id_admin);
-        $data->nama_admin = $request->nama_admin;
-        $data->alamat = $request->alamat;
-        $data->no_telp = $request->no_telp;
-        $data->email = $request->email;        
-        $data->password = $request->password;
+        $datas->nama_admin = $request->nama_admin;
+        $datas->alamat = $request->alamat;
+        $datas->no_telp = $request->no_telp;
+        $datas->email = $request->email;
+        $datas->password = $request->password;
         $datas->save();
 
         return redirect('/admin/MengelolaAdmin')->with('alert-success','Data berhasil diubah!');
