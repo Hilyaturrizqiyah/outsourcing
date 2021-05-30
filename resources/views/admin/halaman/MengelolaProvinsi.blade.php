@@ -33,6 +33,7 @@
                     <thead class="thead-light">
                       <tr>
                         <th>No</th>
+                        <th>ID Provinsi</th>
                         <th>Nama Provinsi</th>
                         <th></th>
                       </tr>
@@ -45,6 +46,7 @@
                       @foreach($provinsi as $tampil)
                       <tr>
                         <td>{{$no++}}</td>
+                        <td>{{$tampil->id}}</td>
                         <td>{{$tampil->nama_provinsi}}</td>
                         <td>
                           <a href="/admin/UbahProvinsi{{$tampil->id}}" class="btn btn-warning">

@@ -32,6 +32,7 @@
                     <thead class="thead-light">
                       <tr>
                         <th>No</th>
+                        <th>ID Area</th>
                         <th>Kota Kabupaten</th>
                         <th>Nama Area</th>
                         <th></th>
@@ -45,6 +46,7 @@
                       @foreach($area as $tampil)
                       <tr>
                         <td>{{$no++}}</td>
+                        <td>{{$tampil->id_area}}</td>
                         <td>{{$tampil->KotaKabupaten->nama_kotaKabupaten}}</td>
                         <td>{{$tampil->nama_area}}</td>
                         <td>

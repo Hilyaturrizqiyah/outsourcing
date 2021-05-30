@@ -9,7 +9,8 @@ class JenisJasaModel extends Model
 {
     protected $table = 'jenis_jasa';
     protected $primaryKey = 'id_jenisJasa';
-    protected $fillable = ['nama_jenisJasa', 'picturePath'];
+
+    protected $fillable = ['nama_jenisJasa','deskripsi', 'picturePath'];
 
     public function jasa()
     {
