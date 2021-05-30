@@ -10,4 +10,8 @@ class kontrak_jasaModel extends Model
     protected $primaryKey = 'id_kontrak';
     protected $fillable = ['id_customer', 'id_jasa', 'id_outsourcing', 'tgl_mulai_kontrak', 'lama_kontrak', 'jumlah_tenagaKerja', 'jumlah_harga', 'status_kontrak'];
 
+    public function customer()
+    {
+        return $this->belongsTo(CustomerModel::class, 'id_customer');
+    }
 }

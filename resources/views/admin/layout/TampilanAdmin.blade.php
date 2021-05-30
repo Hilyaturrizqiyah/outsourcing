@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <link href="" rel="icon">
-  <title>Admin-WisataKuningan</title>
+  <title>Admin-Outsourcing</title>
   <link href="{{ asset('admin/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
   <link href="{{ asset('admin/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
   <link href="{{ asset('admin/css/ruang-admin.css') }}" rel="stylesheet">
@@ -35,7 +35,7 @@
         <!---Container Fluid-->
 
       </div>
-      
+
     </div>
 
     <!-- Footer -->
@@ -53,7 +53,7 @@
   <script src="{{ asset('admin/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
   <script src="{{ asset('admin/js/ruang-admin.min.js') }}"></script>
   <script src="{{ asset('admin/vendor/chart.js/Chart.min.js') }}"></script>
-  <script src="{{ asset('admin/js/demo/chart-area-demo.js') }}"></script> 
+  <script src="{{ asset('admin/js/demo/chart-area-demo.js') }}"></script>
   <!-- Page level plugins -->
   <script src="{{ asset('admin/vendor/datatables/jquery.dataTables.min.js') }}"></script>
   <script src="{{ asset('admin/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
@@ -61,11 +61,11 @@
   <!-- Page level custom scripts -->
   <script>
     $(document).ready(function () {
-      $('#dataTable').DataTable(); // ID From dataTable 
+      $('#dataTable').DataTable(); // ID From dataTable
       $('#dataTableHover').DataTable(); // ID From dataTable with Hover
     });
   </script>
- 
+
 </body>
 
 </html>

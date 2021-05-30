@@ -13,102 +13,100 @@ use Illuminate\Support\Facades\Hash;
 
 class OutsourcingController extends Controller
 {
-    // Mengambil Semua Outsourcing
     public function index()
     {
-        $outsourcing = OutsourcingModel::get();
-        return Outsourcing::collection($outsourcing);
+        $osr = OutsourcingModel::get();
+        return Outsourcing::collection($osr);
     }
 
-    public function login(Request $request)
+    public function all(Request $request)
     {
-        try {
-            //validasi input
-            $request->validate([
-                'email' => 'email|required',
-                'password' => 'required'
-            ]);
+        $id = $request->input('id_outsourcing');
+        $limit = $request->input('limit', 6);
+        $name = $request->input('nama_outsourcing');
+        // $types = $request->input('types');
 
-            //mengecek credentials (login)
-            $credentials = request(['email', 'password']);
+        // $price_from = $request->input('price_from');
+        // $price_to = $request->input('price_to');
 
-            if(!Auth::attempt($credentials)) {
-                return ResponseFormatter::error([
-                    'message' => 'Unauthorized'
-                ], 'Authentication Failed', 500);
-            }
+        // $rate_from = $request->input('rate_from');
+        // $rate_to = $request->input('rate_to');
 
-            //jika hash tidak sesuai maka error
-            $outsourcing = OutsourcingModel::where('email', $request->email)->first();
-            if(!Hash::check($request->password, $outsourcing->password, [])) {
-                throw new \Exception('Invalid Credentials');
-            }
+        if ($id) {
+            $osr = OutsourcingModel::find($id);
 
-            //jika berhasil maka login
-            $tokenResult = $outsourcing->createToken('authToken')->plainTextToken;
-            return ResponseFormatter::success([
-                'access_token' => $tokenResult,
-                'token_type' => 'Bearer',
-                'outsourcing' => $outsourcing
-            ], 'Authenticated');
-        } catch(Exception $error) {
-            return ResponseFormatter::error([
-                'message' => 'Something went wrong',
-                'error' => $error
-            ], 'Authentication Failed', 500);
+            if ($osr)
+                return ResponseFormatter::success(
+                    $osr,
+                    'Data produk berhasil diambil'
+                );
+            else
+                return ResponseFormatter::error(
+                    null,
+                    'Data produk tidak ada',
+                    404
+                );
         }
+
+        $osr = OutsourcingModel::query();
+
+        if ($name)
+            $osr->where('nama_outsourcing', 'like', '%' . $name . '%');
+
+        // if ($types)
+        //     $osr->where('types', 'like', '%' . $types . '%');
+
+        // if ($price_from)
+        //     $osr->where('price', '>=', $price_from);
+
+        // if ($price_to)
+        //     $osr->where('price', '<=', $price_to);
+
+        // if ($rate_from)
+        //     $osr->where('rate', '>=', $rate_from);
+
+        // if ($rate_to)
+        //     $osr->where('rate', '<=', $rate_to);
+
+        return ResponseFormatter::success(
+            $osr->paginate($limit),
+            'Data list produk berhasil diambil'
+        );
     }
 
-// Membuat Outsourcing Baru
+    // Membuat Jenis Baru
     public function store(Request $request)
     {
-        $outsourcing = new OutsourcingModel();
-        $outsourcing->id_area = $request->input('id_area');
-        $outsourcing->id_admin = $request->input('id_admin');
-        $outsourcing->nama_outsourcing = $request->input('nama');
-        $outsourcing->alamat = $request->input('alamat');
-        $outsourcing->no_telp = $request->input('no_telp');
-        $outsourcing->nama_pemilikRekening = $request->input('pemilikRekening');
-        $outsourcing->nama_bank = $request->input('bank');
-        $outsourcing->no_rekening = $request->input('no_rekening');
-        $outsourcing->email = $request->input('email');
-        $outsourcing->password = Hash::make($request->input('password'));
+        $osr = new OutsourcingModel();
+        $osr->nama_outsourcing = $request->input('nama_outsourcing');
 
-        if($outsourcing->save()) {
-            return new Outsourcing($outsourcing);
+        if($osr->save()) {
+            return new Outsourcing($osr);
         }
     }
-// Mengambil Satu Outsourcing
+    // Mengambil Satu Jenis
     public function show($id_outsourcing)
     {
-        $outsourcing = OutsourcingModel::findOrFail($id_outsourcing);
-        return new Outsourcing($outsourcing);
+        $osr = OutsourcingModel::findOrFail($id_outsourcing);
+        return new Outsourcing($osr);
     }
-// Mengubah Outsourcing
+    // Mengubah Jenis
     public function update(Request $request, $id_outsourcing)
     {
-        $outsourcing = OutsourcingModel::findOrFail($id_outsourcing);
-        $outsourcing->id_area = $request->input('id_area');
-        $outsourcing->id_admin = $request->input('id_admin');
-        $outsourcing->nama_outsourcing = $request->input('nama');
-        $outsourcing->alamat = $request->input('alamat');
-        $outsourcing->no_telp = $request->input('no_telp');
-        $outsourcing->nama_pemilikRekening = $request->input('pemilikRekening');
-        $outsourcing->nama_bank = $request->input('bank');
-        $outsourcing->no_rekening = $request->input('no_rekening');
-        $outsourcing->email = $request->input('email');
-        $outsourcing->password = $request->input('password');
+        $osr = OutsourcingModel::findOrFail($id_outsourcing);
+        $osr->nama_outsourcing = $request->input('nama_outsourcing');
 
-        if($outsourcing->save()) {
-            return new Outsourcing($outsourcing);
+
+        if($osr->save()) {
+            return new Outsourcing($osr);
         }
     }
-// Menghapus Outsourcing
+    // Menghapus Jenis
     public function destroy($id_outsourcing)
     {
-        $outsourcing = OutsourcingModel::findOrFail($id_outsourcing);
-        if($outsourcing->delete()) {
-            return new Outsourcing($outsourcing);
+        $osr = OutsourcingModel::findOrFail($id_outsourcing);
+        if($osr->delete()) {
+            return new Outsourcing($osr);
         }
     }
 }

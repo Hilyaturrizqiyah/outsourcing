@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\AdminModel;
 use App\Http\Resources\Admin;
 use App\Http\Controllers\Controller;
-
+use App\Http\Resources\Area;
 
 class AdminController extends Controller
 {
@@ -28,7 +28,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        
+
     }
 
     /**
@@ -57,7 +57,7 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id_admin)
     {
         $admins = AdminModel::findOrFail($id_admin);
         return new Admin($admins);
@@ -69,7 +69,7 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id_admin)
     {
         //
     }

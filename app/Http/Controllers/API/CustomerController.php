@@ -34,7 +34,7 @@ class CustomerController extends Controller
             ]);
 
             $customer = CustomerModel::where('email', $request->email)->first();
-            if(!$customer || !Hash::check($request->password, $customer->password)){
+            if (!$customer || !Hash::check($request->password, $customer->password)) {
                 return response([
                     'message' => ['Unauthoriezed']
                 ], 404);
@@ -45,7 +45,7 @@ class CustomerController extends Controller
             return ResponseFormatter::success([
                 'access_token'  => $tokenResult,
                 'token_type'    => 'Bearer',
-                'customer'          => $customer
+                'customer'      => $customer
             ], 'Authenticated');
         } catch (Exception $error) {
             return ResponseFormatter::error([
