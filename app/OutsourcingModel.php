@@ -11,6 +11,11 @@ class OutsourcingModel extends Model
     protected $primaryKey = 'id_outsourcing';
     protected $fillable = ['nama_outsourcing', 'alamat', 'no_telp', 'nama_pemilikRekening', 'nama_bank', 'no_rekening', 'email', 'password', 'picturePath'];
 
+    public function jasa()
+    {
+        return $this->belongsToMany(jasaModel::class, 'jasa', 'id_outsourcing'); //model_tabel_yang_mau_disambungin, nama_tabel_perantara, foreignkey1_pada_tabel_penghubung, foreignkey2_pada_tabel_penghubung)
+    }
+
     public function toArray()
     {
         $toArray = parent::toArray();

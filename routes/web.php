@@ -47,9 +47,20 @@ Route::get('/admin/HapusCustomer{id_customer}', 'MengelolaCustomerController@del
 
 
 //====================Customer======================//
-Route::get('customer/login', function () {
-    return view('customer/login');
-});
+Route::get('/customer/loginCustomer', 'LoginCustomerController@loginCustomer');
+Route::get('/customer/DashboardCustomer', 'LoginCustomerController@index');
+Route::post('/customer/loginCustomerPost', 'LoginCustomerController@loginCustomerPost');
+Route::get('logout', 'LoginCustomerController@logout');
+
+Route::get('/customer/DashboardCustomer', 'CustomerController@index');
+Route::get('/customer/detailJasa{id_jasa}', 'CustomerController@tampilDetailJasa');
+Route::get('/customer/formKontrak{id_jenisJasa}', 'CustomerController@formKontrak');
+Route::post('/ajukan/{id_jasa}','CustomerController@tambahFormKontrak');
+Route::get('/customer/dataOutsourcing', 'CustomerController@tampilPenyediaJasa');
+Route::get('/customer/detailOutsourcing{id_outsourcing}', 'CustomerController@tampilDetailOutsourcing');
+Route::get('/customer/ubahProfil', 'CustomerController@ubahProfil');
+Route::get('/customer/formUbah', 'CustomerController@formUbah');
+
 
 Route::get('/', function () {
     return view('index');
@@ -62,6 +73,7 @@ Route::get('/login', function () {
 Route::get('/pengguna_jasa/index', function () {
     return view('/pengguna_jasa/index');
 });
+
 
 Route::get('/', 'UtamaController@tampil');
 Route::get('/index/area/cari', 'UtamaController@cari');
