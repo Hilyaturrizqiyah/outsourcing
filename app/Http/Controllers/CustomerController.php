@@ -8,7 +8,9 @@ use App\JenisJasaModel;
 use App\kontrak_jasaModel;
 use App\OutsourcingModel;
 use Illuminate\Http\Request;
-use Session;
+use Illuminate\Support\Facades\Session;
+
+// use Session;
 
 class CustomerController extends Controller
 {
@@ -71,7 +73,7 @@ class CustomerController extends Controller
         $kontrak->save();
         }
 
-        $datas = CustomerModel::find($id_customer);
+        // $datas = CustomerModel::find($id_customer);
         // $customer   = CustomerModel::where();
 
         return redirect('/customer/riwayatSewa');

@@ -8,5 +8,5 @@ class provinsiModel extends Model
 {
     protected $table = 'provinsi';
     protected $primaryKey = 'id';
-    protected $fillable = ['nama_provinsi'];
+    protected $fillable = ['nama'];
 }

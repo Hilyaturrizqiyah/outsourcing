@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\AreaModel;
 use App\provinsiModel;
 use App\kota_kabupatenModel;
+
 use Illuminate\Http\Request;
 use Session;
 
@@ -96,11 +97,13 @@ class MengelolaAreaController extends Controller
         ];
 
     	$this->validate($request, [
+            'id_area' => 'required',
     		'kotaKabupaten' => 'required|max:100',
             'nama_area' => 'required|max:100',
     	], $messages);
 
         $data = new AreaModel();
+        $data->id_area = $request->id_area;
         $data->id_kotaKabupaten = $request->kotaKabupaten;
         $data->nama_area = $request->nama_area;
     	$data->save();
@@ -121,11 +124,13 @@ class MengelolaAreaController extends Controller
         ];
 
     	$this->validate($request, [
+            'id' => 'required',
     		'provinsi' => 'required|max:100',
             'nama_kotaKabupaten' => 'required|max:100',
     	], $messages);
 
         $data = new kota_kabupatenModel();
+        $data->id = $request->id;
         $data->id_provinsi = $request->provinsi;
         $data->nama_kotaKabupaten = $request->nama_kotaKabupaten;
     	$data->save();
@@ -146,10 +151,12 @@ class MengelolaAreaController extends Controller
         ];
 
     	$this->validate($request, [
+            'id' => 'required|unique:provinsi',
             'nama_provinsi' => 'required|max:100|unique:provinsi',
     	], $messages);
 
         $data = new ProvinsiModel();
+        $data->id = $request->id;
         $data->nama_provinsi = $request->nama_provinsi;
     	$data->save();
 
@@ -201,6 +208,5 @@ class MengelolaAreaController extends Controller
     	$datas->delete();
     	return redirect('/admin/MengelolaArea')->with('alert-success','Data berhasil dihapus!');
     }
-
 
 }
