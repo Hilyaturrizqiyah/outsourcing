@@ -15,8 +15,10 @@
           <li><a href="#services">Services</a></li>
           <li><a href="#team">Perusahaan</a></li>
           <li><a href="#contact">Contact</a></li>
+          <li><a disabled>||</a></li>
 
-          <li class="get-started"><a href="#about">Login</a></li>
+          <li><a href="{{url ('/Register')}}" style="color: darkblue"><strong>Register</strong></a></li>
+          <li class="get-started"><a href="{{url ('/Login')}}">Login</a></li>
         </ul>
       </nav><!-- .nav-menu -->
 
