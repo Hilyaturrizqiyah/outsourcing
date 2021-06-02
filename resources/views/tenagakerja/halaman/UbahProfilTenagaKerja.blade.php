@@ -138,7 +138,7 @@
                                                     <div class="col-md-4">
                                                         <center>
                                                             <img class="rounded-circle img-responsive mt-2" width="128" height="128" 
-                                                            @if ($datas->foto_profi == "NULL")
+                                                            @if ($datas->foto_profi == "")
                                                                 src="{{ asset('pengguna/assets/images/faces/1.jpg')}}"
                                                             @else
                                                                 src="{{ url('pengguna/assets/images/foto_profil/'.$datas->foto_profil)}}"

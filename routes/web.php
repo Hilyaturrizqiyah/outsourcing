@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// --------------LandingPage-------------------//
+Route::get('/','UtamaController@tampil');
+Route::get('/Register','UtamaController@tambah');
+
+// --------------LandingPage-------------------//
+
 // --------------Admin-------------------//
 Route::get('/admin/DashboardAdmin', function () {
     return view('admin.halaman.DashboardAdmin');
@@ -49,6 +55,9 @@ Route::get('/admin/HapusArea{id_area}','MengelolaAreaController@delete');
 
 Route::get('/admin/MengelolaCustomer','MengelolaCustomerController@index');
 Route::get('/admin/HapusCustomer{id_customer}','MengelolaCustomerController@delete');
+
+Route::get('/admin/MengelolaOutsourcing','MengelolaOutsourcingController@index');
+Route::get('/admin/HapusOutsourcing{id_outsourcing}','MengelolaOutsourcingController@delete');
 
 //----------------------Admin---------------------//
 
@@ -96,8 +105,15 @@ Route::get('/tenagakerja/HapusPengalamanKerja{id_pengalaman}','PengalamanKerjaCo
 
 Route::get('/tenagakerja/JasaTenagaKerja','TenagaKerjaController@jasa');
 
-
 //----------------------TenagaKerja-----------------//
+
+
+//----------------------Outsourcing-----------------//
+Route::get('/outsourcing/RegisterOutsourcing','OutsourcingController@tambah');
+Route::post('/outsourcing/AksiTambahOutsourcing','OutsourcingController@store');
+
+//----------------------Outsourcing-----------------//
+
 
 //====================Customer======================//
 Route::get('/customer/DashboardCustomer', 'LoginCustomerController@index');

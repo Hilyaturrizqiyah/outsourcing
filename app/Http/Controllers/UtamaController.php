@@ -11,7 +11,7 @@ class UtamaController extends Controller
 {
     public function tampil(){
         $jasa = jasaModel::all();
-        return view('/index', compact('jasa'));
+        return view('landingpage.halaman.index', compact('jasa'));
     }
 
     // public function tampilDetailObat($id_obat)
@@ -43,6 +43,12 @@ class UtamaController extends Controller
         $area = AreaModel::where('nama_area','like',"%".$cari."%")->paginate();
 
     		// mengirim data pegawai ke view index
-		return view('index', compact('area'));
+		return view('landingpage.halaman.index', compact('area'));
 	}
+
+    public function tambah() {
+
+        return view('landingpage.halaman.Register');
+        
+    }
 }

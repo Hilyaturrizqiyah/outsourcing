@@ -115,7 +115,7 @@ class TenagaKerjaController extends Controller
         $data->status_tenagaKerja = "Pelamar";
     	$data->save();
 
-    	return redirect('/tenagakerja/LoginTenagaKerja')->with('alert-success','Data Akun berhasil ditambahkan!');
+    	return redirect('/tenagakerja/RegisterTenagaKerja')->with('alert-success','Data Akun berhasil ditambahkan!');
     }
 
     public function edit() {
