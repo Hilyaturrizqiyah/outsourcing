@@ -51,7 +51,7 @@
           <li><a href="#team">Perusahaan</a></li>
           <li><a href="#contact">Contact</a></li>
 
-          <li class="get-started"><a href="#about">Login</a></li>
+          <li class="get-started"><a href="{{url('/customer/loginCustomer')}}">Login</a></li>
         </ul>
       </nav><!-- .nav-menu -->
 
@@ -211,7 +211,7 @@
         </center>
         <br> <br>
         <div class="row">
-        
+
         </div>
           <div class="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="100">
             <div class="contact-about">

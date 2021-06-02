@@ -20,6 +20,11 @@ class jasaModel extends Model
         return $this->belongsTo(OutsourcingModel::class, 'id_outsourcing');
     }
 
+    public function kontrakJasa()
+    {
+        return $this->belongsToMany(kontrak_jasaModel::class, 'kontrak_jasa', 'id_jasa'); //model_tabel_yang_mau_disambungin, nama_tabel_perantara, foreignkey1_pada_tabel_penghubung, foreignkey2_pada_tabel_penghubung)
+    }
+
     public function biaya_perlengkapan()
     {
         return $this->belongsToMany(Biaya_perlengkapanModel::class, 'biaya_perlengkapan', 'id_jasa'); //model_tabel_yang_mau_disambungin, nama_tabel_perantara, foreignkey1_pada_tabel_penghubung, foreignkey2_pada_tabel_penghubung)

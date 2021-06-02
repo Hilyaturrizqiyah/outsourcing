@@ -18,13 +18,20 @@
                     <div class="card">
                         <div class="card-header">
                             <center>
-                            <img src="{{ url('../pengguna/assets/images/foto_profil/'.$outsourcing->foto_profil) }}" class="rounded img-fluid" width="400px" height="400px">
+                                <img src="{{ url('../pengguna/assets/images/foto_profil/'.$outsourcing->foto_profil) }}"
+                                    class="rounded img-fluid" width="400px" height="400px">
                             </center>
-                        <h5 class="card-title"></h5>
+                            <h5 class="card-title"></h5>
                         </div>
                         <div class="card-body">
                             <h4>{{$outsourcing->nama_outsourcing}}</h4>
-                            <p>{{$outsourcing->alamat}}</p>
+                            <p><i class="fas fa-map-pin"></i> {{$outsourcing->alamat}}</p>
+                            <p style="text-align: justify; text-indent: 0.5in;">{{$outsourcing->deskripsi}}</p>
+                            <br>
+                            <h5>Jasa yang tersedia :</h5>
+                            @foreach ($jasa as $jasa)
+                            <p class="btn btn-outline-dark">{{$jasa->nama_jasa}}</p>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -45,7 +52,7 @@
                                     <div class="form-body">
                                         <div class="row">
                                             <center>
-                                                <a href="{{url('/customer/formKontrak'.$outsourcing->id_outsourcing)}}"
+                                                <a href="{{url('/customer/KontrakOsr'.$outsourcing->id_outsourcing)}}"
                                                     class="btn btn-primary">Mulai Ajukan Kontrak</a>
                                             </center>
                                         </div>

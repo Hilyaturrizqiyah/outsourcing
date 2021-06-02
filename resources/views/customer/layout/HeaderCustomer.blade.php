@@ -1,5 +1,5 @@
 <header class='mb-3'>
-    <nav class="navbar navbar-expand navbar-light ">
+    <nav class="navbar navbar-expand navbar-light">
         <div class="container-fluid">
             <a href="#" class="burger-btn d-block">
                 <i class="bi bi-justify fs-3"></i>
@@ -20,18 +20,21 @@
                             </div>
                             <div class="user-img d-flex align-items-center">
                                 <div class="avatar avatar-md">
-                                    <img  @if ($datas->foto_profi == "NULL")
-                                    src="{{ asset('/pengguna/assets/images/foto_profil/user1.jpg')}}" @else
-                                        src="{{ url('/pengguna/assets/images/foto_profil/'.$datas->foto_profil)}}" @endif>
+                                    <img @if (Auth::guard('customer')->user()->foto_profil == "NULL")
+                                    src="{{ asset('/pengguna/assets/images/foto_profil/user1.jpg')}}"
+                                    @else
+                                    src="{{ url('/pengguna/assets/images/foto_profil/'.Auth::guard('customer')->user()->foto_profil)}}"
+                                    @endif>
                                 </div>
                             </div>
                         </div>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
                         <li>
-                            <h6 class="dropdown-header">Hello, {{Session::get('nama_customer')}}</h6>
+                            <h6 class="dropdown-header">Hello, {{Auth::guard('customer')->user()->nama_customer}}</h6>
                         </li>
-                        <li><a class="dropdown-item" href="{{('/customer/ubahProfil')}}"><i class="icon-mid bi bi-person me-2"></i> My
+                        <li><a class="dropdown-item" href="{{('/customer/ubahProfil')}}"><i
+                                    class="icon-mid bi bi-person me-2"></i> My
                                 Profile</a></li>
                         <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-gear me-2"></i>
                                 Settings</a></li>
@@ -40,7 +43,7 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="{{ url ('/logout') }}"><i
+                        <li><a class="dropdown-item" href="{{url('/logout')}}"><i
                                     class="icon-mid bi bi-box-arrow-left me-2"></i> Logout</a></li>
                     </ul>
                 </div>

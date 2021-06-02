@@ -25,9 +25,9 @@
             <div  class="col-12 col-lg-4">
                 <div class="card">
                     <div class="card-body py-4 px-5">
-                        <div class="d-flex align-items-center">
-                            <div class="avatar avatar-xl text-center">
-                                <img
+                        <div class="text-center mb-4">
+                            <div class="avatar avatar-xl">
+                                <img style="height: 200px !important; width: 200px !important"
                                     @if ($datas->foto_profi == "NULL")
                                     src="{{ asset('assets/img/customer/user1.jpg')}}"
                                     @else

@@ -1,6 +1,6 @@
 <?php
 
-use App\jenis_jasaModel;
+use App\JenisJasaModel;
 use Illuminate\Database\Seeder;
 
 class jenis_jasaTableSeeder extends Seeder
@@ -12,7 +12,7 @@ class jenis_jasaTableSeeder extends Seeder
      */
     public function run()
     {
-        $jenis_jasa = new jenis_jasaModel();
+        $jenis_jasa = new JenisJasaModel();
         $jenis_jasa->id_jenisJasa = 1;
         $jenis_jasa->nama_jenisJasa = "Satpam";
         $jenis_jasa->save();

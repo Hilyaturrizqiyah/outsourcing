@@ -2,10 +2,10 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model as Authenticable;
 use Illuminate\Support\Facades\Storage;
 
-class OutsourcingModel extends Model
+class OutsourcingModel extends Authenticable
 {
     protected $table = 'outsourcing';
     protected $primaryKey = 'id_outsourcing';

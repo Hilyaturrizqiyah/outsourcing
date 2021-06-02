@@ -100,9 +100,11 @@ Route::get('/tenagakerja/JasaTenagaKerja','TenagaKerjaController@jasa');
 //----------------------TenagaKerja-----------------//
 
 //====================Customer======================//
-Route::get('/customer/loginCustomer', 'LoginCustomerController@loginCustomer');
 Route::get('/customer/DashboardCustomer', 'LoginCustomerController@index');
-Route::post('/customer/loginCustomerPost', 'LoginCustomerController@loginCustomerPost');
+Route::get('/customer/loginCustomer', 'LoginCustomerController@loginCustomer');
+Route::get('/customer/register', 'LoginCustomerController@registerCustomer');
+Route::post('/customer/registerCustomerPost', 'LoginCustomerController@registerCustomerPost');
+Route::post('/customer/loginCustomerPost', 'LoginCustomerController@loginPost');
 Route::get('logout', 'LoginCustomerController@logout');
 
 Route::get('/customer/DashboardCustomer', 'CustomerController@index');
@@ -113,6 +115,17 @@ Route::get('/customer/dataOutsourcing', 'CustomerController@tampilPenyediaJasa')
 Route::get('/customer/detailOutsourcing{id_outsourcing}', 'CustomerController@tampilDetailOutsourcing');
 Route::get('/customer/ubahProfil', 'CustomerController@ubahProfil');
 Route::get('/customer/formUbah', 'CustomerController@formUbah');
+Route::get('/customer/riwayatSewa', 'CustomerController@tampilRiwayatPengajuan');
+Route::get('/customer/riwayatSewaProgress', 'CustomerController@tampilRiwayatProgress');
+Route::get('/customer/riwayatSewaFinish', 'CustomerController@tampilRiwayatFinish');
+Route::get('/customer/riwayatSewaDetail{id_kontrak}', 'CustomerController@tampilDetailRiwayat');
+Route::get('/customer/formKomplain{id_kontrak}', 'CustomerController@formKomplain');
+Route::post('/ajukanKomplain/{id_kontrak}','CustomerController@tambahFormKomplain');
+Route::get('/customer/riwayatKomplain', 'CustomerController@riwayatKomplain');
+Route::get('/customer/KontrakOsr{id_outsourcing}', 'CustomerController@formKontrakOutsourcing');
+Route::post('/ajukan/{id_outsourcing}','CustomerController@tambahFormKontrakOsr');
+
+
 
 
 Route::get('/', function () {

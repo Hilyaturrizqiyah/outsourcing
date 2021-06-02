@@ -42,32 +42,27 @@
                                         </div>
                                         @endif
                                         <form class="contact-form-area contact-page-form contact-form text-left"
-                                            action="{{url('/ajukan')}}/{{ $jasa->id_jasa }}" method="post">
+                                            action="{{url('/ajukan')}}/{{ $outsourcing->id_outsourcing }}" method="post">
                                             @csrf
-                                            <div class="form-group">
-                                                <label><b>Jasa </b></label>
-                                                <input type="text" class="form-control" name="nama_admin"
-                                                    placeholder="{{$jasa->nama_jasa}}" disabled>
-                                                @if ($errors->has('nama_admin'))
-                                                <span class="text-danger">
-                                                    <p class="text-right">* {{ $errors->first('nama_admin') }}</p>
-                                                </span>
-                                                @endif
-                                            </div>
-
                                             <div class="form-group">
                                                 <label><b>Perusahaan Penyedia Jasa </b></label>
                                                 <input type="text" class="form-control" name="nama_admin"
-                                                    placeholder="{{$jasa->outsourcing->nama_outsourcing}}" disabled>
+                                                    placeholder="{{$outsourcing->nama_outsourcing}}" disabled>
 
                                                 @if ($errors->has('nama_admin'))
                                                 <span class="text-danger">
                                                     <p class="text-right">* {{ $errors->first('nama_admin') }}</p>
                                                 </span>
                                                 @endif
-
                                             </div>
-
+                                            <div class="form-group">
+                                                <label><b>Pilih Jasa </b></label>
+                                                <select name="deskripsi" id="select" type="select" class="form-select">
+                                                    @foreach ($jasa as $jasa)
+                                                    <option value="{{$jasa->id_jasa}}" name="deskripsi">{{$jasa->nama_jasa}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                             <div class="form-group">
                                                 <label><b>Tanggal Mulai Kontrak</b></label>
                                                 <input type="date" class="form-control" name="tgl_mulai_kontrak">
@@ -180,32 +175,7 @@
     </div>
 </div>
 
-{{-- <div  class="col-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Bagaimana Cara Kerjanya</h4>
-                            <ol>
-                                <li>Pilih jenis jasa yang diinginkan</li>
-                                <li>Isi formulir kontrak jasa</li>
-                                <li>Melakukan kesepakatan dengan pihak outsourcing atau penyedia jasa</li>
-                                <li></li>
-                            </ol>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-content">
-                                    <form class="form form-horizontal">
-                                        <div class="form-body">
-                                            <div class="row">
-                                                <center>
-                                                    <a href="{{url('/customer/formKontrak')}}" class="btn btn-primary">Mulai Ajukan Kontrak</a>
-</center>
-</div>
-</div>
-</form>
-</div>
-</div>
-</div>
-</div> --}}
+
 </section>
 </div>
 

@@ -14,4 +14,19 @@ class kontrak_jasaModel extends Model
     {
         return $this->belongsTo(CustomerModel::class, 'id_customer');
     }
+
+    public function jasa()
+    {
+        return $this->belongsTo(jasaModel::class, 'id_jasa');
+    }
+
+    public function outsourcing()
+    {
+        return $this->belongsTo(OutsourcingModel::class, 'id_outsourcing');
+    }
+
+    public function komplain()
+    {
+        return $this->belongsToMany(komplainModel::class, 'komplain', 'id_kontrak'); //model_tabel_yang_mau_disambungin, nama_tabel_perantara, foreignkey1_pada_tabel_penghubung, foreignkey2_pada_tabel_penghubung)
+    }
 }

@@ -78,7 +78,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link href="img/logo/logo.png" rel="icon">
-    <title>Login</title>
+    <title>Register</title>
     <link href="{{asset('assets/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('admin/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('admin/css/ruang-admin.min.css')}}" rel="stylesheet">
@@ -96,7 +96,7 @@
                             <div class="col-lg-12">
                                 <div class="login-form">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Login</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">Register</h1>
                                     </div>
                                     @if(\Session::has('alert'))
                                     <div class="alert alert-danger mb-3" align="center"
@@ -109,11 +109,42 @@
                                         <div>{{Session::get('alert-success')}}</div>
                                     </div>
                                     @endif
-                                    <form action="{{ url('/customer/loginCustomerPost') }}" method="post" class="user">
+                                    <form action="{{ url('/customer/registerCustomerPost') }}" method="post" class="user">
                                         @csrf
                                         <div class="form-group">
+                                            <input type="nama_customer" name="nama_customer" class="form-control" id="exampleInputEmail"
+                                                aria-describedby="emailHelp" placeholder="Nama Lengkap">
+                                            @if ($errors->has('nama_customer'))
+                                            <span>
+                                                <p class=" text-right">*
+                                                    {{ $errors->first('nama_customer') }}</p>
+                                            </span>
+                                            @endif
+                                        </div>
+                                        <div class="form-group">
+                                            <textarea type="alamat" name="alamat" class="form-control" id="exampleInputEmail"
+                                                aria-describedby="emailHelp" placeholder="Alamat"></textarea>
+                                            @if ($errors->has('alamat'))
+                                            <span>
+                                                <p class=" text-right">*
+                                                    {{ $errors->first('alamat') }}</p>
+                                            </span>
+                                            @endif
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="no_telp" name="no_telp" class="form-control" id="exampleInputEmail"
+                                                aria-describedby="emailHelp" placeholder="Nomor Telepon">
+                                            @if ($errors->has('no_telp'))
+                                            <span>
+                                                <p class=" text-right">*
+                                                    {{ $errors->first('no_telp') }}</p>
+                                            </span>
+                                            @endif
+                                        </div>
+                                        <div class="form-group">
                                             <input type="email" name="email" class="form-control" id="exampleInputEmail"
-                                                aria-describedby="emailHelp" placeholder="Email Address">
+                                                aria-describedby="emailHelp" placeholder="Email">
                                             @if ($errors->has('email'))
                                             <span>
                                                 <p class=" text-right">*
@@ -129,8 +160,16 @@
                                                 {{ $errors->first('password') }}</p></span>
                                             @endif
                                         </div>
+                                        {{-- <div class="form-group">
+                                            <input type="password" name="confirmation_password" class="form-control"
+                                                id="exampleInputPassword" placeholder="Konfirmasi Password">
+                                            @if ($errors->has('password'))
+                                            <span style="color: red""><p class=" text-right">*
+                                                {{ $errors->first('password') }}</p></span>
+                                            @endif
+                                        </div> --}}
                                         <div class="form-group">
-                                            <button class="btn btn-primary btn-block">Login</button>
+                                            <button class="btn btn-primary btn-block">Daftar</button>
                                         </div>
                                         {{-- <hr>
                                          <a href="index.html" class="btn btn-google btn-block">
@@ -142,9 +181,8 @@
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <p>Tidak punya akun? Daftar sebagai</p>
-                                        <a class="font-weight-bold" href="{{url('/outsourcing/register')}}">Penyedia Jasa</a> |
-                                        <a class="font-weight-bold" href="{{url('/customer/register')}}">Pengguna Jasa</a>
+                                        <p>Sudah punya akun?</p>
+                                        <a class="font-weight-bold" href="{{url('/customer/loginCustomer')}}">Login</a>
                                     </div>
                                     <div class="text-center">
                                     </div>

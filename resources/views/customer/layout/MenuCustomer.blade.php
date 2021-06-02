@@ -14,13 +14,13 @@
             <ul class="menu">
                 <li class="sidebar-title">Menu</li>
 
-                <li class="sidebar-item  ">
+                <li class="sidebar-item {{ Request::is('customer/DashboardCustomer') ? "active" : "" }}">
                     <a href="{{('/customer/DashboardCustomer')}}" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
                         <span>Daftar Jasa</span>
                     </a>
                 </li>
-                <li class="sidebar-item  ">
+                <li class="sidebar-item  {{ Request::is('customer/dataOutsourcing') ? "active" : "" }}">
                     <a href="{{('/customer/dataOutsourcing')}}" class='sidebar-link'>
                         <i class="fas fa-building"></i>
                         <span>Daftar Penyedia Jasa</span>
@@ -32,20 +32,20 @@
                         <span>Riwayat Jasa</span>
                     </a>
                     <ul class="submenu ">
-                        <li class="submenu-item ">
-                            <a href="{{url ('tenagakerja/')}}">Pengajuan</a>
+                        <li class="submenu-item {{ Request::is('/customer/riwayatSewa') ? "active" : "" }}">
+                            <a href="{{url ('/customer/riwayatSewa')}}">Pengajuan</a>
                         </li>
-                        <li class="submenu-item ">
-                            <a href="{{url ('tenagakerja/UbahProfilTenagaKerja')}}">In Progress</a>
+                        <li class="submenu-item {{ Request::is('/customer/riwayatSewaProgress') ? "active" : "" }}">
+                            <a href="{{url ('/customer/riwayatSewaProgress')}}">In Progress</a>
                         </li>
-                        <li class="submenu-item ">
-                            <a href="{{url ('tenagakerja/UbahProfilTenagaKerja')}}">Finish</a>
+                        <li class="submenu-item {{ Request::is('/customer/riwayatSewaFinish') ? "active" : "" }}">
+                            <a href="{{url ('/customer/riwayatSewaFinish')}}">Finish</a>
                         </li>
                     </ul>
                 </li>
-                <li class="sidebar-item  ">
-                    <a href="index.html" class='sidebar-link'>
-                        <i class="bi bi-grid-fill"></i>
+                <li class="sidebar-item {{ Request::is('/customer/riwayatKomplain') ? "active" : "" }} ">
+                    <a href="{{('/customer/riwayatKomplain')}}" class='sidebar-link'>
+                        <i class="fas fa-book"></i>
                         <span>Komplain</span>
                     </a>
                 </li>
