@@ -29,6 +29,13 @@
         </a>  
       </li>
 
+      <li class="nav-item {{ Request::is('admin/MengelolaOutsourcing')? "active":""}}">
+        <a class="nav-link" href="{{url ('admin/MengelolaOutsourcing')}}">
+          <i class="fas fa-fw fa-palette"></i>
+          <span>Outsourcing</span>
+        </a>  
+      </li>
+
       <li class="nav-item {{ Request::is('admin/MengelolaJenisJasa')? "active":""}}">
         <a class="nav-link" href="{{url ('admin/MengelolaJenisJasa')}}">
           <i class="fas fa-fw fa-palette"></i>

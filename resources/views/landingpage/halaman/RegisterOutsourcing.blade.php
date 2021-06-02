@@ -27,19 +27,19 @@
 
             <div align="center">
               <h4>
-                Mendaftar Akun Tenaga Kerja
+                Mendaftar Akun Outsourcing
               </h4>
             </div>  
             
               <hr>
-              <form enctype="multipart/form-data" action="{{url('/tenagakerja/AksiTambahTenagakerja')}}" method="post">
+              <form enctype="multipart/form-data" action="{{url('/outsourcing/AksiTambahOutsourcing')}}" method="post">
 
                 {{csrf_field()}}
                 
                 <div class="mb-3 row">
                   <label for="nama" class="col-sm-3 col-form-label"><strong>Nama</strong></label>
                   <div class="col-sm-9">
-                    <input type="text" name="nama_tenagaKerja" class="form-control" id="nama">
+                    <input type="text" name="nama_outsourcing" class="form-control" id="nama">
                   </div>
                 </div>
                 <div class="mb-3 row">

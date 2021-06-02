@@ -18,8 +18,8 @@ class CreateOutsourcingTable extends Migration
             $table->foreignId('id_area')->nullable();
             $table->foreignId('id_admin')->nullable();
             $table->string('nama_outsourcing');
-            $table->string('alamat');
-            $table->string('no_telp');
+            $table->string('alamat')->nullable();
+            $table->string('no_telp')->nullable();
             $table->string('nama_pemilikRekening')->nullable();
             $table->string('nama_bank')->nullable();
             $table->string('no_rekening')->nullable();
