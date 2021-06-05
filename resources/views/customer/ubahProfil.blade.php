@@ -27,17 +27,17 @@
                     <div class="card-body py-4 px-5">
                         <div class="text-center">
                             <div class="avatar avatar-xl">
-                                <img style="height: 200px !important; width: 200px !important" @if ($datas->foto_profi
-                                == "NULL")
-                                src="{{ asset('assets/img/customer/user1.jpg')}}"
+                                <img style="height: 200px !important; width: 200px !important" @if (empty(Auth::guard('customer')->user()->foto_profil))
+                                src="{{ asset('/assets/img/customer/user1.jpg')}}"
                                 @else
-                                src="{{ url('../pengguna/assets/images/foto_profil/'.$datas->foto_profil)}}"
+                                src="{{ asset('/pengguna/assets/images/foto_profil/'.Auth::guard('customer')->user()->foto_profil)}}"
                                 @endif
                                 alt="Face 1">
                             </div>
                             <div class="ms-3 mt-4 name">
-                                <h5 class="font-bold">{{Session::get('nama_customer')}}</h5>
-                                <small class="text-muted">{{Session::get('email')}}</small>
+                                <h5 class="font-bold">{{Auth::guard('customer')->user()->nama_customer}}</h5>
+                                <i class="fas fa-envelope"></i>  <small class="text-muted">{{Auth::guard('customer')->user()->email}}</small> <br>
+                                <i class="fas fa-phone"></i> <small class="text-muted">{{Auth::guard('customer')->user()->no_telp}}</small>
                             </div>
                         </div>
                     </div>

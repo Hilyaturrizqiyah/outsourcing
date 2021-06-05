@@ -39,14 +39,14 @@
                             style="border-bottom-left-radius: 20px !important; border-bottom-right-radius: 20px !important">
                             <div class="row">
                                 <div class="col-6">
-                                    <h6>{{$komplains->kontrak_jasa}}</h6>
                                     <i class="fas fa-user"></i> <small style="color: blueviolet"><b>{{Auth::guard('customer')->user()->nama_customer}}</b></small>
+                                    || <small>{{$komplains->kontrak->outsourcing->nama_outsourcing}}</small>
                                     <p>{{$komplains->alasan}}</p>
                                 </div>
-                                {{-- <div class="col-6">
-                                    <a href="{{('/customer/riwayatSewaDetail'.$komplain->id_komplain)}}"
-                                        class="btn btn-primary float-end"><i class="fas fa-eye"></i> Detail</a>
-                                </div> --}}
+                                <div class="col-6">
+                                    <a href="{{('/customer/komplainDetail'.$komplains->id_komplain)}}"
+                                        class="btn btn-primary float-end">Detail</a>
+                                </div>
                             </div>
                         </div>
                     </div>

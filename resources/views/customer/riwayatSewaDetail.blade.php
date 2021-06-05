@@ -44,6 +44,7 @@
                                         <h6>{{$kontraks->jasa->nama_jasa}}</h6>
                                         <small>Tanggal Pengajuan : {{$kontraks->tgl_mulai_kontrak}}</small> <br>
                                         <p>Lama Kontrak : {{$kontraks->lama_kontrak}}</p>
+                                        <small style="color: green">Status : {{$kontraks->status_kontrak}}</small> <br>
                                     </div>
                                     <div class="col-6">
                                         <b class="float-end">{{$kontraks->outsourcing->nama_outsourcing}}</b>
@@ -60,8 +61,9 @@
                         <div class="card">
                             <div class="card-header"
                                 style="border-bottom-left-radius: 20px !important; border-bottom-right-radius: 20px !important">
-                                <h6>Ingin Ajukan Komplain ?</h6>
-                                <a href="" class="btn btn-primary">Komplain</a>
+                                <h6>Upload Bukti Pembayaran</h6>
+                                <small>*Pembayaran untuk peralatan seperti seragam dll</small><br>
+                                <input type="file" name="" id="">
                             </div>
 
                         </div>
@@ -80,6 +82,7 @@
                                         <h6>{{$kontraks->jasa->nama_jasa}}</h6>
                                         <small>Tanggal Pengajuan : {{$kontraks->tgl_mulai_kontrak}}</small> <br>
                                         <p>Lama Kontrak : {{$kontraks->lama_kontrak}}</p>
+                                        <small style="color: blue">Status : {{$kontraks->status_kontrak}}</small> <br>
                                     </div>
                                     <div class="col-6">
                                         <b class="float-end">{{$kontraks->outsourcing->nama_outsourcing}}</b>
@@ -155,6 +158,7 @@
                                     <h6>{{$kontraks->jasa->nama_jasa}}</h6>
                                     <small>Tanggal Pengajuan : {{$kontraks->tgl_mulai_kontrak}}</small> <br>
                                     <p>Lama Kontrak : {{$kontraks->lama_kontrak}}</p>
+                                    <small style="color: orange">Status : {{$kontraks->status_kontrak}}</small> <br>
                                 </div>
                                 <div class="col-6">
                                     <b class="float-end">{{$kontraks->outsourcing->nama_outsourcing}}</b>

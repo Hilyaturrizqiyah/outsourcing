@@ -18,7 +18,7 @@
           <li><a disabled>||</a></li>
 
           <li><a href="{{url ('/Register')}}" style="color: darkblue"><strong>Register</strong></a></li>
-          <li class="get-started"><a href="{{url ('/Login')}}">Login</a></li>
+          <li class="get-started"><a href="{{url ('customer/loginCustomer')}}">Login</a></li>
         </ul>
       </nav><!-- .nav-menu -->
 

@@ -6,7 +6,7 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Layanan Penyedia Jasa Outsourcing</h3>
+                <h5>Layanan Penyedia Jasa Outsourcing</h5>
                 <p class="text-subtitle text-muted">Perusahaan Outsourcing Terbaik</p>
             </div>
         </div>
@@ -14,7 +14,7 @@
     <div class="page-content">
         <section>
             <div class="row">
-                <div class="col-lg-8 col-md-8 col-12">
+                <div class="col-lg-12 col-md-12 col-12">
                     <div class="card">
                         <div class="card-header">
                             <center>
@@ -26,6 +26,19 @@
                         <div class="card-body">
                             <h4>{{$outsourcing->nama_outsourcing}}</h4>
                             <p><i class="fas fa-map-pin"></i> {{$outsourcing->alamat}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="page-content">
+        <section>
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5>Tentang Kami :</h5>
                             <p style="text-align: justify; text-indent: 0.5in;">{{$outsourcing->deskripsi}}</p>
                             <br>
                             <h5>Jasa yang tersedia :</h5>
@@ -65,8 +78,6 @@
             </div>
         </section>
     </div>
-</div>
-
 </div>
 
 

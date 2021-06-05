@@ -15,7 +15,7 @@
         <section class="row">
             <div class="col-12">
                 <div class="row">
-                    <div class="col-8">
+                    <div class="col">
                         <div class="card">
                             <div class="card-header">
                                 {{-- <img src="{{ url('assets/img/jasa/'.$jenisjasa->foto) }}" class="rounded mx-auto
@@ -86,14 +86,8 @@
                                                             placeholder="Lama kontrak" aria-label="First name">
                                                     </div>
                                                     <div class="col">
-                                                        <select name="deskripsi" id="select" type="select"
-                                                            class="form-select">
-                                                            <option value="Hari" name="deskripsi">Hari</option>
-                                                            <option value="Bulan" name="deskripsi" type="select">Bulan
-                                                            </option>
-                                                            <option value="Tahun" name="deskripsi" type="select">Tahun
-                                                            </option>
-                                                        </select>
+                                                        <input name="deskripsi"  type="text"
+                                                            class="form-control" value="Bulan" disabled>
                                                     </div>
                                                 </div>
 

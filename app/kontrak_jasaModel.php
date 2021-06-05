@@ -8,7 +8,7 @@ class kontrak_jasaModel extends Model
 {
     protected $table = 'kontrak_jasa';
     protected $primaryKey = 'id_kontrak';
-    protected $fillable = ['id_customer', 'id_jasa', 'id_outsourcing', 'tgl_mulai_kontrak', 'lama_kontrak', 'jumlah_tenagaKerja', 'jumlah_harga', 'status_kontrak'];
+    protected $fillable = ['id_customer', 'id_jasa', 'id_outsourcing', 'id_tenagaKerja', 'tgl_mulai_kontrak', 'lama_kontrak', 'jumlah_tenagaKerja', 'jumlah_harga', 'status_kontrak'];
 
     public function customer()
     {
@@ -28,5 +28,10 @@ class kontrak_jasaModel extends Model
     public function komplain()
     {
         return $this->belongsToMany(komplainModel::class, 'komplain', 'id_kontrak'); //model_tabel_yang_mau_disambungin, nama_tabel_perantara, foreignkey1_pada_tabel_penghubung, foreignkey2_pada_tabel_penghubung)
+    }
+
+    public function tenagakerja()
+    {
+        return $this->belongsTo(tenaga_kerjaModel::class, 'id_tenagaKerja');
     }
 }

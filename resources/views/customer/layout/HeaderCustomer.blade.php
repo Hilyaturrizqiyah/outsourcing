@@ -19,8 +19,11 @@
                                 <p class="mb-0 text-sm text-gray-600">{{Session::get('status_tenagaKerja')}}</p> --}}
                             </div>
                             <div class="user-img d-flex align-items-center">
+                                {{-- <div class="">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </div> --}}
                                 <div class="avatar avatar-md">
-                                    <img @if (Auth::guard('customer')->user()->foto_profil == "NULL")
+                                    <img @if (empty(Auth::guard('customer')->user()->foto_profil))
                                     src="{{ asset('/pengguna/assets/images/foto_profil/user1.jpg')}}"
                                     @else
                                     src="{{ url('/pengguna/assets/images/foto_profil/'.Auth::guard('customer')->user()->foto_profil)}}"
@@ -36,10 +39,6 @@
                         <li><a class="dropdown-item" href="{{('/customer/ubahProfil')}}"><i
                                     class="icon-mid bi bi-person me-2"></i> My
                                 Profile</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-gear me-2"></i>
-                                Settings</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-wallet me-2"></i>
-                                Wallet</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
