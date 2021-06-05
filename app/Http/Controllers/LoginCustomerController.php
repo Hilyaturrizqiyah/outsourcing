@@ -16,7 +16,7 @@ class LoginCustomerController extends Controller
         //     return redirect('/customer/loginCustomer')->with('alert', 'Kamu harus login dulu');
         // } else {
 
-        return view('/customer/DashboardCustomer');
+            return view('/customer/DashboardCustomer');
         // }
     }
 
@@ -97,7 +97,7 @@ class LoginCustomerController extends Controller
             // if successful, then redirect to their intended location
             return (redirect()->intended('customer/DashboardCustomer'));
         } else if (Auth::guard('outsourcing')->attempt(['email' => $request->email, 'password' => $request->password])) {
-            return redirect()->intended('outsourcing/DashboardOsr');
+            return redirect()->intended('outsourcing/DashboardOutsourcing');
         } else if (Auth::guard('tenagaKerja')->attempt(['email' => $request->email, 'password' => $request->password])) {
             return redirect()->intended('tenagakerja/ProfilTenagaKerja');
         } else {
@@ -116,75 +116,5 @@ class LoginCustomerController extends Controller
             Auth::guard('tenagaKerja')->logout();
         }
         return redirect('customer/loginCustomer')->with('alert-success', 'Kamu sudah logout');
-    }
-
-    public function aksiubahprofil($id_customer, Request $request)
-    {
-        $messages = [
-            // 'required' => ':attribute masih kosong',
-            // 'min' => ':attribute diisi minimal :min karakter',
-            // 'max' => ':attribute diisi maksimal :max karakter',
-            // 'numeric' => ':attribute harus berupa angka',
-            // 'unique' => ':attribute sudah ada',
-            // 'email' => ':attribute harus berupa email',
-            // 'alpha' => ':attribute harus berupa huruf',
-            // 'image' => ':attribute harus berupa gambar',
-            // 'no_telp.digits_between' => ':attribute diisi antara 1 sampai 15 digit',
-            // 'no_telp.min' => ':attribute tidak boleh kurang dari 1'
-        ];
-
-        $this->validate($request, [
-            // 'nama_customer' => 'nullable|max:50',
-            // 'password' => 'nullable|min:8|max:50',
-            // 'email' => 'nullable|max:50|email|unique:admin',
-            // 'no_telp' => 'nullable|numeric|min:1|digits_between:1,15',
-            // 'alamat' => 'nullable|max:255',
-        ], $messages);
-
-        $data = CustomerModel::find($id_customer);
-
-        if (empty($request->nama_customer)) {
-            $data->nama_customer = $data->nama_customer;
-        } else {
-            $data->nama_customer = $request->nama_customer;
-        }
-
-        if (empty($request->alamat)) {
-            $data->alamat = $data->alamat;
-        } else {
-            $data->alamat = $request->alamat;
-        }
-
-        if (empty($request->password)) {
-            $data->password = $data->password;
-        } else {
-            $data->password = bcrypt($request->password);
-        }
-
-        if (empty($request->no_telp)) {
-            $data->no_telp = $data->no_telp;
-        } else {
-            $data->no_telp = $request->no_telp;
-        }
-
-        if (empty($request->email)) {
-            $data->email = $data->email;
-        } else {
-            $data->email = $request->email;
-        }
-
-        if (empty($request->foto_profil)) {
-            $data->foto_profil = $data->foto_profil;
-        } else {
-            // unlink('/pengguna/assets/images/foto_profil/' . $data->foto_profil); //menghapus file lama
-            $file = $request->file('foto_profil'); // menyimpan data gambar yang diupload ke variabel $file
-            $nama_file = time() . "_" . $file->getClientOriginalName();
-            $file->move('pengguna/assets/images/foto_profil/', $nama_file); // isi dengan nama folder tempat kemana file diupload
-            $data->foto_profil = $nama_file;
-        }
-
-        $data->save();
-        // Session::flush();
-        return redirect('/customer/ubahProfil')->with('alert-success', 'Data Berhasil Di Rubah!');
     }
 }

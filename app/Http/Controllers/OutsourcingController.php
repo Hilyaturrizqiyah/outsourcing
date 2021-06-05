@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\CustomerModel;
 use App\jasaModel;
-use App\jenis_jasaModel;
-use App\AreaModel;
+use App\JenisJasaModel;
+use App\komplainModel;
+use App\kontrak_jasaModel;
 use App\OutsourcingModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class OutsourcingController extends Controller
 {
@@ -14,7 +18,7 @@ class OutsourcingController extends Controller
     {
         $osr = OutsourcingModel::all();
 
-        return view('/osr/DashboardOsr', compact('osr'));
+        return view('/outsourcing/DashboardOutsourcing', compact('osr'));
     }
 
     public function ubahProfil()
