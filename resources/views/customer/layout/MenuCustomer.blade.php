@@ -1,4 +1,4 @@
-<div id="sidebar" class="active">
+<div id="sidebar" class="">
     <div class="sidebar-wrapper active">
         <div class="sidebar-header">
             <div class="d-flex justify-content-between">
@@ -6,7 +6,7 @@
                     <a href="index.html"><img src="{{url('assets/img/logo1.png')}}" alt="Logo" class="img-fluid"></a>
                 </div>
                 <div class="toggler">
-                    <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                    <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-justify fs-3"></i></a>
                 </div>
             </div>
         </div>

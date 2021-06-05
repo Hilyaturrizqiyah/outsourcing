@@ -2,11 +2,16 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model as Authenticable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
+use Laravel\Sanctum\HasApiTokens;
 
-class OutsourcingModel extends Authenticable
+class OutsourcingModel extends Authenticatable
 {
+    use HasApiTokens, Notifiable;
+
     protected $table = 'outsourcing';
     protected $primaryKey = 'id_outsourcing';
     protected $fillable = ['nama_outsourcing', 'alamat', 'no_telp', 'nama_pemilikRekening', 'nama_bank', 'no_rekening', 'email', 'password', 'picturePath'];

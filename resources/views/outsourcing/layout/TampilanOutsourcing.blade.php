@@ -21,13 +21,13 @@
 <body>
     <div id="app">
         <!-- ======= Menu ======= -->
-        @include('osr.layout.MenuOsr')
+        @include('outsourcing.layout.MenuOutsourcing')
         <!-- End Menu -->
 
 
         <div id="main" class='layout-navbar'>
             <!-- ======= Header ======= -->
-            @include('osr.layout.HeaderOsr')
+            @include('outsourcing.layout.HeaderOutsourcing')
             <!-- End Header -->
 
             <div id="main-content">
@@ -37,7 +37,7 @@
                 <!-- End Content -->
 
                 <!-- ======= Footer ======= -->
-                @include('osr.layout.FooterOsr')
+                @include('outsourcing.layout.FooterOutsourcing')
                 <!-- End Footer -->
             </div>
         </div>

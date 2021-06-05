@@ -15,11 +15,6 @@ class kontrak_jasaModel extends Model
         return $this->belongsTo(CustomerModel::class, 'id_customer');
     }
 
-    public function TenagaKerja() // 1 kontrak memiliki banyak tenagakerja
-    { 
-        return $this->hasMany(tenaga_kerjaModel::class,'id_kontrak');
-    }
-  
     public function jasa()
     {
         return $this->belongsTo(jasaModel::class, 'id_jasa');
@@ -33,5 +28,10 @@ class kontrak_jasaModel extends Model
     public function komplain()
     {
         return $this->belongsToMany(komplainModel::class, 'komplain', 'id_kontrak'); //model_tabel_yang_mau_disambungin, nama_tabel_perantara, foreignkey1_pada_tabel_penghubung, foreignkey2_pada_tabel_penghubung)
+    }
+
+    public function tenagaKerja()
+    {
+        return $this->belongsToMany(tenaga_kerjaModel::class, 'tenaga_kerja', 'id_kontrak'); //model_tabel_yang_mau_disambungin, nama_tabel_perantara, foreignkey1_pada_tabel_penghubung, foreignkey2_pada_tabel_penghubung)
     }
 }

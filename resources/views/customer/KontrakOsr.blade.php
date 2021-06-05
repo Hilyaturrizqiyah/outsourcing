@@ -15,7 +15,7 @@
         <section class="row">
             <div class="col-12">
                 <div class="row">
-                    <div class="col-8">
+                    <div class="col">
                         <div class="card">
                             <div class="card-header">
                                 {{-- <img src="{{ url('assets/img/jasa/'.$jenisjasa->foto) }}" class="rounded mx-auto
@@ -42,24 +42,24 @@
                                         </div>
                                         @endif
                                         <form class="contact-form-area contact-page-form contact-form text-left"
-                                            action="{{url('/ajukan')}}/{{ $outsourcing->id_outsourcing }}" method="post">
+                                            action="{{url('/ajukanOsr')}}/{{ $outsourcing->id_outsourcing }}" method="post">
                                             @csrf
                                             <div class="form-group">
                                                 <label><b>Perusahaan Penyedia Jasa </b></label>
-                                                <input type="text" class="form-control" name="nama_admin"
+                                                <input type="text" class="form-control" name="nama_outsourcing"
                                                     placeholder="{{$outsourcing->nama_outsourcing}}" disabled>
 
-                                                @if ($errors->has('nama_admin'))
+                                                @if ($errors->has('nama_outsourcing'))
                                                 <span class="text-danger">
-                                                    <p class="text-right">* {{ $errors->first('nama_admin') }}</p>
+                                                    <p class="text-right">* {{ $errors->first('nama_outsourcing') }}</p>
                                                 </span>
                                                 @endif
                                             </div>
                                             <div class="form-group">
                                                 <label><b>Pilih Jasa </b></label>
-                                                <select name="deskripsi" id="select" type="select" class="form-select">
+                                                <select name="id_jasa" id="select" type="select" class="form-select">
                                                     @foreach ($jasa as $jasa)
-                                                    <option value="{{$jasa->id_jasa}}" name="deskripsi">{{$jasa->nama_jasa}}</option>
+                                                    <option value="{{$jasa->id_jasa}}" name="id_jasa">{{$jasa->nama_jasa}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -81,14 +81,8 @@
                                                             placeholder="Lama kontrak" aria-label="First name">
                                                     </div>
                                                     <div class="col">
-                                                        <select name="deskripsi" id="select" type="select"
-                                                            class="form-select">
-                                                            <option value="Hari" name="deskripsi">Hari</option>
-                                                            <option value="Bulan" name="deskripsi" type="select">Bulan
-                                                            </option>
-                                                            <option value="Tahun" name="deskripsi" type="select">Tahun
-                                                            </option>
-                                                        </select>
+                                                        <input name="deskripsi" type="text"
+                                                            class="form-control" value="Bulan" disabled>
                                                     </div>
                                                 </div>
 

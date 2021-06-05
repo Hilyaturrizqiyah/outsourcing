@@ -5,7 +5,7 @@
         </div>
         <div class="float-end">
             <p>Created with <span class="text-danger"><i class="bi bi-heart-fill icon-mid"></i></span>
-                by <a href="https://ahmadsaugi.com">Kelompok 4</a></p>
+                by <a href="#">Kelompok 4</a></p>
         </div>
     </div>
 </footer>

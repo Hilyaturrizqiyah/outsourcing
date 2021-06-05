@@ -97,7 +97,7 @@ class LoginCustomerController extends Controller
             // if successful, then redirect to their intended location
             return (redirect()->intended('customer/DashboardCustomer'));
         } else if (Auth::guard('outsourcing')->attempt(['email' => $request->email, 'password' => $request->password])) {
-            return redirect()->intended('outsourcing/DashboardOsr');
+            return redirect()->intended('outsourcing/DashboardOutsourcing');
         } else if (Auth::guard('tenagaKerja')->attempt(['email' => $request->email, 'password' => $request->password])) {
             return redirect()->intended('tenagakerja/ProfilTenagaKerja');
         } else {
