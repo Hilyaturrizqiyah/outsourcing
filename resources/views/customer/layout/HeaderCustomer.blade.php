@@ -21,9 +21,9 @@
                             <div class="user-img d-flex align-items-center">
                                 <div class="avatar avatar-md">
                                     <img @if (Auth::guard('customer')->user()->foto_profil == "NULL")
-                                    src="{{ asset('/pengguna/assets/images/foto_profil/user1.jpg')}}"
+                                    src="{{ asset('pengguna/assets/images/foto_profil/user1.jpg')}}"
                                     @else
-                                    src="{{ url('/pengguna/assets/images/foto_profil/'.Auth::guard('customer')->user()->foto_profil)}}"
+                                    src="{{ url('pengguna/assets/images/foto_profil/'.Auth::guard('customer')->user()->foto_profil)}}"
                                     @endif>
                                 </div>
                             </div>
