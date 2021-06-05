@@ -15,6 +15,11 @@ class kontrak_jasaModel extends Model
         return $this->belongsTo(CustomerModel::class, 'id_customer');
     }
 
+    public function TenagaKerja() // 1 kontrak memiliki banyak tenagakerja
+    { 
+        return $this->hasMany(tenaga_kerjaModel::class,'id_kontrak');
+    }
+  
     public function jasa()
     {
         return $this->belongsTo(jasaModel::class, 'id_jasa');

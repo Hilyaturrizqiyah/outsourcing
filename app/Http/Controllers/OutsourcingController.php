@@ -10,6 +10,26 @@ use Illuminate\Http\Request;
 
 class OutsourcingController extends Controller
 {
+    public function index()
+    {
+        $osr = OutsourcingModel::all();
+
+        return view('/osr/DashboardOsr', compact('osr'));
+    }
+
+    public function ubahProfil()
+    {
+        $id_outsourcing = Session::get('id_outsourcing');
+        $datas = OutsourcingModel::find($id_outsourcing);
+
+        return view('/osr/ubahProfil', compact('datas', 'id_outsourcing'));
+    }
+
+    public function jasa(){
+        $jasa = jasaModel::all();
+        return view('/osr/MengelolaJasa', compact('jasa'));
+    }
+
     public function tampil(){
         $jasa = jasaModel::all();
         return view('landingpage.halaman.index', compact('jasa'));

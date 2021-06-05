@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePembayaranTable extends Migration
+class CreatePembayaranTenagaKerjaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,20 @@ class CreatePembayaranTable extends Migration
      */
     public function up()
     {
-        Schema::create('pembayaran', function (Blueprint $table) {
-            $table->id('id_pembayaran');
+        Schema::create('pembayaran_tenaga_kerja', function (Blueprint $table) {
+            $table->id('id_pembayaranTenagaKerja');
             $table->foreignId('id_outsourcing');
             $table->foreignId('id_kontrak');
             $table->string('nama_pembayaran');
-            $table->integer('nominal');
-            $table->string('bukti_tf');
-            $table->string('status_bayar');
-            $table->dateTime('waktu');
+            $table->integer('nominal')->nullable();
+            $table->string('bukti_tf')->nullable();
+            $table->dateTime('waktu_bayar')->nullable();
             $table->integer('bulan_ke');
+            $table->string('status_bayar');
             $table->timestamps();
 
             $table->foreign('id_outsourcing')->references('id_outsourcing')->on('outsourcing');
             $table->foreign('id_kontrak')->references('id_kontrak')->on('kontrak_jasa');
-
         });
     }
 
@@ -38,6 +37,6 @@ class CreatePembayaranTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pembayaran');
+        Schema::dropIfExists('pembayaran_tenaga_kerja');
     }
 }

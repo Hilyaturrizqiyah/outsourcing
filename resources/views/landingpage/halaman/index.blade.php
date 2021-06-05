@@ -145,18 +145,6 @@
         <div class="section-title" data-aos="fade-up">
           <h2>Contact Us</h2>
         </div>
-        <center>
-        <div class="section-title col-md-12 mb-1">
-            <form action="/index/area/cari" method="GET">
-                <input class="btn btn-light col-10" type="text" name="cari" placeholder="Masukkan Kecamatan" value="{{ old('cari') }}" style="box-shadow: 2px 5px rgba(128, 128, 128, 0.247);">
-                <button class="btn btn-primary"><i class="fa fa-search"></i></button>
-            </form>
-        </div>
-        </center>
-        <br> <br>
-        <div class="row">
-        
-        </div>
           <div class="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="100">
             <div class="contact-about">
               <h3>Outsourcing</h3>

@@ -18,8 +18,12 @@ class tenaga_kerjaModel extends Authenticable
         return $this->hasMany(data_keluargaModel::class,'id_tenagaKerja');
     }
 
-    public function kontrak()
-    {
-        return $this->belongsToMany(kontrak_jasaModel::class, 'kontrak', 'id_tenagaKerja'); //model_tabel_yang_mau_disambungin, nama_tabel_perantara, foreignkey1_pada_tabel_penghubung, foreignkey2_pada_tabel_penghubung)
+    public function Jasa() {
+        return $this->belongsTo(jasaModel::class,'id_jasa');
     }
+
+    public function Kontrak() {
+        return $this->belongsTo(kontrak_jasaModel::class,'id_kontrak');
+    }
+
 }
