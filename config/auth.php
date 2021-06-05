@@ -46,6 +46,21 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        'customer' => [
+            'driver' => 'session',
+            'provider' => 'customer',
+        ],
+
+        'outsourcing' => [
+            'driver' => 'session',
+            'provider' => 'outsourcing',
+        ],
+
+        'tenagaKerja' => [
+            'driver' => 'session',
+            'provider' => 'tenagaKerja',
+        ],
     ],
 
     /*
@@ -66,9 +81,17 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'customer' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => App\CustomerModel::class,
+        ],
+        'outsourcing' => [
+            'driver' => 'eloquent',
+            'model' => App\OutsourcingModel::class,
+        ],
+        'tenagaKerja' => [
+            'driver' => 'eloquent',
+            'model' => App\tenaga_kerjaModel::class,
         ],
 
         // 'users' => [

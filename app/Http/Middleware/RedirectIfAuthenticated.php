@@ -18,8 +18,12 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard($guard)->check()) {
-            return redirect(RouteServiceProvider::HOME);
+        if (Auth::guard('customer')->check()) {
+            return redirect('customer/DashboardCustomer');
+        } else if (Auth::guard('outsourcing')->check()) {
+            return redirect('outsourcing/DashboardOsr');
+        }else if (Auth::guard('tenagaKeja')->check()) {
+            return redirect('tenagakerja/ProfilTenagaKerja');
         }
 
         return $next($request);

@@ -118,13 +118,56 @@ Route::get('/tenagakerja/MelamarKerja{id_jasa}','TenagaKerjaController@melamarKe
 Route::get('/outsourcing/RegisterOutsourcing','OutsourcingController@tambah');
 Route::post('/outsourcing/AksiTambahOutsourcing','OutsourcingController@store');
 
+Route::get('/outsourcing/DashboardOutsourcing', 'OutsourcingController@index');
+Route::get('/outsourcing/JasaOutsourcing', 'OutsourcingController@jasa');
+// Route::get('/customer/detailJasa{id_jasa}', 'CustomerController@tampilDetailJasa');
+// Route::get('/customer/formKontrak{id_jenisJasa}', 'CustomerController@formKontrak');
+// Route::post('/ajukan/{id_jasa}','CustomerController@tambahFormKontrak');
+// Route::get('/customer/dataOutsourcing', 'CustomerController@tampilPenyediaJasa');
+// Route::get('/customer/detailOutsourcing{id_outsourcing}', 'CustomerController@tampilDetailOutsourcing');
+Route::get('/outsourcing/ubahProfil', 'OutsourcingController@ubahProfil');
+// Route::get('/customer/formUbah', 'CustomerController@formUbah');
+// Route::get('/customer/riwayatSewa', 'CustomerController@tampilRiwayatPengajuan');
+// Route::get('/customer/riwayatSewaProgress', 'CustomerController@tampilRiwayatProgress');
+// Route::get('/customer/riwayatSewaFinish', 'CustomerController@tampilRiwayatFinish');
+// Route::get('/customer/riwayatSewaDetail{id_kontrak}', 'CustomerController@tampilDetailRiwayat');
+// Route::get('/customer/formKomplain{id_kontrak}', 'CustomerController@formKomplain');
+// Route::post('/ajukanKomplain/{id_kontrak}','CustomerController@tambahFormKomplain');
+// Route::get('/customer/riwayatKomplain', 'CustomerController@riwayatKomplain');
+// Route::get('/customer/KontrakOsr{id_outsourcing}', 'CustomerController@formKontrakOutsourcing');
+// Route::post('/ajukan/{id_outsourcing}','CustomerController@tambahFormKontrakOsr');
+
 //----------------------Outsourcing-----------------//
 
 
 //====================Customer======================//
-Route::get('customer/login', function () {
-    return view('customer/login');
-});
+Route::get('/customer/DashboardCustomer', 'LoginCustomerController@index');
+Route::get('/customer/loginCustomer', 'LoginCustomerController@loginCustomer');
+Route::get('/customer/register', 'LoginCustomerController@registerCustomer');
+Route::post('/customer/registerCustomerPost', 'LoginCustomerController@registerCustomerPost');
+Route::post('/customer/loginCustomerPost', 'LoginCustomerController@loginPost');
+Route::get('logout', 'LoginCustomerController@logout');
+
+Route::get('/customer/DashboardCustomer', 'CustomerController@index');
+Route::get('/customer/detailJasa{id_jasa}', 'CustomerController@tampilDetailJasa');
+Route::get('/customer/formKontrak{id_jenisJasa}', 'CustomerController@formKontrak');
+Route::post('/ajukan/{id_jasa}','CustomerController@tambahFormKontrak');
+Route::get('/customer/dataOutsourcing', 'CustomerController@tampilPenyediaJasa');
+Route::get('/customer/detailOutsourcing{id_outsourcing}', 'CustomerController@tampilDetailOutsourcing');
+Route::get('/customer/ubahProfil', 'CustomerController@ubahProfil');
+Route::get('/customer/formUbah', 'CustomerController@formUbah');
+Route::get('/customer/riwayatSewa', 'CustomerController@tampilRiwayatPengajuan');
+Route::get('/customer/riwayatSewaProgress', 'CustomerController@tampilRiwayatProgress');
+Route::get('/customer/riwayatSewaFinish', 'CustomerController@tampilRiwayatFinish');
+Route::get('/customer/riwayatSewaDetail{id_kontrak}', 'CustomerController@tampilDetailRiwayat');
+Route::get('/customer/formKomplain{id_kontrak}', 'CustomerController@formKomplain');
+Route::post('/ajukanKomplain/{id_kontrak}','CustomerController@tambahFormKomplain');
+Route::get('/customer/riwayatKomplain', 'CustomerController@riwayatKomplain');
+Route::get('/customer/KontrakOsr{id_outsourcing}', 'CustomerController@formKontrakOutsourcing');
+Route::post('/ajukan/{id_outsourcing}','CustomerController@tambahFormKontrakOsr');
+
+
+
 
 Route::get('/', function () {
     return view('index');
@@ -137,6 +180,7 @@ Route::get('/login', function () {
 Route::get('/pengguna_jasa/index', function () {
     return view('/pengguna_jasa/index');
 });
+
 
 Route::get('/', 'UtamaController@tampil');
 Route::get('/index/area/cari', 'UtamaController@cari');

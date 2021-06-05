@@ -2,9 +2,9 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model as Authenticable;
 
-class tenaga_kerjaModel extends Model
+class tenaga_kerjaModel extends Authenticable
 {
     protected $table = 'tenaga_kerja';
     protected $primaryKey = 'id_tenagaKerja';
