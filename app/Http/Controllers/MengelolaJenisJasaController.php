@@ -49,10 +49,12 @@ class MengelolaJenisJasaController extends Controller
 
     	$this->validate($request, [
     		'nama_jenisJasa' => 'required|max:50',
+            'deskripsi' => 'required|max:190',
     	], $messages);
 
         $data = new JenisJasaModel();
         $data->nama_jenisJasa = $request->nama_jenisJasa;
+        $data->deskripsi = $request->deskripsi;
     	$data->save();
 
     	return redirect('/admin/MengelolaJenisJasa')->with('alert-success','Data berhasil ditambahkan!');
@@ -87,10 +89,12 @@ class MengelolaJenisJasaController extends Controller
 
         $this->validate($request, [
             'nama_jenisJasa' => 'required|max:50',
+            'deskripsi' => 'required|max:190',
         ], $messages);
 
         $datas = JenisJasaModel::find($id_jenisJasa);
         $datas->nama_jenisJasa = $request->nama_jenisJasa;
+        $datas->deskripsi = $request->deskripsi;
         $datas->save();
 
         return redirect('/admin/MengelolaJenisJasa')->with('alert-success','Data berhasil diubah!');

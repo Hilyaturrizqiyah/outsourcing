@@ -33,6 +33,7 @@
                       <tr>
                         <th>No</th>
                         <th>Nama Jenis Jasa</th>
+                        <th>Deskripsi</th>
                         <th></th>
                       </tr>
                     </thead>
@@ -45,6 +46,7 @@
                       <tr>
                         <td>{{$no++}}</td>
                         <td>{{$tampil->nama_jenisJasa}}</td>
+                        <td>{{$tampil->deskripsi}}</td>
                         <td>
                           <a href="/admin/UbahJenisJasa{{$tampil->id_jenisJasa}}" class="btn btn-warning">
                             <i class="fas fa-pencil-alt"></i>

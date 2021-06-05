@@ -17,7 +17,6 @@ class CreateDetailKomplainTable extends Migration
             $table->id('id_detailKomplain');
             $table->foreignId('id_komplain');
             $table->foreignId('id_tenagaKerja');
-            $table->string('alasan');
             $table->timestamps();
 
             $table->foreign('id_komplain')->references('id_komplain')->on('komplain');

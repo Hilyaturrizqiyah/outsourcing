@@ -34,6 +34,16 @@
                     @endif
 
                     </div>
+
+                    <div class="form-group">
+                      <label><b>Deskripsi</b></label>
+                      <input type="text" class="form-control" name="deskripsi" placeholder="Masukkan Deskripsi" value="{{$datas->deskripsi}}">
+
+                    @if ($errors->has('deskripsi'))
+                        <span class="text-danger"><p class="text-right">* {{ $errors->first('deskripsi') }}</p></span>
+                    @endif
+
+                    </div>
                    
                     <div class="form-group"> 
                         <input type="reset" class="btn btn-secondary"  value="Batal">

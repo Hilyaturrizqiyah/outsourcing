@@ -11,10 +11,13 @@ use App\pendidikan_nonFormalModel;
 use App\keterampilanModel;
 use App\pengalaman_kerjaModel;
 use App\jasaModel;
+use App\JenisJasaModel;
+use App\lamaran_kerjaModel;
 
 use Illuminate\Http\Request;
 use Session;
 use Hash;
+use DB;
 
 class TenagaKerjaController extends Controller
 {
@@ -226,8 +229,49 @@ class TenagaKerjaController extends Controller
             $id_tenagaKerja = Session::get('id_tenagaKerja');
             $datas = tenaga_kerjaModel::find($id_tenagaKerja);
             $jasas = jasaModel::all();
+            $jenis_jasas = JenisJasaModel::all();
             
-        	return view('tenagakerja.halaman.JasaTenagaKerja',compact('datas','jasas','id_tenagaKerja'));
+        	return view('tenagakerja.halaman.JasaTenagaKerja',compact('datas','jasas','id_tenagaKerja','jenis_jasas'));
+        }
+    }
+
+    public function melamarKerja($id_jasa) {
+
+        if(!Session::get('loginTenagaKerja')){
+            return redirect('tenagakerja/LoginTenagakerja')->with('alert','Anda harus login dulu');
+        }
+        else{
+            $id_tenagaKerja = Session::get('id_tenagaKerja');
+            $tenagaKerja = tenaga_kerjaModel::find($id_tenagaKerja);
+            $countDataPribadi = data_pribadiModel::where('id_tenagaKerja',$id_tenagaKerja)->count();
+            $countDataKeluarga = DataKeluargaModel::where('id_tenagaKerja',$id_tenagaKerja)->count();
+            $countPddkFormal = pendidikan_formalModel::where('id_tenagaKerja',$id_tenagaKerja)->count();
+            $countPddkNonFormal = pendidikan_nonFormalModel::where('id_tenagaKerja',$id_tenagaKerja)->count();
+            $countKeterampilan = keterampilanModel::where('id_tenagaKerja',$id_tenagaKerja)->count();
+            $countPengalaman = pengalaman_kerjaModel::where('id_tenagaKerja',$id_tenagaKerja)->count();
+            $countLamarNunggu = DB::table('lamaran_kerja')->where('id_tenagaKerja', '=', $id_tenagaKerja)->where('status_lamaran', '=', 'Menunggu Validasi')->count();
+            
+            if ($tenagaKerja->status_tenagaKerja == 'Pelamar' && $countLamarNunggu == 0) {
+                if ($tenagaKerja->foto_profil != "" || $countDataPribadi !=0 || $countPddkFormal!=0 || $countPddkNonFormal!=0 || $countKeterampilan!=0 || $countPengalaman!=0 ) {
+                    $data = new lamaran_kerjaModel();
+                    $data->id_tenagaKerja = $id_tenagaKerja;
+                    $data->id_jasa = $id_jasa;
+                    $data->status_lamaran = "Menunggu Validasi";
+                    $data->save();
+    
+                    return redirect('tenagakerja/JasaTenagaKerja')->with('alert-success','Lamaran Pekerjaan berhasil di kirim kepada Outsourcing, silahkan tunggu sampai Outsurcing memvalidasi');
+    
+                }else{
+                    return redirect('tenagakerja/JasaTenagaKerja')->with('alert','Lengkapi dahulu data profil tenaga kerja');
+    
+                }
+                
+            }else{
+                return redirect('tenagakerja/JasaTenagaKerja')->with('alert','Maaf Anda sudah bukan sebagai Pelamar, atau anda sedang menunggu Hasil lamaran');
+
+            }
+
+            
         }
     }
 

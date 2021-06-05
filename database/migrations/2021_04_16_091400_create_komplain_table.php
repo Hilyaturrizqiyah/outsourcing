@@ -17,7 +17,7 @@ class CreateKomplainTable extends Migration
             $table->id('id_komplain');
             $table->foreignId('id_customer');
             $table->foreignId('id_kontrak');
-            $table->string('alasan');
+            $table->longtext('alasan');
             $table->timestamps();
 
             $table->foreign('id_customer')->references('id_customer')->on('customer');

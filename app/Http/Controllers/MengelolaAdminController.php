@@ -5,10 +5,54 @@ namespace App\Http\Controllers;
 use App\AdminModel;
 use Illuminate\Http\Request;
 use Session;
+use Hash;
 
 class MengelolaAdminController extends Controller
 {
-        public function index()     {
+    public function login()     {  
+
+        if(Session::get('loginAdmin')){
+            return redirect('/admin/MengelolaAdmin')->with('alert-success','Anda sudah login');
+        }
+        else{
+
+            return view('admin.halaman.LoginAdmin');
+        }
+    }
+
+    public function postLogin(Request $request){
+
+        $email = $request->email;
+        $password = $request->password;
+
+        $data = AdminModel::where('email',$email)->first();
+        if($data){ //apakah email tersebut ada atau tidak
+            if(Hash::check($password,$data->password)){
+                Session::put('id_admin',$data->id_admin);
+                Session::put('nama_admin',$data->nama_admin);
+                Session::put('alamat',$data->alamat);
+                Session::put('email',$data->email);
+                Session::put('no_telp',$data->no_telp);
+                
+                Session::put('loginAdmin',TRUE);
+                return redirect('/admin/MengelolaAdmin');
+            }
+            else{
+                return redirect('admin/LoginAdmin')->with('alert','Password atau Email, Salah !');
+            }
+        }
+        else{
+            return redirect('admin/LoginAdmin')->with('alert','Password atau Email, Salah!');
+        }
+    }
+
+    public function logout(){
+        Session::flush('loginAdmin');
+        return redirect('admin/LoginAdmin')->with('alert-success','Anda sudah logout');
+    }
+
+
+    public function index()     {
 
         //if(!Session::get('login')){
         //    return redirect('LoginAdmin')->with('alert','Anda harus login dulu');
