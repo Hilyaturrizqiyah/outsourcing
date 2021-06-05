@@ -17,6 +17,7 @@ class CreateTenagaKerjaTable extends Migration
             $table->id('id_tenagaKerja');
             $table->foreignId('id_area')->nullable();
             $table->foreignId('id_jasa')->nullable();
+            $table->foreignId('id_kontrak')->nullable();
             $table->string('nama_tenagaKerja');
             $table->string('no_ktp');
             $table->string('email');
@@ -27,7 +28,7 @@ class CreateTenagaKerjaTable extends Migration
 
             $table->foreign('id_area')->references('id_area')->on('area');
             $table->foreign('id_jasa')->references('id_jasa')->on('jasa');
-
+            $table->foreign('id_kontrak')->references('id_kontrak')->on('kontrak_jasa');
         });
     }
 

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Biaya_perlengkapanModel;
+use App\biaya_tenagaModel;
 use App\CustomerModel;
+use App\detail_komplainModel;
 use App\jasaModel;
 use App\JenisJasaModel;
 use App\komplainModel;
@@ -47,15 +50,15 @@ class CustomerController extends Controller
     }
 
     public function cariJasa(Request $request)
-	{
-		// menangkap data pencarian
-		$cari = $request->cariJasa;
+    {
+        // menangkap data pencarian
+        $cari = $request->cariJasa;
 
-    		// mengambil data dari table pegawai sesuai pencarian data
-        $jasa = jasaModel::where('nama_jasa','like',"%".$cari."%")->paginate();
+        // mengambil data dari table pegawai sesuai pencarian data
+        $jasa = jasaModel::where('nama_jasa', 'like', "%" . $cari . "%")->paginate();
 
-    		// mengirim data pegawai ke view index
-		return view('/customer/DashboardCustomer', compact('jasa'));
+        // mengirim data pegawai ke view index
+        return view('/customer/DashboardCustomer', compact('jasa'));
     }
 
     public function tampilDetailJasa($id_jasa)
@@ -69,13 +72,15 @@ class CustomerController extends Controller
 
     public function formKontrak($id_jasa)
     {
-        $id_customer = Session::get('id_customer');
-        $datas = CustomerModel::find($id_customer);
-        $jasa     = jasaModel::where('id_jasa', $id_jasa)->first();
+        // $id_customer = Session::get('id_customer');
+        // $datas = CustomerModel::find($id_customer);
+        // $jasa     = jasaModel::where('id_jasa', $id_jasa)->get();
+        $biaya_tenaga     = biaya_tenagaModel::where('id_jasa', $id_jasa)->first();
+        $biaya_perlengkapan = Biaya_perlengkapanModel::where('id_jasa', $id_jasa)->get();
         $outsourcing    = OutsourcingModel::all();
         // $customer   = CustomerModel::where();
 
-        return view('/customer/formKontrak', compact('jasa', 'datas', 'id_customer', 'outsourcing'));
+        return view('/customer/formKontrak', compact('outsourcing','biaya_tenaga','biaya_perlengkapan'));
     }
 
     public function tambahFormKontrak(Request $request, $id_jasa)
@@ -90,15 +95,17 @@ class CustomerController extends Controller
         //     'jumlah_tenagaKerja.required' => '*Harus isi terlebih dahulu',
         // ]);
 
-        $jasa     = jasaModel::where('id_jasa', $id_jasa)->first();
+        $jasa     = jasaModel::where('id_jasa', $id_jasa)->get();
+        $biaya_tenaga   = biaya_tenagaModel::where('id_jasa', $id_jasa)->first();
 
         $kontrak    = new kontrak_jasaModel;
-        $kontrak->id_jasa = $jasa->id_jasa;
+        $kontrak->id_jasa = $biaya_tenaga->jasa->id_jasa;
         $kontrak->id_customer = Auth::guard('customer')->user()->id_customer;
-        $kontrak->id_outsourcing = $jasa->outsourcing->id_outsourcing;
+        $kontrak->id_outsourcing = $biaya_tenaga->jasa->outsourcing->id_outsourcing;
         $kontrak->tgl_mulai_kontrak = $request->tgl_mulai_kontrak;
-        $kontrak->lama_kontrak = $request->lamaKontrak . " " . $request->deskripsi;
+        $kontrak->lama_kontrak = $request->lamaKontrak . " " . "Bulan";
         $kontrak->jumlah_tenagaKerja = $request->jumlah_tenagaKerja;
+        $kontrak->jumlah_biayaTenagaKerja = $biaya_tenaga->biaya*$request->jumlah_tenagaKerja;
         $kontrak->status_kontrak = "Pending";
         $kontrak->save();
 
@@ -119,18 +126,34 @@ class CustomerController extends Controller
                 $mulai->save();
             }
             $selisih_hari = $mulai->created_at->diffInDays($now);
-            if ($selisih_hari >=1 && $mulai->status_kontrak == "Kontrak Disetujui") {
+            if ($selisih_hari >= 1 && $mulai->status_kontrak == "Kontrak Disetujui") {
                 $update_mulai = kontrak_jasaModel::find($mulai->id_kontrak);
                 $update_mulai->status_kontrak = "In Progress";
                 $update_mulai->save();
             }
-    }
+        }
+
+        $btl = kontrak_jasaModel::with('jasa')->where('id_customer', Auth::guard('customer')->user()->id_customer)->where('status_kontrak', 'Pending')->get();
+
+
+        foreach ($btl as $batal) {
+            if ($now > $batal->tgl_mulai_kontrak) {
+                $batal->status_kontrak = "Cancel";
+                $batal->save();
+            }
+            $selisih_hari = $batal->created_at->diffInDays($now);
+            if ($selisih_hari >= 1 && $batal->status_kontrak == "Pending") {
+                $update_batal = kontrak_jasaModel::find($batal->id_kontrak);
+                $update_batal->status_kontrak = "Cancel";
+                $update_batal->save();
+            }
+        }
         return view('/customer/riwayatSewa', compact('kontraks', 'now', 'progres'));
     }
 
     public function tampilRiwayatProgress()
     {
-        $kontraks    = kontrak_jasaModel::with('jasa')->where('id_customer', Auth::guard('customer')->user()->id_customer)->where('status_kontrak', 'In Progress')->get();
+        $kontraks    = kontrak_jasaModel::with('jasa')->where('id_customer', Auth::guard('customer')->user()->id_customer)->where('status_kontrak', 'In Progress')->orderBy('tgl_mulai_kontrak', 'asc')->get();
 
         return view('/customer/riwayatSewa', compact('kontraks'));
     }
@@ -144,12 +167,6 @@ class CustomerController extends Controller
 
     public function tampilDetailRiwayat($id_kontrak)
     {
-        // $kontraks    = kontrak_jasaModel::with('jasa')->where('id_customer', Session::get('id_customer'))->where('status_kontrak','In Progress')->get();
-        // // $outsourcing = OutsourcingModel::all();
-        // // $jasa   = jasaModel::all();
-        // // $jenisjasa = JenisJasaModel::all();
-        // // $id_customer = Session::get('id_customer');
-        // $datas = CustomerModel::where('id_customer', Session::get('id_customer'))->first();
         $id_customer = Session::get('id_customer');
         $datas = CustomerModel::find($id_customer);
         $kontraks     = kontrak_jasaModel::where('id_kontrak', $id_kontrak)->first();
@@ -160,9 +177,10 @@ class CustomerController extends Controller
     public function formKomplain($id_kontrak)
     {
 
-        $kontraks     = kontrak_jasaModel::where('id_kontrak', $id_kontrak)->first();
+        $kontraks       = kontrak_jasaModel::where('id_kontrak', $id_kontrak)->where('id_customer', Auth::guard('customer')->user()->id_customer)->first();
+        $tenaga_kerja   = tenaga_kerjaModel::where('id_kontrak', $id_kontrak)->get();
 
-        return view('/customer/formKomplain', compact('kontraks'));
+        return view('/customer/formKomplain', compact('kontraks','tenaga_kerja'));
     }
 
     public function tambahFormKomplain(Request $request, $id_kontrak)
@@ -185,6 +203,12 @@ class CustomerController extends Controller
         $komplain->alasan       = $request->alasan;
         $komplain->save();
 
+
+        $detail_komplain    = new detail_komplainModel();
+        $detail_komplain->id_komplain = $komplain->id_komplain;
+        $detail_komplain->id_tenagaKerja = $request->id_tenagaKerja;
+        $detail_komplain->save();
+
         return redirect('/customer/riwayatKomplain')->with('alert-success', 'Berhasil Ajukan Komplain');
     }
 
@@ -200,12 +224,10 @@ class CustomerController extends Controller
 
     public function tampilDetailKomplain($id_komplain)
     {
-        $komplain     = komplainModel::where('id_komplain', $id_komplain)->first();
-        // $tenagakerja    = tenaga_kerjaModel::all();
-        $kontrak   = kontrak_jasaModel::where('id_customer', Auth::guard('customer')->user()->id_customer)->get();
-        // $tenagakerja    = tenaga_kerjaModel::where('id_kontrak', )->get();
+        $komplain     = komplainModel::where('id_komplain', $id_komplain)->where('id_customer', Auth::guard('customer')->user()->id_customer)->get();
+        $detail_komplain = detail_komplainModel::where('id_komplain', $id_komplain)->first();
 
-        return view('/customer/komplainDetail', compact('komplain', 'kontrak'));
+        return view('/customer/komplainDetail', compact('komplain', 'detail_komplain'));
     }
 
     public function tampilPenyediaJasa()
@@ -219,15 +241,15 @@ class CustomerController extends Controller
     }
 
     public function cariOsr(Request $request)
-	{
-		// menangkap data pencarian
-		$cari = $request->cariOsr;
+    {
+        // menangkap data pencarian
+        $cari = $request->cariOsr;
 
-    		// mengambil data dari table pegawai sesuai pencarian data
-        $outsourcing = OutsourcingModel::where('nama_outsourcing','like',"%".$cari."%")->paginate();
+        // mengambil data dari table pegawai sesuai pencarian data
+        $outsourcing = OutsourcingModel::where('nama_outsourcing', 'like', "%" . $cari . "%")->paginate();
 
-    		// mengirim data pegawai ke view index
-		return view('/customer/dataOutsourcing', compact('outsourcing'));
+        // mengirim data pegawai ke view index
+        return view('/customer/dataOutsourcing', compact('outsourcing'));
     }
 
     public function tampilDetailOutsourcing($id_outsourcing)

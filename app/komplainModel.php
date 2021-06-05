@@ -19,4 +19,9 @@ class komplainModel extends Model
     {
         return $this->belongsTo(CustomerModel::class, 'id_customer');
     }
+
+    public function detail_komplain()
+    {
+        return $this->belongsToMany(detail_komplainModel::class, 'detail_komplain', 'id_komplain'); //model_tabel_yang_mau_disambungin, nama_tabel_perantara, foreignkey1_pada_tabel_penghubung, foreignkey2_pada_tabel_penghubung)
+    }
 }

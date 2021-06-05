@@ -1,7 +1,19 @@
 @extends('customer.layout.TampilanCustomer')
 @section('content')
 
-
+<script type="text/javascript">
+    function startCalculate(){
+        interval=setInterval("Calculate()",1);
+    }
+    function Calculate(){
+        var a=document.form1.biaya.value;
+        var c=document.form1.jumlah_tenagaKerja.value;
+        document.form1.jumlah_biayaTenagaKerja.value=(c*a);
+    }
+    function stopCalc(){
+        clearInterval(interval);
+    }
+</script>
 <div class="page-heading">
     <div class="page-title">
         <div class="row">
@@ -41,13 +53,14 @@
                                             <div>{{Session::get('alert-success')}}</div>
                                         </div>
                                         @endif
-                                        <form class="contact-form-area contact-page-form contact-form text-left"
-                                            action="{{url('/ajukan')}}/{{ $jasa->id_jasa }}" method="post">
+                                        <form id="form1" name="form1"
+                                            class="contact-form-area contact-page-form contact-form text-left"
+                                            action="{{url('/ajukan')}}/{{ $biaya_tenaga->jasa->id_jasa }}" method="post">
                                             @csrf
                                             <div class="form-group">
                                                 <label><b>Jasa </b></label>
                                                 <input type="text" class="form-control" name="nama_admin"
-                                                    placeholder="{{$jasa->nama_jasa}}" disabled>
+                                                    placeholder="{{$biaya_tenaga->jasa->nama_jasa}}" disabled>
                                                 @if ($errors->has('nama_admin'))
                                                 <span class="text-danger">
                                                     <p class="text-right">* {{ $errors->first('nama_admin') }}</p>
@@ -58,7 +71,8 @@
                                             <div class="form-group">
                                                 <label><b>Perusahaan Penyedia Jasa </b></label>
                                                 <input type="text" class="form-control" name="nama_admin"
-                                                    placeholder="{{$jasa->outsourcing->nama_outsourcing}}" disabled>
+                                                    placeholder="{{$biaya_tenaga->jasa->outsourcing->nama_outsourcing}}"
+                                                    disabled>
 
                                                 @if ($errors->has('nama_admin'))
                                                 <span class="text-danger">
@@ -86,95 +100,125 @@
                                                             placeholder="Lama kontrak" aria-label="First name">
                                                     </div>
                                                     <div class="col">
-                                                        <input name="deskripsi"  type="text"
-                                                            class="form-control" value="Bulan" disabled>
+                                                        <input name="deskripsi" type="text" class="form-control"
+                                                            value="Bulan" disabled>
                                                     </div>
                                                 </div>
+                                            </div>
 
+                                            <div class="form-group">
+                                                <label><b>Biaya Tenaga Kerja</b></label>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <input type="text" name="biaya" class="form-control"
+                                                            value="{{$biaya_tenaga->biaya}}" onfocus="startCalculate()"
+                                                            onblur="stopCalc()" readonly>
+                                                    </div>
+                                                    <div class="col">
+                                                        <h5>/ orang</h5>
+                                                    </div>
+                                                </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <label><b>Jumlah Tenaga Kerja</b></label>
-                                                <input type="number" class="form-control" name="jumlah_tenagaKerja"
-                                                    placeholder="Masukkan Jumlah">
+                                                <input type="number"
+                                                    class="form-control @error('jumlah_tenagaKerja') is-invalid @enderror"
+                                                    name="jumlah_tenagaKerja" onfocus="startCalculate()"
+                                                    onblur="stopCalc()">
 
                                                 @if ($errors->has('jumlah_tenagaKerja'))
                                                 <span class="text-danger">
                                                     <p class="text-right">{{ $errors->first('jumlah_tenagaKerja') }}</p>
                                                 </span>
                                                 @endif
-
                                             </div>
 
-                                            {{-- <div class="form-group">
-                                        <label><b>Jumlah Harga</b></label>
-                                        <input type="text" class="form-control" name="password" placeholder="Jumlah Harga">
+                                            <div class="form-group">
+                                                <label><b>Jumlah Harga Tenaga Kerja</b></label>
+                                                <input class="form-control" name="jumlah_biayaTenagaKerja"
+                                                    onfocus="startCalculate()" onblur="stopCalc()" readonly>
 
-                                        @if ($errors->has('password'))
-                                            <span class="text-danger"><p class="text-right">* {{ $errors->first('password') }}
-                                            </p></span>
-                                            @endif
+                                                @if ($errors->has('password'))
+                                                <span class="text-danger">
+                                                    <p class="text-right">* {{ $errors->first('password') }}
+                                                    </p>
+                                                </span>
+                                                @endif
+                                            </div>
 
-                                    </div> --}}
+                                            <div class="form-group">
+                                                <label for="">Include :</label>
+                                                @foreach ($biaya_perlengkapan as $biaya_perlengkapan)
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="flexCheckDefault">
+                                                    <label class="form-check-label" for="flexCheckDefault">
+                                                        {{$biaya_perlengkapan->nama_biayaPerlengkapan}}
+                                                    </label>
+                                                </div>
+                                                @endforeach
+                                            </div>
 
-
-                                    <div class="form-group">
-                                        <input type="reset" class="btn btn-secondary" value="Batal">
-                                        <button class="btn btn-primary">Ajukan Kontrak</button>
+                                            <div class="form-group">
+                                                <input type="reset" class="btn btn-secondary" value="Batal">
+                                                <button class="btn btn-primary">Ajukan Kontrak</button>
+                                            </div>
+                                        </form>
                                     </div>
-                                    </form>
                                 </div>
-                            </div>
 
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-user"></i> Penyewa Jasa
-                                </h6>
+                    <div class="col-lg-4 col-md-4 col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-user"></i> Penyewa
+                                        Jasa
+                                    </h6>
+                                </div>
+
+                                <table>
+                                    <div class="form-group">
+                                        <tr>
+                                            <td><strong>Nama Pengguna Jasa</strong></td>
+                                            <td width="15px">:</td>
+                                            <td>{{Auth::guard('customer')->user()->nama_customer}}</td>
+                                        </tr>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <tr>
+                                            <td><strong>Alamat Pengguna Jasa</strong></td>
+                                            <td width="15px">:</td>
+                                            <td>{{Auth::guard('customer')->user()->alamat}}</td>
+                                        </tr>
+                                    </div>
+                                </table>
                             </div>
-
-                            <table>
-                                <div class="form-group">
-                                    <tr>
-                                        <td><strong>Nama Pengguna Jasa</strong></td>
-                                        <td width="15px">:</td>
-                                        <td>{{Auth::guard('customer')->user()->nama_customer}}</td>
-                                    </tr>
-                                </div>
-
-                                <div class="form-group">
-                                    <tr>
-                                        <td><strong>Alamat Pengguna Jasa</strong></td>
-                                        <td width="15px">:</td>
-                                        <td>{{Auth::guard('customer')->user()->alamat}}</td>
-                                    </tr>
-                                </div>
-                            </table>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-content">
-                                <form class="form form-horizontal">
-                                    <div class="form-body">
-                                        {{-- <div class="row">
+                            <div class="card-body">
+                                <div class="card-content">
+                                    <form class="form form-horizontal">
+                                        <div class="form-body">
+                                            {{-- <div class="row">
                                                 <center>
                                                     <a href="{{url('/customer/formKontrak'.$jasa->id_jasa)}}"
-                                        class="btn btn-primary">Mulai Ajukan Kontrak</a>
-                                        </center>
-                                    </div> --}}
+                                            class="btn btn-primary">Mulai Ajukan Kontrak</a>
+                                            </center>
+                                        </div> --}}
+                                </div>
+                                </form>
                             </div>
-                            </form>
                         </div>
                     </div>
                 </div>
             </div>
     </div>
-</div>
 
-{{-- <div  class="col-4">
+    {{-- <div  class="col-4">
                     <div class="card">
                         <div class="card-header">
                             <h4>Bagaimana Cara Kerjanya</h4>
@@ -191,8 +235,9 @@
                                         <div class="form-body">
                                             <div class="row">
                                                 <center>
-                                                    <a href="{{url('/customer/formKontrak')}}" class="btn btn-primary">Mulai Ajukan Kontrak</a>
-</center>
+                                                    <a href="{{url('/customer/formKontrak')}}" class="btn
+    btn-primary">Mulai Ajukan Kontrak</a>
+    </center>
 </div>
 </div>
 </form>

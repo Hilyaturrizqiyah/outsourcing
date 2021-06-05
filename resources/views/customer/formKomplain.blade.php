@@ -36,48 +36,62 @@
                                             <div>{{Session::get('alert-success')}}</div>
                                         </div>
                                         @endif
-                                        <table>
-                                            <div class="form-group">
-                                                <tr>
-                                                    <td><strong>Nama Customer</strong></td>
-                                                    <td width="15px">:</td>
-                                                    <td>{{Auth::guard('customer')->user()->nama_customer}}</td>
-                                                </tr>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <tr>
-                                                    <td><strong>Alamat Customer</strong></td>
-                                                    <td width="15px">:</td>
-                                                    <td>{{Auth::guard('customer')->user()->alamat}}</td>
-                                                </tr>
-                                            </div>
-                                            <div class="form-group">
-                                                <tr>
-                                                    <td><strong>No. Telepon Customer</strong></td>
-                                                    <td width="15px">:</td>
-                                                    <td>{{Auth::guard('customer')->user()->no_telp}}</td>
-                                                </tr>
-                                            </div>
-                                        </table>
                                         <form class="contact-form-area contact-page-form contact-form text-left"
-                                            action="{{url('/ajukanKomplain')}}/{{ $kontraks->id_kontrak }}" method="post">
-                                        @csrf
+                                            action="{{url('/ajukanKomplain')}}/{{ $kontraks->id_kontrak }}"
+                                            method="post">
+                                            @csrf
+                                            <div class="form-group">
+                                                <label><b>Pilih Nama Tenaga Kerja</b></label>
+                                                <small style="color: red">*Yang akan dikomplain</small>
+                                                <select type="select" class="form-control" name="id_tenagaKerja">
+                                                    @foreach ($tenaga_kerja as $tenaga_kerja)
+                                                    <option value="{{$tenaga_kerja->id_tenagaKerja}}">{{$tenaga_kerja->nama_tenagaKerja}}</option>
+                                                    @endforeach
+                                                </select>
+                                                @if ($errors->has('jumlah_tenagaKerja'))
+                                                <span class="text-danger">
+                                                    <p class="text-right">{{ $errors->first('jumlah_tenagaKerja') }}</p>
+                                                </span>
+                                                @endif
+                                            </div>
+                                            <div class="form-group">
+                                                <textarea type="date" class="form-control" name="alasan"
+                                                    rows="15"></textarea>
+                                                @if ($errors->has('alasan'))
+                                                <span class="text-danger">
+                                                    <p class="text-right">{{ $errors->first('alasan') }}
+                                                    </p>
+                                                </span>
+                                                @endif
+                                            </div>
+                                            <table>
+                                                <div class="form-group">
+                                                    <tr>
+                                                        <td><strong>Nama Customer</strong></td>
+                                                        <td width="15px">:</td>
+                                                        <td>{{Auth::guard('customer')->user()->nama_customer}}</td>
+                                                    </tr>
+                                                </div>
 
-                                        <div class="form-group">
-                                            <textarea type="date" class="form-control" name="alasan"
-                                                rows="15"></textarea>
-                                            @if ($errors->has('alasan'))
-                                            <span class="text-danger">
-                                                <p class="text-right">{{ $errors->first('alasan') }}
-                                                </p>
-                                            </span>
-                                            @endif
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="reset" class="btn btn-secondary" value="Batal">
-                                            <button class="btn btn-primary">Ajukan Komplain</button>
-                                        </div>
+                                                <div class="form-group">
+                                                    <tr>
+                                                        <td><strong>Alamat Customer</strong></td>
+                                                        <td width="15px">:</td>
+                                                        <td>{{Auth::guard('customer')->user()->alamat}}</td>
+                                                    </tr>
+                                                </div>
+                                                <div class="form-group">
+                                                    <tr>
+                                                        <td><strong>No. Telepon Customer</strong></td>
+                                                        <td width="15px">:</td>
+                                                        <td>{{Auth::guard('customer')->user()->no_telp}}</td>
+                                                    </tr>
+                                                </div>
+                                            </table> <br>
+                                            <div class="form-group">
+                                                <input type="reset" class="btn btn-secondary" value="Batal">
+                                                <button class="btn btn-primary">Ajukan Komplain</button>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>

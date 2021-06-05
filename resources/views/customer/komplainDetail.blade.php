@@ -21,8 +21,8 @@
                         </div>
                         <div class="card-body">
                             <h4>{{Auth::guard('customer')->user()->nama_customer}}</h4>
-                            <p>{{$komplain->alasan}}</p>
-                            <p>{{$komplain->kontrak->lama_kontrak}}</p>
+                            <p>{{$detail_komplain->komplain->alasan}}</p>
+                            <p>{{$detail_komplain->komplain->kontrak->lama_kontrak}}</p>
                             <br>
 
                         </div>
@@ -32,7 +32,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h5>Daftar Nama Pekerja :</h5>
-                            <p class="btn btn-outline-dark">{{$komplain->kontrak->tenagakerja->nama_tenagaKerja}}</p>
+                            <p class="btn btn-outline-dark">{{$detail_komplain->tenagakerja->nama_tenagaKerja}}</p>
                         </div>
                         <div class="card-body">
                             <div class="card-content">
@@ -40,7 +40,7 @@
                                     <div class="form-body">
                                         <div class="row">
                                             <center>
-                                                <a href="{{url('/customer/KontrakOsr'.$komplain->id_komplain)}}"
+                                                <a href="{{url('/customer/KontrakOsr'.$detail_komplain->komplain->id_komplain)}}"
                                                     class="btn btn-primary">Komplain Tenaga Kerja</a>
                                             </center>
                                         </div>
