@@ -34,6 +34,12 @@
                         </li>
                     </ul>
                 </li>
+                <li class="sidebar-item  ">
+                    <a href="{{url ('tenagakerja/JasaTenagaKerja')}}" class='sidebar-link'>
+                        <i class="bi bi-grid-1x2-fill"></i>
+                        <span>Lamar Jasa </span>
+                    </a>
+                </li>
             </ul>
 
         </div>

@@ -24,6 +24,11 @@ Route::get('/admin/DashboardAdmin', function () {
     return view('admin.halaman.DashboardAdmin');
 });
 
+Route::get('/admin/LoginAdmin', 'MengelolaAdminController@login');
+Route::post('/admin/LoginPost', 'MengelolaAdminController@postLogin');
+Route::get('/admin/Logout', 'MengelolaAdminController@logout');
+
+
 Route::get('/admin/MengelolaAdmin', 'MengelolaAdminController@index');
 Route::get('/admin/TambahAdmin', 'MengelolaAdminController@tambah');
 Route::post('/admin/AksiTambahAdmin', 'MengelolaAdminController@store');
@@ -104,6 +109,7 @@ Route::post('/tenagakerja/AksiUbahPengalamanKerja{id_pengalaman}','PengalamanKer
 Route::get('/tenagakerja/HapusPengalamanKerja{id_pengalaman}','PengalamanKerjaController@delete');
 
 Route::get('/tenagakerja/JasaTenagaKerja','TenagaKerjaController@jasa');
+Route::get('/tenagakerja/MelamarKerja{id_jasa}','TenagaKerjaController@melamarKerja');
 
 //----------------------TenagaKerja-----------------//
 

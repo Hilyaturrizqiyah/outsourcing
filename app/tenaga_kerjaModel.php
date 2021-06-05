@@ -17,4 +17,13 @@ class tenaga_kerjaModel extends Authenticable
     public function DataKeluarga() { // 1 praktik memiliki banyak keluarga
         return $this->hasMany(data_keluargaModel::class,'id_tenagaKerja');
     }
+
+    public function Jasa() {
+        return $this->belongsTo(jasaModel::class,'id_jasa');
+    }
+
+    public function Kontrak() {
+        return $this->belongsTo(kontrak_jasaModel::class,'id_kontrak');
+    }
+
 }
