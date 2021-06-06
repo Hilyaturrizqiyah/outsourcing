@@ -2,18 +2,51 @@
 @section('content')
 
 <script type="text/javascript">
+    function totalIt() {
+  var input = document.getElementsByName("perlengkapan[]");
+  var total = 0;
+  for (var i = 0; i < input.length; i++) {
+    if (input[i].checked) {
+      total += parseFloat(input[i].value);
+    }
+  }
+  document.getElementById("total").value =total;
+}
+</script>
+
+<script type="text/javascript">
     function startCalculate(){
         interval=setInterval("Calculate()",1);
     }
     function Calculate(){
         var a=document.form1.biaya.value;
         var c=document.form1.jumlah_tenagaKerja.value;
+        var x=document.form1.jumlahTenagaKerja.value;
+        var y=document.form1.biayaPerlengkapan.value;
         document.form1.jumlah_biayaTenagaKerja.value=(c*a);
+        document.form1.jumlah_biayaPerlengkapan.value=(x*y);
+        document.form1.jumlahTenagaKerja.value=c;
     }
     function stopCalc(){
         clearInterval(interval);
     }
+
 </script>
+<script type="text/javascript">
+    function hitungJumlahBP(){
+        interval=setInterval("Hitung()",1);
+    }
+    function Hitung(){
+        var a=document.form1.biayaPerlengkapan.value;
+        var c=document.form1.jumlah_tenagaKerja.value;jumlah_biayaPerlengkapan
+        document.form1.jumlah_biayaPerlengkapan.value=(c*a);
+    }
+    function stophitungJumlahBP(){
+        clearInterval(interval);
+    }
+
+</script>
+
 <div class="page-heading">
     <div class="page-title">
         <div class="row">
@@ -136,7 +169,7 @@
 
                                             <div class="form-group">
                                                 <label><b>Jumlah Harga Tenaga Kerja</b></label>
-                                                <input class="form-control" name="jumlah_biayaTenagaKerja"
+                                                <input type="number" class="form-control" name="jumlah_biayaTenagaKerja"
                                                     onfocus="startCalculate()" onblur="stopCalc()" readonly>
 
                                                 @if ($errors->has('password'))
@@ -146,19 +179,44 @@
                                                 </span>
                                                 @endif
                                             </div>
-
                                             <div class="form-group">
-                                                <label for="">Include :</label>
-                                                @foreach ($biaya_perlengkapan as $biaya_perlengkapan)
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                        id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">
-                                                        {{$biaya_perlengkapan->nama_biayaPerlengkapan}}
+                                                <label><b>Include : Biaya Peralatan</b></label>
+                                                
+                                                @foreach ($biaya_perlengkapan as $key => $biaya_perlengkapan)
+                                                <div class="form-check">                                               
+                                                    <input class="form-check-input" type="checkbox" name="perlengkapan[]" value="{{$biaya_perlengkapan->biaya}}"
+                                                        id="menu{{$key}}" onclick="totalIt()">
+                                                    <label class="form-check-label" for="menu{{$key}}">
+                                                        {{$biaya_perlengkapan->nama_biayaPerlengkapan}} ( {{$biaya_perlengkapan->biaya}} )
                                                     </label>
                                                 </div>
                                                 @endforeach
                                             </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-lg-5">
+                                                        <input type="text" name="biayaPerlengkapan" class="form-control" id="total" onfocus="startCalculate()"
+                                                        onblur="stopCalc()" readonly>
+                                                       
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <span>X (Jumlah Tenaga Kerja)</span>
+                                                        
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <input class="form-control" name="jumlahTenagaKerja"
+                                                        onfocus="startCalculate()"
+                                                        onblur="stopCalc()" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label><b>Jumlah Biaya Peralatan</b></label>
+                                                <input type="number" class="form-control" name="jumlah_biayaPerlengkapan" onfocus="startCalculate()"
+                                                onblur="stopCalc()" readonly>
+                                            </div>
+
+
 
                                             <div class="form-group">
                                                 <input type="reset" class="btn btn-secondary" value="Batal">
@@ -208,11 +266,28 @@
                                                     <a href="{{url('/customer/formKontrak'.$jasa->id_jasa)}}"
                                             class="btn btn-primary">Mulai Ajukan Kontrak</a>
                                             </center>
-                                        </div> --}}
+                                            </div> --}}
+                                        </div>
+                                    </form>
                                 </div>
-                                </form>
                             </div>
                         </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-user"></i> Biaya Perlengkapan
+                                    </h6>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-content">
+                                    
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

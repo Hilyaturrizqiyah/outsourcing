@@ -161,6 +161,7 @@ Route::post('/ajukanKomplain/{id_kontrak}','CustomerController@tambahFormKomplai
 Route::get('/customer/riwayatKomplain', 'CustomerController@riwayatKomplain');
 Route::get('/customer/KontrakOsr{id_outsourcing}', 'CustomerController@formKontrakOutsourcing');
 Route::post('/ajukan/{id_outsourcing}','CustomerController@tambahFormKontrakOsr');
+Route::post('/customer/uploadPembayaranPerlengkapan','CustomerController@uploadPembayaranPerlengkapan');
 
 
 

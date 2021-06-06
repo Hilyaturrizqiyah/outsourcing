@@ -12,6 +12,8 @@ use App\komplainModel;
 use App\kontrak_jasaModel;
 use App\OutsourcingModel;
 use App\tenaga_kerjaModel;
+use App\PembayaranTenagaKerjaModel;
+use App\PembayaranPerlengkapanModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -103,11 +105,39 @@ class CustomerController extends Controller
         $kontrak->id_customer = Auth::guard('customer')->user()->id_customer;
         $kontrak->id_outsourcing = $biaya_tenaga->jasa->outsourcing->id_outsourcing;
         $kontrak->tgl_mulai_kontrak = $request->tgl_mulai_kontrak;
-        $kontrak->lama_kontrak = $request->lamaKontrak . " " . "Bulan";
+        $kontrak->lama_kontrak = $request->lamaKontrak;
         $kontrak->jumlah_tenagaKerja = $request->jumlah_tenagaKerja;
         $kontrak->jumlah_biayaTenagaKerja = $biaya_tenaga->biaya*$request->jumlah_tenagaKerja;
+        $kontrak->jumlah_biayaPerlengkapan = $request->jumlah_biayaPerlengkapan;
         $kontrak->status_kontrak = "Pending";
         $kontrak->save();
+        
+        //---Rizqi---
+        //---Pembayaran TenagaKerja untuk bulan ke1----
+        $idKontrak = $kontrak->id_kontrak;
+        $pembayaranTK = new PembayaranTenagaKerjaModel;
+        $pembayaranTK->id_outsourcing = $kontrak->id_outsourcing;
+        $pembayaranTK->id_kontrak = $idKontrak;
+        $pembayaranTK->nama_pembayaran = "Pembayaran Kontrak bulan ke 1";
+        $pembayaranTK->nominal = $request->jumlah_biayaTenagaKerja;
+        $pembayaranTK->bulan_ke = 1;
+        $pembayaranTK->status_bayar = "Menunggu Pembayaran";
+        $pembayaranTK->save();
+        //---Pembayaran TenagaKerja ----
+        
+        if ($request->jumlah_biayaPerlengkapan != "") {
+            //---Pembayaran Perlengkapan untuk bulan ke1----
+            $pembayaranP = new PembayaranPerlengkapanModel;
+            $pembayaranP->id_outsourcing = $kontrak->id_outsourcing;
+            $pembayaranP->id_kontrak = $idKontrak;
+            $pembayaranP->nama_pembayaran = "Pembayaran Perlengkapan";
+            $pembayaranP->nominal = $request->jumlah_biayaPerlengkapan;
+            $pembayaranP->status_bayar = "Menunggu Pembayaran";
+            $pembayaranP->save();
+            //---Pembayaran Perlengkapan ----
+        }
+        //---Rizqi---
+
 
         return redirect('/customer/riwayatSewa')->with('alert-success', 'Data Berhasil Ditambah');
     }
@@ -170,8 +200,9 @@ class CustomerController extends Controller
         $id_customer = Session::get('id_customer');
         $datas = CustomerModel::find($id_customer);
         $kontraks     = kontrak_jasaModel::where('id_kontrak', $id_kontrak)->first();
+        $pembayaranP = PembayaranPerlengkapanModel::where('id_kontrak', $id_kontrak)->first();
 
-        return view('/customer/riwayatSewaDetail', compact('kontraks', 'datas', 'id_customer'));
+        return view('/customer/riwayatSewaDetail', compact('kontraks', 'datas', 'id_customer','pembayaranP'));
     }
 
     public function formKomplain($id_kontrak)
@@ -310,5 +341,58 @@ class CustomerController extends Controller
         $datas = CustomerModel::find($id_customer);
 
         return view('/customer/formUbah', compact('datas', 'id_customer'));
+    }
+
+    public function pembayaranTenagaKerja($id_kontrak)
+    {
+        $id_customer = (Auth::guard('customer')->user()->id_customer);
+        $kontrak = kontrak_jasaModel::find($id_kontrak);
+        $countPembayaranTK = PembayaranTenagaKerjaModel::where('id_kontrak', $id_kontrak);
+        $now = Carbon::now()->format('y-m-d');
+        $lamaKontrak = $kontrak->lama_kontrak;
+
+        $selisih_hari = $kontrak->tgl_mulai_kontrak->diffInDays($now);
+        $jumlahHariKerja = $countPembayaranTK * 30;
+
+        if ($countPembayaranTK <= $lamaKontrak) {
+
+            if ($jumlahHariKerja <= $selisih_hari) {
+
+                $idKontrak = $kontrak->id_kontrak;
+                $pembayaranTK = new PembayaranTenagaKerjaModel;
+                $pembayaranTK->id_outsourcing = $kontrak->id_outsourcing;
+                $pembayaranTK->id_kontrak = $idKontrak;
+                $pembayaranTK->nama_pembayaran = "Pembayaran Kontrak bulan ke".$countPembayaranTK++;
+                $pembayaranTK->bulan_ke = $countPembayaranTK++;
+                $pembayaranTK->status_bayar = "Menunggu Pembayaran";
+                $pembayaranTK->save();
+            }else{
+
+            }
+        }else{
+
+        }
+
+
+        return view('/customer/formUbah', compact('datas', 'id_customer'));
+    }
+
+    public function uploadPembayaranPerlengkapan(Request $request,){
+        $idKontrak = $request->id_kontrak;
+        $now = Carbon::now()->format('y-m-d');
+        
+
+        $pembayaranTK = PembayaranPerlengkapanModel::where('id_kontrak', $idKontrak)->where('status_bayar','Menunggu Pembayaran')->first();
+        
+        $file = $request->file('bukti_tfPerlengkapan'); // menyimpan data gambar yang diupload ke variabel $file
+        $nama_file = time()."_".$file->getClientOriginalName();
+        $file->move('pengguna/assets/images/bukti_tf',$nama_file); // isi dengan nama folder tempat kemana file diupload
+            
+        $pembayaranTK->bukti_tf = $nama_file;
+        $pembayaranTK->waktu_bayar = $now;
+        $pembayaranTK->status_bayar = 'Menunggu Validasi';
+        $pembayaranTK->update();
+
+        return redirect('/customer/riwayatSewaDetail'.$idKontrak)->with('alert-success', 'Bukti Pembayaran Perlengkapan Berhasil di Upload');
     }
 }
