@@ -33,7 +33,7 @@
                     <div>{{Session::get('alert-success')}}</div>
                 </div>
                 @endif
-                @if($kontraks->status_kontrak == 'Kontrak Disetujui')
+                @if($kontraks->status_kontrak == 'Menunggu Pembayaran')
                 <div class="row">
                     <div class="col-8">
                         <div class="card">
@@ -44,6 +44,57 @@
                                         <h6>{{$kontraks->jasa->nama_jasa}}</h6>
                                         <small>Tanggal Pengajuan : {{$kontraks->tgl_mulai_kontrak}}</small> <br>
                                         <p>Lama Kontrak : {{$kontraks->lama_kontrak}}</p>
+                                        <p>Jumlah Tenaga Kerja : {{$kontraks->jumlah_tenagaKerja}}</p>
+                                        <p>Jumlah Biaya Perlengkapan : {{$kontraks->jumlah_biayaPerlengkapan}}</p>
+                                        <p>Jumlah Biaya Tenaga Kerja : {{$kontraks->jumlah_biayaTenagaKerja}}</p>
+
+                                        <small style="color: orange">Status : {{$kontraks->status_kontrak}}</small> <br>
+                                    </div>
+                                    <div class="col-6">
+                                        <b class="float-end">{{$kontraks->outsourcing->nama_outsourcing}}</b>
+                                        <small class="float-end" style="color: red">Pembayaran tenaga kerja dapat dilakukan dari awal sampai akhir
+                                            bulan</small>
+                                        {{-- <a href="{{('/customer/komplain')}}" class="btn btn-primary float-end"><i
+                                            class="fas fa-eye"></i> Ajukan Komplain</a> --}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card-header"
+                                style="border-bottom-left-radius: 20px !important; border-bottom-right-radius: 20px !important">
+                                <h6>Upload Bukti Pembayaran Perlengkapan</h6>
+                                <small>*Pembayaran untuk peralatan seperti seragam dll</small><br>
+                                <form enctype="multipart/form-data" action="{{url('customer/uploadPembayaranPerlengkapan')}}" method="post">
+                                    {{csrf_field()}}
+                                    <input type="text" name = "id_kontrak" value="{{$kontraks->id_kontrak}}" hidden>
+                                    <input type="file" name="bukti_tfPerlengkapan"><hr>
+                                    <input type="submit" class="btn btn-primary" value="Kirim" {{ ($pembayaranP->status_bayar == 'Menunggu Validasi') ? 'disabled' : ''}}>
+                                    {{ ($pembayaranP->status_bayar == 'Menunggu Validasi') ? '(Menunggu Validasi oleh Outsourcing)' : ''}}
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DataTable with Hover -->
+
+                @elseif($kontraks->status_kontrak == 'Kontrak Disetujui')
+                <div class="row">
+                    <div class="col-8">
+                        <div class="card">
+                            <div class="card-header"
+                                style="border-bottom-left-radius: 20px !important; border-bottom-right-radius: 20px !important">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h6>{{$kontraks->jasa->nama_jasa}}</h6>
+                                        <small>Tanggal Pengajuan : {{$kontraks->tgl_mulai_kontrak}}</small> <br>
+                                        <p>Lama Kontrak : {{$kontraks->lama_kontrak}}</p>
+                                        <p>Jumlah Tenaga Kerja : {{$kontraks->jumlah_tenagaKerja}}</p><br>
+
                                         <small style="color: green">Status : {{$kontraks->status_kontrak}}</small> <br>
                                     </div>
                                     <div class="col-6">
@@ -81,7 +132,8 @@
                                     <div class="col-6">
                                         <h6>{{$kontraks->jasa->nama_jasa}}</h6>
                                         <small>Tanggal Pengajuan : {{$kontraks->tgl_mulai_kontrak}}</small> <br>
-                                        <p>Lama Kontrak : {{$kontraks->lama_kontrak}}</p>
+                                        <p>Lama Kontrak : {{$kontraks->lama_kontrak}}</p><br>
+                                        
                                         <small style="color: blue">Status : {{$kontraks->status_kontrak}}</small> <br>
                                     </div>
                                     <div class="col-6">

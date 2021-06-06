@@ -21,8 +21,8 @@ class CreateKontrakJasaTable extends Migration
             $table->date('tgl_mulai_kontrak');
             $table->string('lama_kontrak');
             $table->integer('jumlah_tenagaKerja');
-            $table->integer('jumlah_biayaTenagaKerja');
-            $table->integer('jumlah_biayaPerlengkapan');
+            $table->integer('jumlah_biayaTenagaKerja')->nullable();
+            $table->integer('jumlah_biayaPerlengkapan')->nullable();
             $table->string('status_kontrak');
             $table->timestamps();
 
