@@ -26,13 +26,13 @@ class OutsourcingController extends Controller
         $id_outsourcing = Session::get('id_outsourcing');
         $datas = OutsourcingModel::find($id_outsourcing);
 
-        return view('/osr/ubahProfil', compact('datas', 'id_outsourcing'));
+        return view('/outsourcing/ubahProfil', compact('datas', 'id_outsourcing'));
     }
 
-    public function jasa(){
-        $jasa = jasaModel::all();
-        return view('/osr/MengelolaJasa', compact('jasa'));
-    }
+    // public function jasa(){
+    //     $jasa = jasaModel::all();
+    //     return view('/outsourcing/MengelolaJasa', compact('jasa'));
+    // }
 
     public function tampil(){
         $jasa = jasaModel::all();
