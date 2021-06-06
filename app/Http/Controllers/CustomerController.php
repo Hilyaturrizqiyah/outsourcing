@@ -377,7 +377,7 @@ class CustomerController extends Controller
         return view('/customer/formUbah', compact('datas', 'id_customer'));
     }
 
-    public function uploadPembayaranPerlengkapan(Request $request,){
+    public function uploadPembayaranPerlengkapan(Request $request){
         $idKontrak = $request->id_kontrak;
         $now = Carbon::now()->format('y-m-d');
         
