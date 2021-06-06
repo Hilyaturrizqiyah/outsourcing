@@ -14,8 +14,8 @@
             <ul class="menu">
                 <li class="sidebar-title">Menu</li>
 
-                <li class="sidebar-item {{ Request::is('customer/DashboardCustomer') ? "active" : "" }}">
-                    <a href="{{('/customer/DashboardCustomer')}}" class='sidebar-link'>
+                <li class="sidebar-item {{ Request::is('outsourcing/MengelolaJasa') ? "active" : "" }}">
+                    <a href="{{('/outsourcing/MengelolaJasa')}}" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
                         <span>Data Jasa</span>
                     </a>
