@@ -25,7 +25,7 @@
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url ('outsourcing/DashboardOutsourcing')}}">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Jasa Outsourcing</li>
+                        <li class="breadcrumb-item active" aria-current="page">Data Tenaga Kerja</li>
                         
                     </ol>
                 </nav>
@@ -67,13 +67,12 @@
                 <th>Bulan Ke</th>
                 <th>Status Pembayaran</th> -->
                 <th>
-                  <div class="col-sm-12 d-flex justify-content-end">
-                    <button type="submit" class="btn btn-primary me-1 mb-1">Ubah</button>
-                    <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
-                    <a href=# class="btn btn-danger me-1 mb-1" onclick="return confirm('Anda yakin mau menghapus item ini ?')">
-                      Hapus
-                    </a>
-                  </div>
+                        <a href=# class="btn btn-warning">
+                            <i class="fas fa-pencil-alt"></i>
+                        </a>
+                        <a href=# class="btn btn-danger" onclick="return confirm('Anda yakin mau menghapus item ini ?')">
+                            <i class="fas fa-trash"></i>
+                        </a>
                 </th>
               </tr>
             </tbody>
