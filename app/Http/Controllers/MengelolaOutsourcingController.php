@@ -1,3 +1,4 @@
+
 <?php
 
 namespace App\Http\Controllers;
@@ -43,3 +44,4 @@ class MengelolaOutsourcingController extends Controller
 
 
 }
+

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 
 use Illuminate\Support\Facades\Route;
@@ -18,6 +19,7 @@ Route::get('kirim-email','MailController@penerimaanTenagaKerja');
 // --------------LandingPage-------------------//
 Route::get('/','UtamaController@tampil');
 Route::get('/Register','UtamaController@tambah');
+Route::get('/index/area/cari', 'UtamaController@cari');
 
 // --------------LandingPage-------------------//
 
@@ -119,11 +121,28 @@ Route::get('/tenagakerja/MelamarKerja{id_jasa}','TenagaKerjaController@melamarKe
 //----------------------Outsourcing-----------------//
 Route::get('/outsourcing/RegisterOutsourcing','OutsourcingController@tambah');
 Route::post('/outsourcing/AksiTambahOutsourcing','OutsourcingController@store');
-Route::get('/customer/DashboardCustomer', 'LoginCustomerController@index');
-Route::get('/customer/loginCustomer', 'LoginCustomerController@loginCustomer');
 
 Route::get('/outsourcing/DashboardOutsourcing', 'OutsourcingController@index');
-Route::get('/outsourcing/JasaOutsourcing', 'OutsourcingController@jasa');
+
+Route::get('/outsourcing/MengelolaJasa','MengelolaJasaController@index');
+Route::get('/chained_dopdown','MengelolaJasaController@chained_dopdown');
+Route::get('/outsourcing/TambahJasa','MengelolaJasaController@tambah');
+Route::post('/outsourcing/AksiTambahJasa','MengelolaJasaController@store');
+Route::get('/outsourcing/UbahJasa{id_jasa}','MengelolaJasaController@edit');
+Route::post('/outsourcing/AksiUbahJasa{id_jasa}','MengelolaJasaController@update');
+Route::get('/outsourcing/HapusJasa{id_jasa}','MengelolaJasaController@delete');
+
+Route::get('/outsourcing/MengelolaTenagaKerja','MengelolaTenagaKerjaController@index');
+// Route::get('/admin/UbahJenisJasa{id_jenisJasa}','MengelolaJenisJasaController@edit');
+// Route::post('/admin/AksiUbahJenisJasa{id_jenisJasa}','MengelolaJenisJasaController@update');
+// Route::get('/admin/HapusJenisJasa{id_jenisJasa}','MengelolaJenisJasaController@delete');
+
+Route::get('/outsourcing/DataPenyewaanPending', 'OutsourcingController@tampilRiwayatPengajuan');
+Route::get('/outsourcing/DataPenyewaanProgress', 'OutsourcingController@tampilRiwayatProgress');
+Route::get('/outsourcing/DataPenyewaanFinish', 'OutsourcingController@tampilRiwayatFinish');
+
+Route::get('/outsourcing/DataKomplain', 'OutsourcingController@riwayatKomplain');
+
 // Route::get('/customer/detailJasa{id_jasa}', 'CustomerController@tampilDetailJasa');
 // Route::get('/customer/formKontrak{id_jenisJasa}', 'CustomerController@formKontrak');
 // Route::post('/ajukan/{id_jasa}','CustomerController@tambahFormKontrak');
@@ -144,6 +163,7 @@ Route::get('/outsourcing/ubahProfil', 'OutsourcingController@ubahProfil');
 //----------------------Outsourcing-----------------//
 
 
+
 //====================Customer======================//
 Route::get('/customer/DashboardCustomer', 'LoginCustomerController@index');
 Route::get('/customer/loginCustomer', 'LoginCustomerController@loginCustomer');
@@ -151,6 +171,8 @@ Route::get('/customer/register', 'LoginCustomerController@registerCustomer');
 Route::post('/customer/registerCustomerPost', 'LoginCustomerController@registerCustomerPost');
 Route::post('/customer/loginCustomerPost', 'LoginCustomerController@loginPost');
 Route::get('logout', 'LoginCustomerController@logout');
+Route::post('/customer/AksiUbahProfilCust{id_customer}','LoginCustomerController@update');
+
 
 Route::get('/customer/DashboardCustomer', 'CustomerController@index');
 Route::get('/customer/detailJasa{id_jasa}', 'CustomerController@tampilDetailJasa');
@@ -167,9 +189,11 @@ Route::get('/customer/riwayatSewaDetail{id_kontrak}', 'CustomerController@tampil
 Route::get('/customer/formKomplain{id_kontrak}', 'CustomerController@formKomplain');
 Route::post('/ajukanKomplain/{id_kontrak}','CustomerController@tambahFormKomplain');
 Route::get('/customer/riwayatKomplain', 'CustomerController@riwayatKomplain');
+Route::get('/customer/komplainDetail{id_komplain}', 'CustomerController@tampilDetailKomplain');
 Route::get('/customer/KontrakOsr{id_outsourcing}', 'CustomerController@formKontrakOutsourcing');
 Route::post('/ajukan/{id_outsourcing}','CustomerController@tambahFormKontrakOsr');
 Route::post('/customer/uploadPembayaranPerlengkapan','CustomerController@uploadPembayaranPerlengkapan');
+Route::post('/customer/uploadPembayaranTenaga','CustomerController@uploadPembayaranTenaga');
 
 
 
@@ -188,4 +212,3 @@ Route::get('/pengguna_jasa/index', function () {
 
 
 Route::get('/', 'UtamaController@tampil');
-Route::get('/index/area/cari', 'UtamaController@cari');

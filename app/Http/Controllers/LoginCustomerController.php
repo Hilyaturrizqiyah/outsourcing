@@ -16,7 +16,7 @@ class LoginCustomerController extends Controller
         //     return redirect('/customer/loginCustomer')->with('alert', 'Kamu harus login dulu');
         // } else {
 
-            return view('/customer/DashboardCustomer');
+        return view('/customer/DashboardCustomer');
         // }
     }
 
@@ -24,29 +24,6 @@ class LoginCustomerController extends Controller
     {
         return view('/customer/loginCustomer');
     }
-
-    // public function loginCustomerPost(Request $request)
-    // {
-
-    //     $email = $request->email;
-    //     $password = $request->password;
-
-    //     $data = CustomerModel::where('email', $email)->first();
-    //     if ($data) { //apakah email tersebut ada atau tidak
-    //         if (Hash::check($password, $data->password)) {
-    //             Session::put('id_customer', $data->id_customer);
-    //             Session::put('nama_customer', $data->nama_customer);
-    //             Session::put('email', $data->email);
-
-    //             Session::put('loginCustomerPost', TRUE);
-    //             return redirect('/customer/DashboardCustomer');
-    //         } else {
-    //             return redirect('/customer/loginCustomer')->with('alert', 'Password atau Email, Salah !');
-    //         }
-    //     } else {
-    //         return redirect('/customer/loginCustomer')->with('alert', 'Password atau Email, Salah!');
-    //     }
-    // }
 
 
     public function registerCustomer()
@@ -82,14 +59,8 @@ class LoginCustomerController extends Controller
 
         $data->save();
 
-        return redirect('/customer/loginCustomer')->with('alert', 'Kamu Berhasil Register');
+        return redirect('/customer/loginCustomer')->with('alert-success', 'Kamu Berhasil Register');
     }
-
-    // public function logout()
-    // {
-    //     Session::flush();
-    //     return redirect('/customer/loginCustomer')->with('alert', 'Kamu sudah logout');
-    // }
 
     function loginPost(Request $request)
     {
@@ -116,5 +87,75 @@ class LoginCustomerController extends Controller
             Auth::guard('tenagaKerja')->logout();
         }
         return redirect('customer/loginCustomer')->with('alert-success', 'Kamu sudah logout');
+    }
+
+    public function update($id_customer, Request $request)
+    {
+        $messages = [
+            // 'required' => ':attribute masih kosong',
+            // 'min' => ':attribute diisi minimal :min karakter',
+            // 'max' => ':attribute diisi maksimal :max karakter',
+            // 'numeric' => ':attribute harus berupa angka',
+            // 'unique' => ':attribute sudah ada',
+            // 'email' => ':attribute harus berupa email',
+            // 'alpha' => ':attribute harus berupa huruf',
+            // 'image' => ':attribute harus berupa gambar',
+            // 'no_telp.digits_between' => ':attribute diisi antara 1 sampai 15 digit',
+            // 'no_telp.min' => ':attribute tidak boleh kurang dari 1'
+        ];
+
+        $this->validate($request, [
+            // 'nama' => 'nullable|max:50',
+            // 'password' => 'nullable|min:8|max:50',
+            // 'email' => 'nullable|max:50|email|unique:admin',
+            // 'no_telp' => 'nullable|numeric|min:1|digits_between:1,15',
+            // 'alamat' => 'nullable|max:255',
+        ], $messages);
+
+        $data = CustomerModel::find($id_customer);
+
+        if (empty($request->foto_profil)) {
+            $data->foto_profil = $data->foto_profil;
+            unlink('pengguna/assets/images/foto_profil/' . $data->foto_profil); //menghapus file lama
+
+        } else {
+            $file = $request->file('foto_profil'); // menyimpan data gambar yang diupload ke variabel $file
+            $nama_file = time() . "_" . $file->getClientOriginalName();
+            $file->move('pengguna/assets/images/foto_profil/', $nama_file); // isi dengan nama folder tempat kemana file diupload
+            $data->foto_profil = $nama_file;
+
+        }
+
+        if (empty($request->nama_customer)) {
+            $data->nama_customer = $data->nama_customer;
+        } else {
+            $data->nama_customer = $request->nama_customer;
+        }
+
+        if (empty($request->email)) {
+            $data->email = $data->email;
+        } else {
+            $data->email = $request->email;
+        }
+
+        if (empty($request->password)) {
+            $data->password = $data->password;
+        } else {
+            $data->password = bcrypt($request->password);
+        }
+
+        if (empty($request->no_telp)) {
+            $data->no_telp = $data->no_telp;
+        } else {
+            $data->no_telp = $request->no_telp;
+        }
+
+        if (empty($request->alamat)) {
+            $data->alamat = $data->alamat;
+        } else {
+            $data->alamat = $request->alamat;
+        }
+        $data->save();
+        return redirect('customer/ubahProfil')->with('alert-success', 'Data berhasil diubah!');
     }
 }

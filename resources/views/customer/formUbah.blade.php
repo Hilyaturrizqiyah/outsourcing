@@ -39,7 +39,7 @@
                         <div class="ms-3 name">
                             <form enctype="multipart/form-data"
                                 class="contact-form-area contact-page-form contact-form text-left"
-                                action="aksiUbahProfilCust{{$datas->id_customer}}" method="post">
+                                action="AksiUbahProfilCust{{$datas->id_customer}}" method="post">
 
                                 {{csrf_field()}}
                                 <div class="form-group">
@@ -79,8 +79,6 @@
                                         <h6 class="m-0 font-weight-bold text-primary">Ubah Profil</h6>
                                     </div>
                                     <div class="card-body">
-
-
 
                                         <div class="form-group">
                                             <label><b>Nama</b></label>

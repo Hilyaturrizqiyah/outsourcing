@@ -105,15 +105,18 @@
                                     </div>
                                     @endif
                                     @if(\Session::has('alert-success'))
-                                    <div class="alert alert-success">
+                                    <div class="alert alert-success" align="center"
+                                        style="background-color: green; color:white; ">
                                         <div>{{Session::get('alert-success')}}</div>
                                     </div>
                                     @endif
-                                    <form action="{{ url('/customer/registerCustomerPost') }}" method="post" class="user">
+                                    <form action="{{ url('/customer/registerCustomerPost') }}" method="post"
+                                        class="user">
                                         @csrf
                                         <div class="form-group">
-                                            <input type="nama_customer" name="nama_customer" class="form-control" id="exampleInputEmail"
-                                                aria-describedby="emailHelp" placeholder="Nama Lengkap">
+                                            <input type="nama_customer" name="nama_customer" class="form-control"
+                                                id="exampleInputEmail" aria-describedby="emailHelp"
+                                                placeholder="Nama Lengkap">
                                             @if ($errors->has('nama_customer'))
                                             <span>
                                                 <p class=" text-right">*
@@ -122,8 +125,9 @@
                                             @endif
                                         </div>
                                         <div class="form-group">
-                                            <textarea type="alamat" name="alamat" class="form-control" id="exampleInputEmail"
-                                                aria-describedby="emailHelp" placeholder="Alamat"></textarea>
+                                            <textarea type="alamat" name="alamat" class="form-control"
+                                                id="exampleInputEmail" aria-describedby="emailHelp"
+                                                placeholder="Alamat"></textarea>
                                             @if ($errors->has('alamat'))
                                             <span>
                                                 <p class=" text-right">*
@@ -133,8 +137,9 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <input type="no_telp" name="no_telp" class="form-control" id="exampleInputEmail"
-                                                aria-describedby="emailHelp" placeholder="Nomor Telepon">
+                                            <input type="no_telp" name="no_telp" class="form-control"
+                                                id="exampleInputEmail" aria-describedby="emailHelp"
+                                                placeholder="Nomor Telepon">
                                             @if ($errors->has('no_telp'))
                                             <span>
                                                 <p class=" text-right">*
@@ -166,26 +171,25 @@
                                             @if ($errors->has('password'))
                                             <span style="color: red""><p class=" text-right">*
                                                 {{ $errors->first('password') }}</p></span>
-                                            @endif
-                                        </div> --}}
-                                        <div class="form-group">
-                                            <button class="btn btn-primary btn-block">Daftar</button>
-                                        </div>
-                                        {{-- <hr>
+                                        @endif
+                                </div> --}}
+                                <div class="form-group">
+                                    <button class="btn btn-primary btn-block">Daftar</button>
+                                </div>
+                                {{-- <hr>
                                          <a href="index.html" class="btn btn-google btn-block">
                                             <i class="fab fa-google fa-fw"></i> Login with Google
                                         </a>
                                         <a href="index.html" class="btn btn-facebook btn-block">
                                             <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
                                         </a> --}}
-                                    </form>
-                                    <hr>
-                                    <div class="text-center">
-                                        <p>Sudah punya akun?</p>
-                                        <a class="font-weight-bold" href="{{url('/customer/loginCustomer')}}">Login</a>
-                                    </div>
-                                    <div class="text-center">
-                                    </div>
+                                </form>
+                                <hr>
+                                <div class="text-center">
+                                    <p>Sudah punya akun?</p>
+                                    <a class="font-weight-bold" href="{{url('/customer/loginCustomer')}}">Login</a>
+                                </div>
+                                <div class="text-center">
                                 </div>
                             </div>
                         </div>
@@ -193,6 +197,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <!-- Login Content -->
     <script src="{{asset('admin/vendor/jquery/jquery.min.js')}}"></script>

@@ -40,38 +40,19 @@
                         <div class="card-body">
                             <h5>Tentang Kami :</h5>
                             <p style="text-align: justify; text-indent: 0.5in;">{{$outsourcing->deskripsi}}</p>
-                            <br>
-                            <h5>Jasa yang tersedia :</h5>
-                            @foreach ($jasa as $jasa)
-                            <p class="btn btn-outline-dark">{{$jasa->nama_jasa}}</p>
-                            @endforeach
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Bagaimana Cara Kerjanya</h4>
+                            <h4>Ingin ajukan kontrak ?</h4>
+                            <small>Pilih jasa yang tersedia :</small>
                             <ol>
-                                <li>Pilih jenis jasa yang diinginkan</li>
-                                <li>Isi formulir kontrak jasa</li>
-                                <li>Melakukan kesepakatan dengan pihak outsourcing atau penyedia jasa</li>
-                                <li></li>
+                                @foreach ($jasa as $jasa)
+                                <a href="{{url('/customer/detailJasa'.$jasa->id_jasa)}}" class="btn btn-outline-dark mt-3">{{$jasa->nama_jasa}}</a>
+                                @endforeach
                             </ol>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-content">
-                                <form class="form form-horizontal">
-                                    <div class="form-body">
-                                        <div class="row">
-                                            <center>
-                                                <a href="{{url('/customer/KontrakOsr'.$outsourcing->id_outsourcing)}}"
-                                                    class="btn btn-primary">Mulai Ajukan Kontrak</a>
-                                            </center>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
                         </div>
                     </div>
                 </div>

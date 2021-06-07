@@ -41,18 +41,19 @@
                                 style="border-bottom-left-radius: 20px !important; border-bottom-right-radius: 20px !important">
                                 <div class="row">
                                     <div class="col-6">
-                                        <h6>{{$kontraks->jasa->nama_jasa}}</h6>
+                                        <p class="fw-bold">{{$kontraks->jasa->nama_jasa}} |
+                                            {{$kontraks->outsourcing->nama_outsourcing}}</p>
                                         <small>Tanggal Pengajuan : {{$kontraks->tgl_mulai_kontrak}}</small> <br>
                                         <p>Lama Kontrak : {{$kontraks->lama_kontrak}}</p>
                                         <p>Jumlah Tenaga Kerja : {{$kontraks->jumlah_tenagaKerja}}</p>
-                                        <p>Jumlah Biaya Perlengkapan : {{$kontraks->jumlah_biayaPerlengkapan}}</p>
-                                        <p>Jumlah Biaya Tenaga Kerja : {{$kontraks->jumlah_biayaTenagaKerja}}</p>
+                                        <p>Jumlah Biaya Perlengkapan : Rp. {{number_format($kontraks->jumlah_biayaPerlengkapan)}}</p>
+                                        <p>Jumlah Biaya Tenaga Kerja : Rp. {{number_format($kontraks->jumlah_biayaTenagaKerja)}}</p>
 
-                                        <small style="color: orange">Status : {{$kontraks->status_kontrak}}</small> <br>
+                                        <small style="color: purple">Status : {{$kontraks->status_kontrak}}</small> <br>
                                     </div>
                                     <div class="col-6">
-                                        <b class="float-end">{{$kontraks->outsourcing->nama_outsourcing}}</b>
-                                        <small class="float-end" style="color: red">Pembayaran tenaga kerja dapat dilakukan dari awal sampai akhir
+                                        <small class="float-end" style="color: red">Note : Pembayaran tenaga kerja <br> dapat
+                                            dilakukan dari awal sampai akhir
                                             bulan</small>
                                         {{-- <a href="{{('/customer/komplain')}}" class="btn btn-primary float-end"><i
                                             class="fas fa-eye"></i> Ajukan Komplain</a> --}}
@@ -67,11 +68,14 @@
                                 style="border-bottom-left-radius: 20px !important; border-bottom-right-radius: 20px !important">
                                 <h6>Upload Bukti Pembayaran Perlengkapan</h6>
                                 <small>*Pembayaran untuk peralatan seperti seragam dll</small><br>
-                                <form enctype="multipart/form-data" action="{{url('customer/uploadPembayaranPerlengkapan')}}" method="post">
+                                <form enctype="multipart/form-data"
+                                    action="{{url('customer/uploadPembayaranPerlengkapan')}}" method="post">
                                     {{csrf_field()}}
-                                    <input type="text" name = "id_kontrak" value="{{$kontraks->id_kontrak}}" hidden>
-                                    <input type="file" name="bukti_tfPerlengkapan"><hr>
-                                    <input type="submit" class="btn btn-primary" value="Kirim" {{ ($pembayaranP->status_bayar == 'Menunggu Validasi') ? 'disabled' : ''}}>
+                                    <input type="text" name="id_kontrak" value="{{$kontraks->id_kontrak}}" hidden>
+                                    <input type="file" name="bukti_tfPerlengkapan">
+                                    <hr>
+                                    <input type="submit" class="btn btn-primary" value="Kirim"
+                                        {{ ($pembayaranP->status_bayar == 'Menunggu Validasi') ? 'disabled' : ''}}>
                                     {{ ($pembayaranP->status_bayar == 'Menunggu Validasi') ? '(Menunggu Validasi oleh Outsourcing)' : ''}}
                                 </form>
                             </div>
@@ -84,39 +88,30 @@
 
                 @elseif($kontraks->status_kontrak == 'Kontrak Disetujui')
                 <div class="row">
-                    <div class="col-8">
+                    <div class="col">
                         <div class="card">
                             <div class="card-header"
                                 style="border-bottom-left-radius: 20px !important; border-bottom-right-radius: 20px !important">
                                 <div class="row">
                                     <div class="col-6">
-                                        <h6>{{$kontraks->jasa->nama_jasa}}</h6>
-                                        <small>Tanggal Pengajuan : {{$kontraks->tgl_mulai_kontrak}}</small> <br>
-                                        <p>Lama Kontrak : {{$kontraks->lama_kontrak}}</p>
-                                        <p>Jumlah Tenaga Kerja : {{$kontraks->jumlah_tenagaKerja}}</p><br>
+                                        <p class="fw-bold">{{$kontraks->jasa->nama_jasa}} |
+                                            {{$kontraks->outsourcing->nama_outsourcing}}</p>
+                                        <p style="font-size: 12px">Tanggal Pengajuan : {{$kontraks->tgl_mulai_kontrak}}
+                                        </p>
+                                        <p style="font-size: 12px">Lama Kontrak : {{$kontraks->lama_kontrak}} Bulan</p>
+                                        <br>
 
                                         <small style="color: green">Status : {{$kontraks->status_kontrak}}</small> <br>
                                     </div>
                                     <div class="col-6">
                                         <b class="float-end">{{$kontraks->outsourcing->nama_outsourcing}}</b>
-                                        <small class="float-end" style="color: red">Pembayaran dilakukan setiap akhir
-                                            bulan</small>
+                                        <small class="float-end" style="color: red">Note : Pembayaran dilakukan per
+                                            bulan <br> selama masa kontrak</small>
                                         {{-- <a href="{{('/customer/komplain')}}" class="btn btn-primary float-end"><i
                                             class="fas fa-eye"></i> Ajukan Komplain</a> --}}
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="card">
-                            <div class="card-header"
-                                style="border-bottom-left-radius: 20px !important; border-bottom-right-radius: 20px !important">
-                                <h6>Upload Bukti Pembayaran</h6>
-                                <small>*Pembayaran untuk peralatan seperti seragam dll</small><br>
-                                <input type="file" name="" id="">
-                            </div>
-
                         </div>
                     </div>
                 </div>
@@ -129,17 +124,21 @@
                             <div class="card-header"
                                 style="border-bottom-left-radius: 20px !important; border-bottom-right-radius: 20px !important">
                                 <div class="row">
-                                    <div class="col-6">
-                                        <h6>{{$kontraks->jasa->nama_jasa}}</h6>
-                                        <small>Tanggal Pengajuan : {{$kontraks->tgl_mulai_kontrak}}</small> <br>
-                                        <p>Lama Kontrak : {{$kontraks->lama_kontrak}}</p><br>
-                                        
+                                    <div class="col">
+                                        <p class="fw-bold">{{$kontraks->jasa->nama_jasa}} |
+                                            {{$kontraks->outsourcing->nama_outsourcing}}</p>
+                                        <p style="font-size: 12px">Tanggal Pengajuan : {{$kontraks->tgl_mulai_kontrak}}
+                                        </p>
+                                        <p style="font-size: 12px">Lama Kontrak : {{$kontraks->lama_kontrak}} Bulan</p>
+                                        <br>
+
                                         <small style="color: blue">Status : {{$kontraks->status_kontrak}}</small> <br>
                                     </div>
-                                    <div class="col-6">
-                                        <b class="float-end">{{$kontraks->outsourcing->nama_outsourcing}}</b>
-                                        <small class="float-end" style="color: red">Pembayaran dilakukan setiap akhir
-                                            bulan</small>
+                                    <div class="col">
+                                        <p class="float-end" style="color: red">Pembayaran dilakukan setiap akhir
+                                            bulan</p>
+                                        <p class="float-end" style="color: red">Total nominal
+                                            Rp. {{number_format($kontraks->jumlah_biayaTenagaKerja)}}</p>
                                         {{-- <a href="{{('/customer/komplain')}}" class="btn btn-primary float-end"><i
                                             class="fas fa-eye"></i> Ajukan Komplain</a> --}}
                                     </div>
@@ -152,7 +151,8 @@
                             <div class="card-header"
                                 style="border-bottom-left-radius: 20px !important; border-bottom-right-radius: 20px !important">
                                 <h6>Ingin Ajukan Komplain ?</h6>
-                                <a href="{{url('/customer/formKomplain'.$kontraks->id_kontrak)}}" class="btn btn-primary">Komplain</a>
+                                <a href="{{url('/customer/formKomplain'.$kontraks->id_kontrak)}}"
+                                    class="btn btn-primary">Komplain</a>
                             </div>
                         </div>
                     </div>
@@ -164,58 +164,56 @@
                                 <thead class="thead-light">
                                     <tr>
                                         <th>No</th>
-                                        <th>Batas Tanggal Bayar</th>
+                                        <th>Keterangan</th>
                                         <th>Nominal</th>
-                                        <th>Bukti Transfer</th>
-                                        <th>Tanggal Pembayaran</th>
                                         <th>Bulan Ke</th>
                                         <th>Status Pembayaran</th>
                                         <th></th>
                                     </tr>
                                 </thead>
 
+                                @foreach($pembayaranTK as $pembayaranTK)
                                 <tbody>
                                     @php
                                     $no=1;
                                     @endphp
-                                    {{-- @foreach($kontraks as $kontrak)
                                     <tr>
                                         <td>{{$no++}}</td>
-                                        <td>{{$kontrak->tgl_mulai_kontrak}}</td>
-                                        <td>{{$kontrak->jumlah_harga}}</td>
-                                        <td>foto bukti tf</td>
-                                        <td>tgl</td>
-                                        <td>bulan</td>
+                                        <td>{{$pembayaranTK->nama_pembayaran}}</td>
+                                        <td>Rp.
+                                            {{number_format($pembayaranTK->nominal / $pembayaranTK->kontrakjasa->lama_kontrak)}}
+                                        </td>
+                                        <td>{{$pembayaranTK->bulan_ke}}</td>
+                                        <td>{{$pembayaranTK->status_bayar}}</td>
                                         <td>
-                                            <a href="/admin/HapusCustomer{{$kontrak->id_kontrak}}"
-                                                class="btn btn-danger"
-                                                onclick="return confirm('Anda yakin mau menghapus item ini ?')">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#uploadBukti">
+                                                Upload Bukti Pembayaran
+                                            </button>
                                         </td>
                                     </tr>
                                 </tbody>
-                                @endforeach --}}
+                                @endforeach
                             </table>
                         </div>
                     </div>
                 </div>
                 @else
-                <div class="col-12">
+                <div class="col">
                     <div class="card">
                         <div class="card-header"
                             style="border-bottom-left-radius: 20px !important; border-bottom-right-radius: 20px !important">
                             <div class="row">
                                 <div class="col-6">
-                                    <h6>{{$kontraks->jasa->nama_jasa}}</h6>
+                                    <p class="fw-bold">{{$kontraks->jasa->nama_jasa}} |
+                                        {{$kontraks->outsourcing->nama_outsourcing}}</p>
                                     <small>Tanggal Pengajuan : {{$kontraks->tgl_mulai_kontrak}}</small> <br>
                                     <p>Lama Kontrak : {{$kontraks->lama_kontrak}}</p>
                                     <small style="color: orange">Status : {{$kontraks->status_kontrak}}</small> <br>
                                 </div>
                                 <div class="col-6">
-                                    <b class="float-end">{{$kontraks->outsourcing->nama_outsourcing}}</b>
-                                    <small class="float-end" style="color: red">Pembayaran dilakukan setiap akhir
-                                        bulan</small>
+                                    <small class="float-end" style="color: red">Note : Pembayaran dilakukan per
+                                        bulan <br> selama masa kontrak</small>
                                     {{-- <a href="{{('/customer/komplain')}}" class="btn btn-primary float-end"><i
                                         class="fas fa-eye"></i> Ajukan Komplain</a> --}}
                                 </div>
@@ -226,6 +224,35 @@
                 @endif
             </div>
         </section>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="uploadBukti" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Upload Bukti Pembayaran</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{url('customer/uploadPembayaranTenaga')}}" method="POST" enctype="multipart/form-data">
+                    {{csrf_field()}}
+                    <div class="form-group">
+                        <label><b>Upload Bukti</b></label>
+                        <input type="file" class="form-control" name="bukti_tfTenagaKerja">
+                        @if ($errors->has('bukti_tf'))
+                        <span class="text-danger">
+                            <p class="text-right">* {{ $errors->first('bukti_tf') }}</p>
+                        </span>
+                        @endif
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button class="btn btn-primary">Save changes</button>
+            </div>
+            </form>
+        </div>
     </div>
 </div>
 @endsection

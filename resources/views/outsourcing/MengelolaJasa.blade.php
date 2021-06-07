@@ -1,4 +1,4 @@
-@extends('osr.layout.TampilanOsr')
+@extends('outsourcing.layout.TampilanOutsourcing')
 @section('content')
 
 
@@ -6,55 +6,72 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Dashboard Outsourcing</h3>
-                <p class="text-subtitle text-muted">.....</p>
+                <h3>Data Jasa</h3>
+                <p class="text-subtitle text-muted">Daftar Jasa dari Penyedia Jasa</p>
+                <p>
+                <div class="py-3 d-flex flex-row align-items-center justify-content-between">
+                  <a href="{{url('/outsourcing/TambahJasa')}}" class="btn btn-success">Tambah Jasa</a>
+                </div>
+                </p>
+                <!-- <p>
+                  Button trigger for Success theme modal
+                  <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#Keterampilan">
+                    Tambah Jasa
+                  </button>
+                  <br>
+                </p> -->
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{url ('tenagakerja')}}">Dashboard</a>
+                        <li class="breadcrumb-item"><a href="{{url ('outsourcing/DashboardOutsourcing')}}">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Data Jasa</li>
+                        
                     </ol>
                 </nav>
             </div>
         </div>
     </div>
     <div class="col-lg-12">
-              <div class="card mb-4">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <a href="{{url('/admin/TambahJenisJasa')}}" class="btn btn-success">Tambah Jenis Jasa</a>
-                </div>
-                <div class="table-responsive p-3">
-                  <table class="table align-items-center table-flush table-hover" id="dataTableHover">
-                    <thead class="thead-light">
-                      <tr>
-                        <th>No</th>
-                        <th>Nama Jasa</th>
-                        <th></th>
-                      </tr>
-                    </thead>
+      <div class="card mb-4">
+        <div class="table-responsive p-3">
+          <table class="table align-items-center table-flush table-hover" id="dataTableHover">
+            <thead class="thead-light">
+              <tr>
+                <th>No</th>
+                <th>Nama Jasa</th>
+                <th>Jenis Jasa</th>
+                <!-- <th>Bukti Transfer</th>
+                <th>Tanggal Pembayaran</th>
+                <th>Bulan Ke</th>
+                <th>Status Pembayaran</th> -->
+                <th>  </th>
+              </tr>
+            </thead>
 
-                    <tbody>
-                      
+            <tbody>
+            @php
+                        $no=1;
+                      @endphp
+                      @foreach($datas as $tampil)
                       <tr>
-                        <td>1. </td>
-                        <td>Driver</td>
+                        <td>{{$no++}}</td>
+                        <td>{{$tampil->nama_jasa}}</td>
+                        <td>{{$tampil->jenis_jasa->nama_jenisJasa}}</td>
                         <td>
-                          <a href=# class="btn btn-warning">
+                          <a href="/outsourcing/UbahJasa{{$tampil->id_jasa}}" class="btn btn-warning">
                             <i class="fas fa-pencil-alt"></i>
                           </a>
-                          <a href=# class="btn btn-danger" onclick="return confirm('Anda yakin mau menghapus item ini ?')">
+                          <a href="/outsourcing/HapusJasa{{$tampil->id_jasa}}" class="btn btn-danger" onclick="return confirm('Anda yakin mau menghapus item ini ?')">
                             <i class="fas fa-trash"></i>
                           </a>
                         </td>
                       </tr>
                     </tbody>
-                      
-                  </table>
-                </div>
-              </div>
-            </div>
-
+                      @endforeach
+          </table>
+        </div>
+      </div>
+    </div>
 </div>
-
-
 @endsection

@@ -17,12 +17,13 @@
                 <div class="col-lg-8 col-md-8 col-12">
                     <div class="card">
                         <div class="card-header">
-                            {{-- <h5 class="card-title">Komplain Customer</h5> --}}
+                            <small class="float-end">{{$detail_komplain->created_at}}</small>
+                            <h4>{{Auth::guard('customer')->user()->nama_customer}}</h4>
+                            
                         </div>
                         <div class="card-body">
-                            <h4>{{Auth::guard('customer')->user()->nama_customer}}</h4>
                             <p>{{$detail_komplain->komplain->alasan}}</p>
-                            <p>{{$detail_komplain->komplain->kontrak->lama_kontrak}}</p>
+                            {{-- <p>{{$detail_komplain->komplain->kontrak->lama_kontrak}}</p> --}}
                             <br>
 
                         </div>
@@ -31,10 +32,10 @@
                 <div class="col-lg-4 col-md-4 col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5>Daftar Nama Pekerja :</h5>
+                            <h5>Nama Pekerja :</h5>
                             <p class="btn btn-outline-dark">{{$detail_komplain->tenagakerja->nama_tenagaKerja}}</p>
                         </div>
-                        <div class="card-body">
+                        {{-- <div class="card-body">
                             <div class="card-content">
                                 <form class="form form-horizontal">
                                     <div class="form-body">
@@ -47,7 +48,7 @@
                                     </div>
                                 </form>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
