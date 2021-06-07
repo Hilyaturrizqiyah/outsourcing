@@ -14,14 +14,20 @@
             <ul class="menu">
                 <li class="sidebar-title">Menu</li>
 
-                <li class="sidebar-item {{ Request::is('customer/DashboardCustomer') ? "active" : "" }}">
-                    <a href="{{('/customer/DashboardCustomer')}}" class='sidebar-link'>
+                <li class="sidebar-item {{ Request::is('outsourcing/DashboardOutsourcing') ? "active" : "" }}">
+                    <a href="{{('/outsourcing/DashboardOutsourcing')}}" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="sidebar-item {{ Request::is('outsourcing/MengelolaJasa') ? "active" : "" }}">
+                    <a href="{{('/outsourcing/MengelolaJasa')}}" class='sidebar-link'>
+                        <i class="fas fa-list"></i>
                         <span>Data Jasa</span>
                     </a>
                 </li>
-                <li class="sidebar-item  {{ Request::is('customer/dataOutsourcing') ? "active" : "" }}">
-                    <a href="{{('/customer/dataOutsourcing')}}" class='sidebar-link'>
+                <li class="sidebar-item  {{ Request::is('outsourcing/MengelolaTenagaKerja') ? "active" : "" }}">
+                    <a href="{{('/outsourcing/MengelolaTenagaKerja')}}" class='sidebar-link'>
                         <i class="fas fa-building"></i>
                         <span>Data Pelamar</span>
                     </a>
@@ -32,19 +38,19 @@
                         <span>Data Penyewaan</span>
                     </a>
                     <ul class="submenu ">
-                        <li class="submenu-item {{ Request::is('/customer/riwayatSewa') ? "active" : "" }}">
-                            <a href="{{url ('/customer/riwayatSewa')}}">Pengajuan</a>
+                        <li class="submenu-item {{ Request::is('/outsourcing/DataPenyewaanPending') ? "active" : "" }}">
+                            <a href="{{url ('/outsourcing/DataPenyewaanPending')}}">Pengajuan</a>
                         </li>
-                        <li class="submenu-item {{ Request::is('/customer/riwayatSewaProgress') ? "active" : "" }}">
-                            <a href="{{url ('/customer/riwayatSewaProgress')}}">In Progress</a>
+                        <li class="submenu-item {{ Request::is('/outsourcing/DataPenyewaanProgress') ? "active" : "" }}">
+                            <a href="{{url ('/outsourcing/DataPenyewaanProgress')}}">In Progress</a>
                         </li>
-                        <li class="submenu-item {{ Request::is('/customer/riwayatSewaFinish') ? "active" : "" }}">
-                            <a href="{{url ('/customer/riwayatSewaFinish')}}">Finish</a>
+                        <li class="submenu-item {{ Request::is('/outsourcing/DataPenyewaanFinish') ? "active" : "" }}">
+                            <a href="{{url ('/outsourcing/DataPenyewaanFinish')}}">Finish</a>
                         </li>
                     </ul>
                 </li>
-                <li class="sidebar-item {{ Request::is('/customer/riwayatKomplain') ? "active" : "" }} ">
-                    <a href="{{('/customer/riwayatKomplain')}}" class='sidebar-link'>
+                <li class="sidebar-item {{ Request::is('/outsourcing/DataKomplain') ? "active" : "" }} ">
+                    <a href="{{('/outsourcing/DataKomplain')}}" class='sidebar-link'>
                         <i class="fas fa-book"></i>
                         <span> Data Komplain</span>
                     </a>

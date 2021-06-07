@@ -8,7 +8,7 @@ class jasaModel extends Model
 {
     protected $table = 'jasa';
     protected $primaryKey = 'id_jasa';
-    protected $fillable = ['id_outsourcing', 'id_jenisJasa', 'nama_jasa'];
+    protected $fillable = ['id_outsourcing', 'id_jenisJasa', 'nama_jasa', 'foto_profil'];
 
     public function jenis_jasa()
     {

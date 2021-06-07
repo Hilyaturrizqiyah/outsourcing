@@ -332,6 +332,7 @@ class CustomerController extends Controller
         return view('/customer/riwayatSewaDetail', compact('datas', 'id_customer'));
     }
 
+
     public function uploadPembayaranPerlengkapan(Request $request)
     {
         $idKontrak = $request->id_kontrak;

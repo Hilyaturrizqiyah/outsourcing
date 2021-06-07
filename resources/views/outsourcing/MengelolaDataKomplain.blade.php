@@ -6,13 +6,13 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Data Jasa</h3>
-                <p class="text-subtitle text-muted">Daftar Jasa dari Penyedia Jasa</p>
+                <h3>Data Komplain</h3>
+                <p class="text-subtitle text-muted">List Data Komplain dari Customer</p>
                 <p>
-                <div class="py-3 d-flex flex-row align-items-center justify-content-between">
+                <!-- <div class="py-3 d-flex flex-row align-items-center justify-content-between">
                   <a href="{{url('/outsourcing/TambahJasa')}}" class="btn btn-success">Tambah Jasa</a>
                 </div>
-                </p>
+                </p> -->
                 <!-- <p>
                   Button trigger for Success theme modal
                   <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#Keterampilan">
@@ -39,8 +39,8 @@
             <thead class="thead-light">
               <tr>
                 <th>No</th>
-                <th>Nama Jasa</th>
-                <th>Jenis Jasa</th>
+                <th>Nama Customer</th>
+                <th>Alasan</th>
                 <!-- <th>Bukti Transfer</th>
                 <th>Tanggal Pembayaran</th>
                 <th>Bulan Ke</th>
@@ -53,16 +53,13 @@
             @php
                         $no=1;
                       @endphp
-                      @foreach($datas as $tampil)
+                      @foreach($komplain as $komplains)
                       <tr>
                         <td>{{$no++}}</td>
-                        <td>{{$tampil->nama_jasa}}</td>
-                        <td>{{$tampil->jenis_jasa->nama_jenisJasa}}</td>
+                        <td>{{$komplains->customer->nama_customer}}</td>
+                        <td>{{$komplains->alasan}}</td>
                         <td>
-                          <a href="/outsourcing/UbahJasa{{$tampil->id_jasa}}" class="btn btn-warning">
-                            <i class="fas fa-pencil-alt"></i>
-                          </a>
-                          <a href="/outsourcing/HapusJasa{{$tampil->id_jasa}}" class="btn btn-danger" onclick="return confirm('Anda yakin mau menghapus item ini ?')">
+                          <a href="/outsourcing/HapusJasa{{$komplains->id_komplain}}" class="btn btn-danger" onclick="return confirm('Anda yakin mau menghapus item ini ?')">
                             <i class="fas fa-trash"></i>
                           </a>
                         </td>
