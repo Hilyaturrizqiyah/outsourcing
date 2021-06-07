@@ -2,6 +2,10 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\AuthenticationException;
+
+use Exception;
+
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -29,10 +33,8 @@ class Handler extends ExceptionHandler
     /**
      * Report or log an exception.
      *
-     * @param  \Throwable  $exception
+     * @param  \Exception  $exception
      * @return void
-     *
-     * @throws \Throwable
      */
     public function report(Throwable $exception)
     {
@@ -44,12 +46,20 @@ class Handler extends ExceptionHandler
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Throwable  $exception
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
-     * @throws \Throwable
+     * @return \Illuminate\Http\Response
      */
     public function render($request, Throwable $exception)
     {
         return parent::render($request, $exception);
     }
+
+    protected function unauthenticated($request, \Illuminate\Auth\AuthenticationException $exception)
+    {
+      if($request->expectsJson()){
+        return response()->json(['error' => 'Unauthenticated.'], 401);
+      }
+
+      return redirect('/customer/loginCustomer')->with('alert', 'Tidak Boleh Akses !');
+    }
+
 }

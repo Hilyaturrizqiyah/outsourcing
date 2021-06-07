@@ -25,7 +25,7 @@
             <div class="row">
                 <div class="col-lg-8 col-md-8 col-12">
                     <div class="card">
-                        <div class="card-header">
+                        <div class="card-header text-center">
                             <img src="{{ url('assets/img/jasa/'.$jasa->foto_profil) }}" class="rounded img-fluid">
                             <h5 class="card-title"></h5>
                         </div>

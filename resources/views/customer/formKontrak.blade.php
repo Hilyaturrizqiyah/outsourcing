@@ -271,21 +271,6 @@
                             </div>
                         </div>
 
-                        <div class="card">
-                            <div class="card-header">
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-user"></i> Biaya Perlengkapan
-                                    </h6>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="card-content">
-
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
             </div>

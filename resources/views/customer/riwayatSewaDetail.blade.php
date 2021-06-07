@@ -107,9 +107,28 @@
                                         <b class="float-end">{{$kontraks->outsourcing->nama_outsourcing}}</b>
                                         <small class="float-end" style="color: red">Note : Pembayaran dilakukan per
                                             bulan <br> selama masa kontrak</small>
+                                            {{-- <p>Download Surat Pengajuan Kontrak Kerja</p>
+                                            <a href="{{ route('suratKontrak.download', $kontraks->id_kontrak) }}" class="btn btn-primary"><i class="fas fa-file-pdf"></i> PDF</a> --}}
                                         {{-- <a href="{{('/customer/komplain')}}" class="btn btn-primary float-end"><i
                                             class="fas fa-eye"></i> Ajukan Komplain</a> --}}
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="card text-center">
+                            <div class="card-header"
+                                style="border-bottom-left-radius: 20px !important; border-bottom-right-radius: 20px !important">
+                                <div class="row">
+                                    <div class="col">
+                                        <img src="{{ url('pengguna/assets/images/bukti_tf/'.$kontraks->foto_kontrak) }}" alt="Image"
+                                        width="500px" height="550px">
+
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -198,6 +217,24 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="card text-center">
+                            <div class="card-header"
+                                style="border-bottom-left-radius: 20px !important; border-bottom-right-radius: 20px !important">
+                                <div class="row">
+                                    <div class="col">
+                                        <img src="{{ url('pengguna/assets/images/bukti_tf/'.$kontraks->foto_kontrak) }}" alt="Image"
+                                        width="500px" height="550px">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 @else
                 <div class="col">
                     <div class="card">

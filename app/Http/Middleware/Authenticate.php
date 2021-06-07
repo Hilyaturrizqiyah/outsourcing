@@ -19,7 +19,7 @@ class Authenticate extends Middleware
             return redirect('customer/DashboardCustomer');
         } else if (Auth::guard('outsourcing')->check()) {
             return redirect('outsourcing/DashboardOsr');
-        }else if (Auth::guard('tenagaKeja')->check()) {
+        }else if (Auth::guard('tenagaKerja')->check()) {
             return redirect('tenagakerja/ProfilTenagaKerja');
         }
     }

@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use PDF;
 
 class OutsourcingController extends Controller
 {
@@ -41,7 +42,8 @@ class OutsourcingController extends Controller
     //     return view('/outsourcing/MengelolaJasa', compact('jasa'));
     // }
 
-    public function tampil(){
+    public function tampil()
+    {
         $jasa = jasaModel::all();
         return view('landingpage.halaman.index', compact('jasa'));
     }
@@ -55,42 +57,44 @@ class OutsourcingController extends Controller
     // }
 
     // public function cariObat(Request $request)
-	// {
-	// 	// menangkap data pencarian
-	// 	$cari = $request->cari;
+    // {
+    // 	// menangkap data pencarian
+    // 	$cari = $request->cari;
 
     // 		// mengambil data dari table pegawai sesuai pencarian data
     //     $Obat = ModelObat::where('nama_obat','like',"%".$cari."%")->paginate();
 
     // 		// mengirim data pegawai ke view index
-	// 	return view('/obat', compact('Obat'));
+    // 	return view('/obat', compact('Obat'));
     // }
 
     public function cari(Request $request)
-	{
-		// menangkap data pencarian
-		$cari = $request->cari;
+    {
+        // menangkap data pencarian
+        $cari = $request->cari;
 
-    		// mengambil data dari table pegawai sesuai pencarian data
-        $area = AreaModel::where('nama_area','like',"%".$cari."%")->paginate();
+        // mengambil data dari table pegawai sesuai pencarian data
+        $area = AreaModel::where('nama_area', 'like', "%" . $cari . "%")->paginate();
 
-    		// mengirim data pegawai ke view index
-		return view('landingpage.halaman.index', compact('area'));
-	}
+        // mengirim data pegawai ke view index
+        return view('landingpage.halaman.index', compact('area'));
+    }
 
-    public function tambah() {
+    public function tambah()
+    {
 
         //if(Session::get('loginTenagaKerja')){
         //    return redirect('/tenagakerja')->with('alert-success','Anda sudah login');
-       // }
+        // }
         //else{
 
-            return view('landingpage.halaman.RegisterOutsourcing');
+        return view('landingpage.halaman.RegisterOutsourcing');
         //}
-        
+
     }
 
-    public function store( Request $request) {
+    public function store(Request $request)
+    {
 
         $messages = [
             'required' => ':attribute masih kosong',
@@ -102,12 +106,12 @@ class OutsourcingController extends Controller
             'image' => ':attribute harus berupa gambar',
         ];
 
-    	$this->validate($request, [
-    		'nama_outsourcing' => 'required|max:50',
-    		'no_ktp' => 'required|numeric|digits_between:0,17',
+        $this->validate($request, [
+            'nama_outsourcing' => 'required|max:50',
+            'no_ktp' => 'required|numeric|digits_between:0,17',
             'email' => 'required|email|max:50',
-    		'password' => 'required|max:255'
-    	], $messages);
+            'password' => 'required|max:255'
+        ], $messages);
 
         $data = new OutsourcingModel();
         $data->nama_outsourcing = $request->nama_outsourcing;
@@ -115,9 +119,9 @@ class OutsourcingController extends Controller
         $data->email = $request->email;
         $data->password = bcrypt($request->password);
         $data->status_outsourcing = "Menunggu Validasi";
-    	$data->save();
+        $data->save();
 
-    	return redirect('/outsourcing/RegisterOutsourcing')->with('alert-success','Data Akun berhasil ditambahkan!');
+        return redirect('/outsourcing/RegisterOutsourcing')->with('alert-success', 'Data Akun berhasil ditambahkan!');
     }
 
 
@@ -125,39 +129,39 @@ class OutsourcingController extends Controller
     {
         $kontraks    = kontrak_jasaModel::with('jasa')->where('id_outsourcing', Auth::guard('outsourcing')->user()->id_outsourcing)->where('status_kontrak', 'Pending')->orWhere('status_kontrak', 'Kontrak Disetujui')->where('id_outsourcing', Auth::guard('outsourcing')->user()->id_outsourcing)->get();
         //Proses pembatalan dalam 1 hari
-        $now = Carbon::now();
-        $progres = kontrak_jasaModel::with('jasa')->where('id_outsourcing', Auth::guard('outsourcing')->user()->id_outsourcing)->where('status_kontrak', 'Kontrak Disetujui')->get();
+        // $now = Carbon::now();
+        // $progres = kontrak_jasaModel::with('jasa')->where('id_outsourcing', Auth::guard('outsourcing')->user()->id_outsourcing)->where('status_kontrak', 'Kontrak Disetujui')->get();
 
 
-        foreach ($progres as $mulai) {
-            if ($mulai->tgl_mulai_kontrak < $now) {
-                $mulai->status_kontrak = "In Progress";
-                $mulai->save();
-            }
-            $selisih_hari = $mulai->created_at->diffInDays($now);
-            if ($selisih_hari >= 1 && $mulai->status_kontrak == "Kontrak Disetujui") {
-                $update_mulai = kontrak_jasaModel::find($mulai->id_kontrak);
-                $update_mulai->status_kontrak = "In Progress";
-                $update_mulai->save();
-            }
-        }
+        // foreach ($progres as $mulai) {
+        //     if ($mulai->tgl_mulai_kontrak < $now) {
+        //         $mulai->status_kontrak = "In Progress";
+        //         $mulai->save();
+        //     }
+        //     $selisih_hari = $mulai->created_at->diffInDays($now);
+        //     if ($selisih_hari >= 1 && $mulai->status_kontrak == "Kontrak Disetujui") {
+        //         $update_mulai = kontrak_jasaModel::find($mulai->id_kontrak);
+        //         $update_mulai->status_kontrak = "In Progress";
+        //         $update_mulai->save();
+        //     }
+        // }
 
-        $btl = kontrak_jasaModel::with('jasa')->where('id_outsourcing', Auth::guard('outsourcing')->user()->id_outsourcing)->where('status_kontrak', 'Pending')->get();
+        // $btl = kontrak_jasaModel::with('jasa')->where('id_outsourcing', Auth::guard('outsourcing')->user()->id_outsourcing)->where('status_kontrak', 'Pending')->get();
 
 
-        foreach ($btl as $batal) {
-            if ($now > $batal->tgl_mulai_kontrak) {
-                $batal->status_kontrak = "Cancel";
-                $batal->save();
-            }
-            $selisih_hari = $batal->created_at->diffInDays($now);
-            if ($selisih_hari >= 1 && $batal->status_kontrak == "Pending") {
-                $update_batal = kontrak_jasaModel::find($batal->id_kontrak);
-                $update_batal->status_kontrak = "Cancel";
-                $update_batal->save();
-            }
-        }
-        return view('/outsourcing/MengelolaKontrak', compact('kontraks', 'now', 'progres'));
+        // foreach ($btl as $batal) {
+        //     if ($now > $batal->tgl_mulai_kontrak) {
+        //         $batal->status_kontrak = "Cancel";
+        //         $batal->save();
+        //     }
+        //     $selisih_hari = $batal->created_at->diffInDays($now);
+        //     if ($selisih_hari >= 1 && $batal->status_kontrak == "Pending") {
+        //         $update_batal = kontrak_jasaModel::find($batal->id_kontrak);
+        //         $update_batal->status_kontrak = "Cancel";
+        //         $update_batal->save();
+        //     }
+        // }
+        return view('/outsourcing/MengelolaKontrak', compact('kontraks'));
     }
 
     public function tampilRiwayatProgress()
@@ -174,15 +178,47 @@ class OutsourcingController extends Controller
         return view('/outsourcing/MengelolaKontrak', compact('kontraks'));
     }
 
-    // public function tampilDetailRiwayat($id_kontrak)
-    // {
-    //     $id_outsourcing = Session::get('id_outsourcing');
-    //     $datas = OutsourcingModel::find($id_outsourcing);
-    //     $kontraks     = kontrak_jasaModel::where('id_kontrak', $id_kontrak)->first();
-    //     $pembayaranP = PembayaranPerlengkapanModel::where('id_kontrak', $id_kontrak)->first();
+    public function tampilUbahKontrak($id_kontrak)
+    {
+        // $id_outsourcing = Session::get('id_outsourcing');
+        // $datas = OutsourcingModel::find($id_outsourcing);
+        $kontraks     = kontrak_jasaModel::where('id_kontrak', $id_kontrak)->first();
+        // $pembayaranP = PembayaranPerlengkapanModel::where('id_kontrak', $id_kontrak)->first();
 
-    //     return view('/outsourcing/MengelolaKontrak', compact('kontraks', 'datas', 'id_outsourcing','pembayaranP'));
-    // }
+        return view('/outsourcing/ubahKontrak', compact('kontraks'));
+    }
+
+    public function cetak_pdf($id_kontrak)
+    {
+        // $obat             = ModelObat::all();
+        $kontraks        = kontrak_jasaModel::where('id_kontrak', $id_kontrak)->first();
+        // $id_customer    = CustomerModel::all();
+        // $cust = kontrak_jasaModel::where('id_kontrak', $id_kontrak)->where('id_customer', $id_customer)->get();
+        // $total = PemesananDetailModel::where('id_kontrak', $pemesanan->id_kontrak)->sum('harga_jumlah');
+
+        // $size = array(0,0,450,500);
+        $pdf = PDF::loadview('/outsourcing/kontrakKerjaPDF',compact('kontraks'));
+        return $pdf->stream('cetak-kontrak-pdf.pdf');
+    }
+
+    public function uploadSurat($id_kontrak, Request $request)
+    {
+        // $idKontrak = $request->id_kontrak;
+        // $now = Carbon::now()->format('y-m-d');
+
+
+        $kontraks = kontrak_jasaModel::find($id_kontrak);
+
+        $file = $request->file('foto_kontrak'); // menyimpan data gambar yang diupload ke variabel $file
+        $nama_file = time() . "_" . $file->getClientOriginalName();
+        $file->move('pengguna/assets/images/bukti_tf', $nama_file); // isi dengan nama folder tempat kemana file diupload
+
+        $kontraks->foto_kontrak = $nama_file;
+        $kontraks->status_kontrak = 'Menunggu Pembayaran';
+        $kontraks->update();
+
+        return redirect('/outsourcing/ubahKontrak'.$id_kontrak)->with('alert-success', 'Surat Kontrak Berhasil di Upload');
+    }
 
     public function riwayatKomplain()
     {
