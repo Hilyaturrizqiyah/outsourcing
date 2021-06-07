@@ -35,8 +35,72 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-uppercase mb-1 text-gray-800">Data Admin</div>
+                      <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{$admin}}</div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-users fa-2x text-info"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </a>
+            </div>
+            <!-- New User Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <a href="" class="card-link">
+              <div class="card h-100">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-uppercase mb-1 text-gray-800">Data Customer</div>
+                      <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{$customer}}</div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-users fa-2x text-info"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </a>
+            </div>
+            <!-- New User Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <a href="" class="card-link">
+              <div class="card h-100">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-uppercase mb-1 text-gray-800">Data Outsourcing</div>
+                      <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{$outsourcing}}</div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-users fa-2x text-info"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Documentation Link -->
+          <div class="row">
+            <div class="col-lg-12">
+              <h5>Jenis Jasa</h5>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <!-- New User Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <a href="" class="card-link">
+              <div class="card h-100">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-uppercase mb-1 text-gray-800">Data Jenis Jasa</div>
-                      <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">20</div>
+                      <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{$jenisJasa}}</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-users fa-2x text-info"></i>

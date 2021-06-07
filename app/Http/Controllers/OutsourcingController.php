@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AreaModel;
 use App\CustomerModel;
 use App\jasaModel;
 use App\JenisJasaModel;

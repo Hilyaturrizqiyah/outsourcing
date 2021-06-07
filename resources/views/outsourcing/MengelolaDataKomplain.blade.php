@@ -25,7 +25,7 @@
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url ('outsourcing/DashboardOutsourcing')}}">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Jasa Outsourcing</li>
+                        <li class="breadcrumb-item active" aria-current="page">Data Komplain</li>
                         
                     </ol>
                 </nav>

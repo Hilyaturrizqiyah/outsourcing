@@ -29,7 +29,7 @@
                 <li class="sidebar-item  {{ Request::is('outsourcing/MengelolaTenagaKerja') ? "active" : "" }}">
                     <a href="{{('/outsourcing/MengelolaTenagaKerja')}}" class='sidebar-link'>
                         <i class="fas fa-building"></i>
-                        <span>Data Pelamar</span>
+                        <span>Data Tenaga Kerja</span>
                     </a>
                 </li>
                 <li class="sidebar-item  has-sub">

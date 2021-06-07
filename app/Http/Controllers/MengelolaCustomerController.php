@@ -1,3 +1,4 @@
+
 <?php
 
 namespace App\Http\Controllers;
@@ -10,14 +11,14 @@ class MengelolaCustomerController extends Controller
 {
         public function index()     {  
 
-        //if(!Session::get('login')){
-        //    return redirect('LoginAdmin')->with('alert','Anda harus login dulu');
-        //}
-        //else{
+        if(!Session::get('loginAdmin')){
+            return redirect('/admin/MengelolaAdmin')->with('alert','Anda harus login dulu');
+        }
+        else{
 
         $datas = CustomerModel::get();         
         	return view('admin.halaman.MengelolaCustomer',compact('datas'));     
-        //}  
+        }  
     }
 
     public function delete($id_customer) {

@@ -53,7 +53,7 @@
                       <td>{{$tampil->no_ktp}}</td>
                       <td>{{$tampil->email}}</td>
                       <td>
-                        <a href="/admin/LihatOutsourcing{{$tampil->id_outsourcing}}" class="btn btn-info">
+                        <a href="/admin/DetailOutsourcing{{$tampil->id_outsourcing}}" class="btn btn-info">
                           <i class="fas fa-eye"></i>&nbsp;Lihat Detail
                         </a>
                       </td>
@@ -105,6 +105,7 @@
                         <td>{{$tampil->email}}</td>
                         
                         <td>
+                          
                           <a href="/admin/HapusOutsourcing{{$tampil->id_outsourcing}}" class="btn btn-danger" onclick="return confirm('Anda yakin mau menghapus item ini ?')">
                             <i class="fas fa-trash"></i>
                           </a>

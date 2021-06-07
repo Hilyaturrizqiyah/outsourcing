@@ -61,7 +61,7 @@
                 <!-- DataTable with Hover -->
                 @elseif($kontraks->status_kontrak == 'In Progress')
                 <div class="row">
-                    <div class="col-8">
+                    <div class="col">
                         <div class="card">
                             <div class="card-header"
                                 style="border-bottom-left-radius: 20px !important; border-bottom-right-radius: 20px !important">
@@ -71,23 +71,8 @@
                                         <small>Tanggal Pengajuan : {{$kontraks->tgl_mulai_kontrak}}</small> <br>
                                         <p>Lama Kontrak : {{$kontraks->lama_kontrak}}</p>
                                     </div>
-                                    <div class="col-6">
-                                        <b class="float-end">{{$kontraks->outsourcing->nama_outsourcing}}</b>
-                                        <small class="float-end" style="color: red">Pembayaran dilakukan setiap akhir
-                                            bulan</small>
-                                        {{-- <a href="{{('/customer/komplain')}}" class="btn btn-primary float-end"><i
-                                            class="fas fa-eye"></i> Ajukan Komplain</a> --}}
-                                    </div>
+
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="card">
-                            <div class="card-header"
-                                style="border-bottom-left-radius: 20px !important; border-bottom-right-radius: 20px !important">
-                                <h6>Ingin Ajukan Komplain ?</h6>
-                                <a href="{{url('/customer/formKomplain'.$kontraks->id_kontrak)}}" class="btn btn-primary">Komplain</a>
                             </div>
                         </div>
                     </div>

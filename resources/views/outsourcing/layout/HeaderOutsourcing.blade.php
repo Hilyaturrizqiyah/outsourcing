@@ -20,10 +20,10 @@
                             </div>
                             <div class="user-img d-flex align-items-center">
                                 <div class="avatar avatar-md">
-                                    <img @if (Auth::guard('outsourcing')->user()->foto_profil == "NULL")
+                                    <img @if (empty(Auth::guard('outsourcing')->user()->foto_profil))
                                     src="{{ asset('/pengguna/assets/images/foto_profil/user1.jpg')}}"
                                     @else
-                                    src="{{ url('/pengguna/assets/images/foto_profil/'.Auth::guard('outsourcing')->user()->foto_profil)}}"
+                                    src="{{ url('pengguna/assets/images/foto_profil/'.Auth::guard('outsourcing')->user()->foto_profil)}}"
                                     @endif>
                                 </div>
                             </div>
@@ -36,10 +36,7 @@
                         <li><a class="dropdown-item" href="{{('/outsourcing/ubahProfil')}}"><i
                                     class="icon-mid bi bi-person me-2"></i> My
                                 Profile</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-gear me-2"></i>
-                                Settings</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-wallet me-2"></i>
-                                Wallet</a></li>
+                        
                         <li>
                             <hr class="dropdown-divider">
                         </li>
