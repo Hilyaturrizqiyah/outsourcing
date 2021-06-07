@@ -15,6 +15,8 @@ use App\JenisJasaModel;
 use App\lamaran_kerjaModel;
 
 use Illuminate\Http\Request;
+use App\Mail\MyTestMail;
+use Illuminate\Support\Facades\Mail;
 use Session;
 use Hash;
 use DB;
@@ -47,7 +49,21 @@ class TenagaKerjaController extends Controller
                 Session::put('status_tenagaKerja',$data->status_tenagaKerja);
                 
                 Session::put('loginTenagaKerja',TRUE);
+
+                //---kirim email
+                //$tenagaKerja = tenaga_kerjaModel::find($data->id_tenagaKerja);
+                //$jasa = jasaModel::find($tenagaKerja->id_jasa);
+                //$details = [
+                //'title' => 'Pemberitahuan Lamaran Tenaga Kerja ',
+                //'body' => 'Selamat anda diterima di Jasa '.$tenagaKerja->Jasa->nama_jasa.' pada Outsourcing '.$jasa->outsourcing->nama_outsourcing,
+                //];
+            
+                // \Mail::to($tenagaKerja->email)->send(new \App\Mail\MyTestMail($details));
+                //Kirim Email
+
+
                 return redirect('tenagakerja');
+                
             }
             else{
                 return redirect('tenagakerja/LoginTenagakerja')->with('alert','Password atau Email, Salah !');
@@ -118,7 +134,7 @@ class TenagaKerjaController extends Controller
         $data->status_tenagaKerja = "Pelamar";
     	$data->save();
 
-    	return redirect('/tenagakerja/RegisterTenagaKerja')->with('alert-success','Data Akun berhasil ditambahkan!');
+    	return redirect('/tenagakerja/RegisterTenagakerja')->with('alert-success','Data Akun berhasil ditambahkan!');
     }
 
     public function edit() {

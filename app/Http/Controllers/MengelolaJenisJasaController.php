@@ -10,25 +10,26 @@ class MengelolaJenisJasaController extends Controller
 {
         public function index()     {
 
-        //if(!Session::get('login')){
-        //    return redirect('LoginAdmin')->with('alert','Anda harus login dulu');
-        //}
-        //else{
+        if(!Session::get('loginAdmin')){
+            return redirect('/admin/MengelolaAdmin')->with('alert','Anda harus login dulu');
+        }
+        else{
 
         $datas = JenisJasaModel::get();
         	return view('admin.halaman.MengelolaJenisJasa',compact('datas'));
         }
+    }
     
 
     public function tambah() {
 
-        //if(!Session::get('login')){
-        //    return redirect('LoginAdmin')->with('alert','Anda harus login dulu');
-        //}
-        //else{
-		//
+        if(!Session::get('loginAdmin')){
+            return redirect('/admin/MengelolaAdmin')->with('alert','Anda harus login dulu');
+        }
+        else{
+		
         	return view('admin.halaman.tambah_data.TambahJenisJasa');
-        //}
+        }
     }
 
     public function store( Request $request) {
@@ -62,14 +63,14 @@ class MengelolaJenisJasaController extends Controller
 
    	public function edit($id_jenisJasa) {
 
-        //if(!Session::get('login')){
-        //    return redirect('LoginAdmin')->with('alert','Anda harus login dulu');
-        //}
-        //else{
+        if(!Session::get('loginAdmin')){
+            return redirect('/admin/MengelolaAdmin')->with('alert','Anda harus login dulu');
+        }
+        else{
 
         	$datas = JenisJasaModel::find($id_jenisJasa);
         	return view('admin.halaman.ubah_data.UbahJenisJasa',compact('datas'));
-        //}
+        }
     }
 
     public function update($id_jenisJasa, Request $request) {
