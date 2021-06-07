@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\jasaModel;
 use App\JenisJasaModel;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class MengelolaJasaController extends Controller
 {
@@ -60,26 +63,34 @@ class MengelolaJasaController extends Controller
         ];
 
     	$this->validate($request, [
-    		'nama_jenisJasa' => 'required|max:50',
-            'nama_jasa' => 'required'
+            'nama_jasa' => 'required|max:50',
+            'id_jenisJasa' => 'required',
+            'foto_profil' => 'required|image|max:2048'
     	], $messages);
 
         $data = new jasaModel();
+        $data->id_jasa = $request->id_jasa;
+        $data->id_outsourcing = Auth::guard('outsourcing')->user()->id_outsourcing;
+        $data->id_jenisJasa = $request->id_jenisJasa;
         $data->nama_jasa = $request->nama_jasa;
-        $data->na
+
+        $file = $request->file('foto_profil'); // menyimpan data gambar yang diupload ke variabel $file
+        $nama_file = time()."_".$file->getClientOriginalName();
+        $file->move('pengguna/assets/images/bukti_tf',$nama_file); // isi dengan nama folder tempat kemana file diupload   
+        $data->foto_profil = $nama_file;
     	$data->save();
 
     	return redirect('/outsourcing/MengelolaJasa')->with('alert-success','Data berhasil ditambahkan!');
     }
 
-   	public function edit($id_jenisJasa) {
+   	public function edit($id_jenis) {
 
         //if(!Session::get('login')){
         //    return redirect('LoginAdmin')->with('alert','Anda harus login dulu');
         //}
         //else{
 
-        	$datas = JenisJasaModel::find($id_jasa);
+        	$datas = jenisModel::find($id_jasa);
         	return view('admin.halaman.ubah_data.UbahJenisJasa',compact('datas'));
         //}
     }
@@ -100,19 +111,29 @@ class MengelolaJasaController extends Controller
         ];
 
         $this->validate($request, [
-            'nama_jenisJasa' => 'required|max:50',
+            'nama_jasa' => 'required|max:50',
+            'id_jenisJasa' => 'required',
+            'foto_profil' => 'required|image|max:2048'
         ], $messages);
 
-        $datas = JenisJasaModel::find($id_jenisJasa);
-        $datas->nama_jenisJasa = $request->nama_jenisJasa;
-        $datas->save();
+        $data = new jasaModel();
+        $data->id_jasa = $request->id_jasa;
+        $data->id_outsourcing = Auth::guard('outsourcing')->user()->id_outsourcing;
+        $data->id_jenisJasa = $request->id_jenisJasa;
+        $data->nama_jasa = $request->nama_jasa;
 
-        return redirect('/admin/MengelolaJenisJasa')->with('alert-success','Data berhasil diubah!');
+        $file = $request->file('foto_profil'); // menyimpan data gambar yang diupload ke variabel $file
+        $nama_file = time()."_".$file->getClientOriginalName();
+        $file->move('pengguna/assets/images/bukti_tf',$nama_file); // isi dengan nama folder tempat kemana file diupload   
+        $data->foto_profil = $nama_file;
+    	$data->save();
+
+    	return redirect('/outsourcing/MengelolaJasa')->with('alert-success','Data berhasil diubah!');
     }
 
-    public function delete($id_jenisJasa) {
-    	$datas = JenisJasaModel::find($id_jenisJasa);
+    public function delete($id_jasa) {
+    	$datas = jasaModel::find($id_jasa);
     	$datas->delete();
-    	return redirect('/admin/MengelolaJenisJasa')->with('alert-success','Data berhasil dihapus!');
+    	return redirect('/outsourcing/MengelolaJasa')->with('alert-success','Data berhasil dihapus!');
     }
 }
