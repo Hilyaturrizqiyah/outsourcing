@@ -40,7 +40,7 @@
               </div>
               <div class="form-group">
                 <label><b>Nama Jenis Jasa</b></label>
-                <select class="form-select" name="jenis_jasa" id="jenis_jasa">
+                <select class="form-select" name="id_jenisJasa" id="id_jenisJasa">
                   <option value='0'>-- Select Jenis Jasa --</option>
                   <!-- Read jenis_jasa -->
                   @foreach($jenis_jasa as $id_jenisJasa => $nama_jenisJasa)
@@ -50,7 +50,18 @@
                 <!-- @if ($errors->has('nama_jenisJasa'))
                   <span class="text-danger"><p class="text-right">* {{ $errors->first('nama_jenisJasa') }}</p></span>
                 @endif -->
-              </div>     
+              </div>
+              <div class="form-group">
+                <label><b>Foto</b></label>
+                  <div class="custom-file">
+                    <input type="file" name="foto_profil" id="foto_profil">
+                    <br><label class="text-primary" for="foto_profil">* Ukuran Maksimal 2 Mb</label>
+                    </div>
+                    @if ($errors->has('foto_profil'))
+                      <span class="text-danger"><p class="text-right">* {{ $errors->first('foto_profil') }}</p></span>
+                    @endif
+                  </div>
+             </div>     
               <div class="form-group"> 
                 <input type="reset" class="btn btn-secondary"  value="Batal">
                 <input type="submit" class="btn btn-primary" value="Simpan">
