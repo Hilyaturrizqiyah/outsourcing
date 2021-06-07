@@ -43,7 +43,7 @@
                                 <li>Pilih jenis jasa yang diinginkan</li>
                                 <li>Isi formulir kontrak jasa</li>
                                 <li>Melakukan kesepakatan dengan pihak outsourcing atau penyedia jasa</li>
-                                <li></li>
+                                <li>Melakukan Transaksi Pembayaran Dengan Mengupload Bukti Transfer</li>
                             </ol>
                         </div>
                         <div class="card-body">

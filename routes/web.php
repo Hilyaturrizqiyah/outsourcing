@@ -143,6 +143,8 @@ Route::get('/customer/register', 'LoginCustomerController@registerCustomer');
 Route::post('/customer/registerCustomerPost', 'LoginCustomerController@registerCustomerPost');
 Route::post('/customer/loginCustomerPost', 'LoginCustomerController@loginPost');
 Route::get('logout', 'LoginCustomerController@logout');
+Route::post('/customer/AksiUbahProfilCust{id_customer}','LoginCustomerController@update');
+
 
 Route::get('/customer/DashboardCustomer', 'CustomerController@index');
 Route::get('/customer/detailJasa{id_jasa}', 'CustomerController@tampilDetailJasa');
@@ -159,9 +161,11 @@ Route::get('/customer/riwayatSewaDetail{id_kontrak}', 'CustomerController@tampil
 Route::get('/customer/formKomplain{id_kontrak}', 'CustomerController@formKomplain');
 Route::post('/ajukanKomplain/{id_kontrak}','CustomerController@tambahFormKomplain');
 Route::get('/customer/riwayatKomplain', 'CustomerController@riwayatKomplain');
+Route::get('/customer/komplainDetail{id_komplain}', 'CustomerController@tampilDetailKomplain');
 Route::get('/customer/KontrakOsr{id_outsourcing}', 'CustomerController@formKontrakOutsourcing');
 Route::post('/ajukan/{id_outsourcing}','CustomerController@tambahFormKontrakOsr');
 Route::post('/customer/uploadPembayaranPerlengkapan','CustomerController@uploadPembayaranPerlengkapan');
+Route::post('/customer/uploadPembayaranTenaga','CustomerController@uploadPembayaranTenaga');
 
 
 

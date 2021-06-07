@@ -34,4 +34,9 @@ class kontrak_jasaModel extends Model
     {
         return $this->belongsToMany(tenaga_kerjaModel::class, 'tenaga_kerja', 'id_kontrak'); //model_tabel_yang_mau_disambungin, nama_tabel_perantara, foreignkey1_pada_tabel_penghubung, foreignkey2_pada_tabel_penghubung)
     }
+
+    public function pembayaranTenaga()
+    {
+        return $this->belongsToMany(PembayaranTenagaKerjaModel::class, 'pembayaran_tenaga_kerja', 'id_kontrak'); //model_tabel_yang_mau_disambungin, nama_tabel_perantara, foreignkey1_pada_tabel_penghubung, foreignkey2_pada_tabel_penghubung)
+    }
 }

@@ -5,13 +5,17 @@ namespace App\Http\Controllers;
 use App\jasaModel;
 use App\jenis_jasaModel;
 use App\AreaModel;
+use App\JenisJasaModel;
+use App\OutsourcingModel;
 use Illuminate\Http\Request;
 
 class UtamaController extends Controller
 {
     public function tampil(){
         $jasa = jasaModel::all();
-        return view('landingpage.halaman.index', compact('jasa'));
+        $osr = OutsourcingModel::all();
+        $jenisjasa = JenisJasaModel::all();
+        return view('landingpage.halaman.index', compact('jasa','jenisjasa','osr'));
     }
 
     // public function tampilDetailObat($id_obat)
@@ -49,6 +53,6 @@ class UtamaController extends Controller
     public function tambah() {
 
         return view('landingpage.halaman.Register');
-        
+
     }
 }

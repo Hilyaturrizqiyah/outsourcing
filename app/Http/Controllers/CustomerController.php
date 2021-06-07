@@ -25,8 +25,6 @@ class CustomerController extends Controller
 {
     public function index()
     {
-        // $id_customer = Session::get('id_customer');
-        // $datas = CustomerModel::find($id_customer);
         $jenisjasa = JenisJasaModel::all();
         $jasa = jasaModel::all();
 
@@ -74,28 +72,24 @@ class CustomerController extends Controller
 
     public function formKontrak($id_jasa)
     {
-        // $id_customer = Session::get('id_customer');
-        // $datas = CustomerModel::find($id_customer);
-        // $jasa     = jasaModel::where('id_jasa', $id_jasa)->get();
         $biaya_tenaga     = biaya_tenagaModel::where('id_jasa', $id_jasa)->first();
         $biaya_perlengkapan = Biaya_perlengkapanModel::where('id_jasa', $id_jasa)->get();
         $outsourcing    = OutsourcingModel::all();
-        // $customer   = CustomerModel::where();
 
-        return view('/customer/formKontrak', compact('outsourcing','biaya_tenaga','biaya_perlengkapan'));
+        return view('/customer/formKontrak', compact('outsourcing', 'biaya_tenaga', 'biaya_perlengkapan'));
     }
 
     public function tambahFormKontrak(Request $request, $id_jasa)
     {
-        // $this->validate($request, [
-        //     'tgl_mulai_kontrak' => 'required',
-        //     'lama_kontrak' => 'required',
-        //     'jumlah_tenagaKerja' => 'required'
-        // ], [
-        //     'tgl_mulai_kontrak.required' => '*Harus isi terlebih dahulu',
-        //     'lama_kontrak.required' => '*Harus isi terlebih dahulu',
-        //     'jumlah_tenagaKerja.required' => '*Harus isi terlebih dahulu',
-        // ]);
+        $this->validate($request, [
+            'tgl_mulai_kontrak' => 'required',
+            'lamaKontrak' => 'required',
+            'jumlah_tenagaKerja' => 'required'
+        ], [
+            'tgl_mulai_kontrak.required' => '*Harus isi terlebih dahulu',
+            'lama_kontrak.required' => '*Harus isi terlebih dahulu',
+            'jumlah_tenagaKerja.required' => '*Harus isi terlebih dahulu',
+        ]);
 
         $jasa     = jasaModel::where('id_jasa', $id_jasa)->get();
         $biaya_tenaga   = biaya_tenagaModel::where('id_jasa', $id_jasa)->first();
@@ -107,11 +101,11 @@ class CustomerController extends Controller
         $kontrak->tgl_mulai_kontrak = $request->tgl_mulai_kontrak;
         $kontrak->lama_kontrak = $request->lamaKontrak;
         $kontrak->jumlah_tenagaKerja = $request->jumlah_tenagaKerja;
-        $kontrak->jumlah_biayaTenagaKerja = $biaya_tenaga->biaya*$request->jumlah_tenagaKerja;
+        $kontrak->jumlah_biayaTenagaKerja = $biaya_tenaga->biaya * $request->jumlah_tenagaKerja;
         $kontrak->jumlah_biayaPerlengkapan = $request->jumlah_biayaPerlengkapan;
         $kontrak->status_kontrak = "Pending";
         $kontrak->save();
-        
+
         //---Rizqi---
         //---Pembayaran TenagaKerja untuk bulan ke1----
         $idKontrak = $kontrak->id_kontrak;
@@ -124,7 +118,7 @@ class CustomerController extends Controller
         $pembayaranTK->status_bayar = "Menunggu Pembayaran";
         $pembayaranTK->save();
         //---Pembayaran TenagaKerja ----
-        
+
         if ($request->jumlah_biayaPerlengkapan != "") {
             //---Pembayaran Perlengkapan untuk bulan ke1----
             $pembayaranP = new PembayaranPerlengkapanModel;
@@ -139,12 +133,14 @@ class CustomerController extends Controller
         //---Rizqi---
 
 
-        return redirect('/customer/riwayatSewa')->with('alert-success', 'Data Berhasil Ditambah');
+        return redirect('/customer/riwayatSewa')->with('alert-success', 'Pengajuan Kontrak Berhasil');
     }
 
     public function tampilRiwayatPengajuan()
     {
-        $kontraks    = kontrak_jasaModel::with('jasa')->where('id_customer', Auth::guard('customer')->user()->id_customer)->where('status_kontrak', 'Pending')->orWhere('status_kontrak', 'Kontrak Disetujui')->where('id_customer', Auth::guard('customer')->user()->id_customer)->get();
+        $kontraks    = kontrak_jasaModel::with('jasa')->where('id_customer', Auth::guard('customer')->user()->id_customer)->where('status_kontrak', 'Pending')
+            ->orWhere('status_kontrak', 'Menunggu Pembayaran')->where('id_customer', Auth::guard('customer')->user()->id_customer)
+            ->orWhere('status_kontrak', 'Kontrak Disetujui')->where('id_customer', Auth::guard('customer')->user()->id_customer)->get();
         //Proses pembatalan dalam 1 hari
         $now = Carbon::now();
         $progres = kontrak_jasaModel::with('jasa')->where('id_customer', Auth::guard('customer')->user()->id_customer)->where('status_kontrak', 'Kontrak Disetujui')->get();
@@ -201,8 +197,9 @@ class CustomerController extends Controller
         $datas = CustomerModel::find($id_customer);
         $kontraks     = kontrak_jasaModel::where('id_kontrak', $id_kontrak)->first();
         $pembayaranP = PembayaranPerlengkapanModel::where('id_kontrak', $id_kontrak)->first();
+        $pembayaranTK = PembayaranTenagaKerjaModel::where('id_kontrak', $id_kontrak)->get();
 
-        return view('/customer/riwayatSewaDetail', compact('kontraks', 'datas', 'id_customer','pembayaranP'));
+        return view('/customer/riwayatSewaDetail', compact('kontraks', 'datas', 'id_customer', 'pembayaranP', 'pembayaranTK'));
     }
 
     public function formKomplain($id_kontrak)
@@ -211,20 +208,16 @@ class CustomerController extends Controller
         $kontraks       = kontrak_jasaModel::where('id_kontrak', $id_kontrak)->where('id_customer', Auth::guard('customer')->user()->id_customer)->first();
         $tenaga_kerja   = tenaga_kerjaModel::where('id_kontrak', $id_kontrak)->get();
 
-        return view('/customer/formKomplain', compact('kontraks','tenaga_kerja'));
+        return view('/customer/formKomplain', compact('kontraks', 'tenaga_kerja'));
     }
 
     public function tambahFormKomplain(Request $request, $id_kontrak)
     {
-        // $this->validate($request, [
-        //     'tgl_mulai_kontrak' => 'required',
-        //     'lama_kontrak' => 'required',
-        //     'jumlah_tenagaKerja' => 'required'
-        // ], [
-        //     'tgl_mulai_kontrak.required' => '*Harus isi terlebih dahulu',
-        //     'lama_kontrak.required' => '*Harus isi terlebih dahulu',
-        //     'jumlah_tenagaKerja.required' => '*Harus isi terlebih dahulu',
-        // ]);
+        $this->validate($request, [
+            'alasan' => 'required'
+        ], [
+            'alasan.required' => '*Harus isi terlebih dahulu'
+        ]);
 
         $kontrak     = kontrak_jasaModel::where('id_kontrak', $id_kontrak)->first();
 
@@ -291,42 +284,6 @@ class CustomerController extends Controller
         return view('/customer/detailOutsourcing', compact('outsourcing', 'jasa'));
     }
 
-    public function formKontrakOutsourcing($id_outsourcing)
-    {
-        $outsourcing     = OutsourcingModel::where('id_outsourcing', $id_outsourcing)->first();
-        $jasa   = jasaModel::where('id_outsourcing', $id_outsourcing)->get();
-
-        return view('/customer/kontrakOsr', compact('outsourcing', 'jasa'));
-    }
-
-    public function tambahFormKontrakOsr(Request $request, $id_outsourcing)
-    {
-        // $this->validate($request, [
-        //     'tgl_mulai_kontrak' => 'required',
-        //     'lama_kontrak' => 'required',
-        //     'jumlah_tenagaKerja' => 'required'
-        // ], [
-        //     'tgl_mulai_kontrak.required' => '*Harus isi terlebih dahulu',
-        //     'lama_kontrak.required' => '*Harus isi terlebih dahulu',
-        //     'jumlah_tenagaKerja.required' => '*Harus isi terlebih dahulu',
-        // ]);
-
-        $outsourcing     = OutsourcingModel::where('id_outsourcing', $id_outsourcing)->first();
-
-        $kontrak    = new kontrak_jasaModel;
-        $kontrak->id_outsourcing = $outsourcing->id_outsourcing;
-        $kontrak->id_customer = Auth::guard('customer')->user()->id_customer;
-        $kontrak->id_jasa = $request->id_jasa;
-        $kontrak->tgl_mulai_kontrak = $request->tgl_mulai_kontrak;
-        $kontrak->lama_kontrak = $request->lamaKontrak . " " . $request->deskripsi;
-        $kontrak->jumlah_tenagaKerja = $request->jumlah_tenagaKerja;
-        $kontrak->status_kontrak = "Pending";
-        $kontrak->save();
-
-        return redirect('/customer/riwayatSewa')->with('alert-success', 'Data Berhasil Ditambah');
-    }
-
-
     public function ubahProfil()
     {
         $id_customer = Auth::guard('customer')->user()->id_customer;
@@ -362,37 +319,55 @@ class CustomerController extends Controller
                 $pembayaranTK = new PembayaranTenagaKerjaModel;
                 $pembayaranTK->id_outsourcing = $kontrak->id_outsourcing;
                 $pembayaranTK->id_kontrak = $idKontrak;
-                $pembayaranTK->nama_pembayaran = "Pembayaran Kontrak bulan ke".$countPembayaranTK++;
+                $pembayaranTK->nama_pembayaran = "Pembayaran Kontrak bulan ke" . $countPembayaranTK++;
                 $pembayaranTK->bulan_ke = $countPembayaranTK++;
                 $pembayaranTK->status_bayar = "Menunggu Pembayaran";
                 $pembayaranTK->save();
-            }else{
-
+            } else {
             }
-        }else{
-
+        } else {
         }
 
 
-        return view('/customer/formUbah', compact('datas', 'id_customer'));
+        return view('/customer/riwayatSewaDetail', compact('datas', 'id_customer'));
     }
 
-    public function uploadPembayaranPerlengkapan(Request $request,){
+    public function uploadPembayaranPerlengkapan(Request $request)
+    {
         $idKontrak = $request->id_kontrak;
         $now = Carbon::now()->format('y-m-d');
-        
 
-        $pembayaranTK = PembayaranPerlengkapanModel::where('id_kontrak', $idKontrak)->where('status_bayar','Menunggu Pembayaran')->first();
-        
+
+        $pembayaranTK = PembayaranPerlengkapanModel::where('id_kontrak', $idKontrak)->where('status_bayar', 'Menunggu Pembayaran')->first();
+
         $file = $request->file('bukti_tfPerlengkapan'); // menyimpan data gambar yang diupload ke variabel $file
-        $nama_file = time()."_".$file->getClientOriginalName();
-        $file->move('pengguna/assets/images/bukti_tf',$nama_file); // isi dengan nama folder tempat kemana file diupload
-            
+        $nama_file = time() . "_" . $file->getClientOriginalName();
+        $file->move('pengguna/assets/images/bukti_tf', $nama_file); // isi dengan nama folder tempat kemana file diupload
+
         $pembayaranTK->bukti_tf = $nama_file;
         $pembayaranTK->waktu_bayar = $now;
         $pembayaranTK->status_bayar = 'Menunggu Validasi';
         $pembayaranTK->update();
 
-        return redirect('/customer/riwayatSewaDetail'.$idKontrak)->with('alert-success', 'Bukti Pembayaran Perlengkapan Berhasil di Upload');
+        return redirect('/customer/riwayatSewaDetail' . $idKontrak)->with('alert-success', 'Bukti Pembayaran Perlengkapan Berhasil di Upload');
+    }
+
+    public function uploadPembayaranTenaga(Request $request)
+    {
+        $idKontrak = $request->id_kontrak;
+        $now = Carbon::now()->format('y-m-d');
+
+
+        $pembayaranTK = PembayaranTenagaKerjaModel::where('status_bayar', 'Menunggu Pembayaran')->first();
+
+        $file = $request->file('bukti_tfTenagaKerja'); // menyimpan data gambar yang diupload ke variabel $file
+        $nama_file = time() . "_" . $file->getClientOriginalName();
+        $file->move('pengguna/assets/images/bukti_tf', $nama_file); // isi dengan nama folder tempat kemana file diupload
+        $pembayaranTK->bukti_tf = $nama_file;
+        $pembayaranTK->waktu_bayar = $now;
+        $pembayaranTK->status_bayar = 'Menunggu Validasi';
+        $pembayaranTK->update();
+
+        return redirect('/customer/riwayatSewaDetail' . $idKontrak)->with('alert-success', 'Bukti Pembayaran Tenaga Kerja Berhasil di Upload');
     }
 }

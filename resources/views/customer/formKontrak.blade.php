@@ -168,7 +168,7 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label><b>Jumlah Harga Tenaga Kerja</b></label>
+                                                <label><b>Jumlah Biaya Tenaga Kerja</b></label>
                                                 <input type="number" class="form-control" name="jumlah_biayaTenagaKerja"
                                                     onfocus="startCalculate()" onblur="stopCalc()" readonly>
 
@@ -181,9 +181,9 @@
                                             </div>
                                             <div class="form-group">
                                                 <label><b>Include : Biaya Peralatan</b></label>
-                                                
+
                                                 @foreach ($biaya_perlengkapan as $key => $biaya_perlengkapan)
-                                                <div class="form-check">                                               
+                                                <div class="form-check">
                                                     <input class="form-check-input" type="checkbox" name="perlengkapan[]" value="{{$biaya_perlengkapan->biaya}}"
                                                         id="menu{{$key}}" onclick="totalIt()">
                                                     <label class="form-check-label" for="menu{{$key}}">
@@ -197,11 +197,11 @@
                                                     <div class="col-lg-5">
                                                         <input type="text" name="biayaPerlengkapan" class="form-control" id="total" onfocus="startCalculate()"
                                                         onblur="stopCalc()" readonly>
-                                                       
+
                                                     </div>
                                                     <div class="col-lg-4">
                                                         <span>X (Jumlah Tenaga Kerja)</span>
-                                                        
+
                                                     </div>
                                                     <div class="col-lg-3">
                                                         <input class="form-control" name="jumlahTenagaKerja"
@@ -215,8 +215,6 @@
                                                 <input type="number" class="form-control" name="jumlah_biayaPerlengkapan" onfocus="startCalculate()"
                                                 onblur="stopCalc()" readonly>
                                             </div>
-
-
 
                                             <div class="form-group">
                                                 <input type="reset" class="btn btn-secondary" value="Batal">
@@ -283,7 +281,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="card-content">
-                                    
+
                                 </div>
                             </div>
                         </div>
