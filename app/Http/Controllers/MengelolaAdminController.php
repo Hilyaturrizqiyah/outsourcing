@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\AdminModel;
+use App\CustomerModel;
+use App\OutsourcingModel;
+use App\JenisJasaModel;
 use Illuminate\Http\Request;
 use Session;
 use Hash;
@@ -52,27 +55,42 @@ class MengelolaAdminController extends Controller
     }
 
 
+    public function dashboard(){
+        if(!Session::get('loginAdmin')){
+            return redirect('/admin/MengelolaAdmin')->with('alert','Anda harus login dulu');
+        }
+        else{
+
+        $admin = AdminModel::all()->count();
+        $customer = CustomerModel::all()->count();
+        $outsourcing = OutsourcingModel::all()->count();
+        $jenisJasa = JenisJasaModel::all()->count();
+        	return view('admin.halaman.DashboardAdmin',compact('admin','customer','outsourcing','jenisJasa'));
+        }
+    }
+
+
     public function index()     {
 
-        //if(!Session::get('login')){
-        //    return redirect('LoginAdmin')->with('alert','Anda harus login dulu');
-        //}
-        //else{
+        if(!Session::get('loginAdmin')){
+            return redirect('/admin/MengelolaAdmin')->with('alert','Anda harus login dulu');
+        }
+        else{
 
         $datas = AdminModel::get();
         	return view('admin.halaman.MengelolaAdmin',compact('datas'));
-        //}
+        }
     }
 
     public function tambah() {
 
-        //if(!Session::get('login')){
-        //    return redirect('LoginAdmin')->with('alert','Anda harus login dulu');
-        //}
-        //else{
-		//
+        if(!Session::get('loginAdmin')){
+            return redirect('/admin/MengelolaAdmin')->with('alert','Anda harus login dulu');
+        }
+        else{
+		
         	return view('admin.halaman.tambah_data.TambahAdmin');
-        //}
+        }
     }
 
     public function store( Request $request) {
@@ -113,7 +131,7 @@ class MengelolaAdminController extends Controller
    	public function edit($id_admin) {
 
         if(!Session::get('login')){
-            return redirect('LoginAdmin')->with('alert','Anda harus login dulu');
+            return redirect('/admin/MengelolaAdmin')->with('alert','Anda harus login dulu');
         }
         else{
 

@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('kirim-email','MailController@penerimaanTenagaKerja');
+
 // --------------LandingPage-------------------//
 Route::get('/','UtamaController@tampil');
 Route::get('/Register','UtamaController@tambah');
@@ -22,9 +24,11 @@ Route::get('/index/area/cari', 'UtamaController@cari');
 // --------------LandingPage-------------------//
 
 // --------------Admin-------------------//
-Route::get('/admin/DashboardAdmin', function () {
-    return view('admin.halaman.DashboardAdmin');
-});
+Route::get('/admin/DashboardAdmin', 'MengelolaAdminController@dashboard');
+
+Route::get('/admin/LoginAdmin', 'MengelolaAdminController@login');
+Route::post('/admin/LoginPost', 'MengelolaAdminController@postLogin');
+Route::get('/admin/Logout', 'MengelolaAdminController@logout');
 
 Route::get('/admin/MengelolaAdmin', 'MengelolaAdminController@index');
 Route::get('/admin/TambahAdmin', 'MengelolaAdminController@tambah');
@@ -59,6 +63,9 @@ Route::get('/admin/MengelolaCustomer','MengelolaCustomerController@index');
 Route::get('/admin/HapusCustomer{id_customer}','MengelolaCustomerController@delete');
 
 Route::get('/admin/MengelolaOutsourcing','MengelolaOutsourcingController@index');
+Route::get('/admin/DetailOutsourcing{id_outsourcing}','MengelolaOutsourcingController@detailOutsourcing');
+Route::get('/admin/ValidasiOutsourcing{id_outsourcing}','MengelolaOutsourcingController@validasiOutsourcing');
+
 Route::get('/admin/HapusOutsourcing{id_outsourcing}','MengelolaOutsourcingController@delete');
 
 //----------------------Admin---------------------//
@@ -106,6 +113,7 @@ Route::post('/tenagakerja/AksiUbahPengalamanKerja{id_pengalaman}','PengalamanKer
 Route::get('/tenagakerja/HapusPengalamanKerja{id_pengalaman}','PengalamanKerjaController@delete');
 
 Route::get('/tenagakerja/JasaTenagaKerja','TenagaKerjaController@jasa');
+Route::get('/tenagakerja/MelamarKerja{id_jasa}','TenagaKerjaController@melamarKerja');
 
 //----------------------TenagaKerja-----------------//
 

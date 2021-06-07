@@ -13,75 +13,75 @@ class MengelolaAreaController extends Controller
 {
     public function indexArea()     {  
 
-        //if(!Session::get('login')){
-        //    return redirect('LoginAdmin')->with('alert','Anda harus login dulu');
-        //}
-        //else{
+        if(!Session::get('loginAdmin')){
+            return redirect('/admin/MengelolaAdmin')->with('alert','Anda harus login dulu');
+        }
+        else{
 
         $area = AreaModel::get();
         
         	return view('admin.halaman.MengelolaArea',compact('area'));     
-        //}  
+        }  
     }
 
     public function indexKoKab()     {  
 
-        //if(!Session::get('login')){
-        //    return redirect('LoginAdmin')->with('alert','Anda harus login dulu');
-        //}
-        //else{
+        if(!Session::get('loginAdmin')){
+            return redirect('/admin/MengelolaAdmin')->with('alert','Anda harus login dulu');
+        }
+        else{
 
         $kota_kabupaten = kota_kabupatenModel::get();         
         	return view('admin.halaman.MengelolaKoKab',compact('kota_kabupaten'));     
-        //}  
+        }  
     }
 
     public function indexProvinsi()     {  
 
-        //if(!Session::get('login')){
-        //    return redirect('LoginAdmin')->with('alert','Anda harus login dulu');
-        //}
-        //else{
+        if(!Session::get('loginAdmin')){
+            return redirect('/admin/MengelolaAdmin')->with('alert','Anda harus login dulu');
+        }
+        else{
 
         $provinsi = provinsiModel::get();
         	return view('admin.halaman.MengelolaProvinsi',compact('provinsi'));     
-        //}  
+        }  
     }
 
     public function tambahArea() {
 
-        //if(!Session::get('login')){
-        //    return redirect('LoginAdmin')->with('alert','Anda harus login dulu');
-        //}
-        //else{
-		//
+        if(!Session::get('loginAdmin')){
+            return redirect('/admin/MengelolaAdmin')->with('alert','Anda harus login dulu');
+        }
+        else{
+		
             $kota_kabupaten = kota_kabupatenModel::get();
         	return view('admin.halaman.tambah_data.TambahArea',compact('kota_kabupaten'));
-        //}
+        }
     }
 
     public function tambahKoKab() {
 
-        //if(!Session::get('login')){
-        //    return redirect('LoginAdmin')->with('alert','Anda harus login dulu');
-        //}
-        //else{
-		//
+        if(!Session::get('loginAdmin')){
+            return redirect('/admin/MengelolaAdmin')->with('alert','Anda harus login dulu');
+        }
+        else{
+		
             $provinsi = provinsiModel::get();
         	return view('admin.halaman.tambah_data.TambahKoKab',compact('provinsi'));
-        //}
+        }
     }
 
     public function tambahProvinsi() {
 
-        //if(!Session::get('login')){
-        //    return redirect('LoginAdmin')->with('alert','Anda harus login dulu');
-        //}
-        //else{
-		//
+        if(!Session::get('loginAdmin')){
+            return redirect('/admin/MengelolaAdmin')->with('alert','Anda harus login dulu');
+        }
+        else{
+		
             
         	return view('admin.halaman.tambah_data.TambahProvinsi');
-        //}
+        }
     }
 
     public function storeArea( Request $request) {
@@ -165,14 +165,14 @@ class MengelolaAreaController extends Controller
 
    	public function edit($id_area) {
 
-        //if(!Session::get('login')){
-        //    return redirect('LoginAdmin')->with('alert','Anda harus login dulu');
-        //}
-        //else{
+        if(!Session::get('loginAdmin')){
+            return redirect('/admin/MengelolaAdmin')->with('alert','Anda harus login dulu');
+        }
+        else{
 
         	$datas = AreaModel::find($id_area);
         	return view('admin.halaman.ubah_data.UbahArea',compact('datas'));
-        //}
+        }
     }
 
     public function update($id_area, Request $request) {
