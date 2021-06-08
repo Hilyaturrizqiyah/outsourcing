@@ -78,8 +78,11 @@
                                     <input type="file" name="bukti_tfPerlengkapan">
                                     <hr>
                                     <input type="submit" class="btn btn-primary" value="Kirim"
-                                        {{ ($pembayaranP->status_bayar == 'Menunggu Validasi') ? 'disabled' : ''}}>
+                                    @isset($pembayaranP)
+                                    {{ ($pembayaranP->status_bayar == 'Menunggu Validasi') ? 'disabled' : ''}}>
                                     {{ ($pembayaranP->status_bayar == 'Menunggu Validasi') ? '(Menunggu Validasi oleh Outsourcing)' : ''}}
+                                    @endisset
+                                        
                                 </form>
                             </div>
 
