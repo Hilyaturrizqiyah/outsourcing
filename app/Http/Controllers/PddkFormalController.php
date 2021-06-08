@@ -26,8 +26,8 @@ class PddkFormalController extends Controller
     		'pendidikan' => 'required|max:50',
             'nama_institusi' => 'required|max:50',
             'jurusan' => 'required|max:50',
-            'periode_masuk' => 'required|max:50',
-            'periode_keluar' => 'required|max:50',
+            'periode_masuk' => 'required|numeric',
+            'periode_keluar' => 'required|numeric',
             'lokasi' => 'required|max:100',
     	], $messages);
 
@@ -59,7 +59,7 @@ class PddkFormalController extends Controller
     		'pendidikan' => 'required|max:50',
             'nama_institusi' => 'required|max:50',
             'jurusan' => 'required|max:50',
-            'periode_masuk' => 'required|max:50',
+            'periode_masuk' => 'required|numeric',
             'periode_keluar' => 'required|max:50',
             'lokasi' => 'required|max:100',
     	], $messages);

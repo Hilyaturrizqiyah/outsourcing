@@ -18,6 +18,9 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use App\Mail\MyTestMail;
+use Illuminate\Support\Facades\Mail;
+
 
 // use Session;
 
@@ -315,7 +318,9 @@ class CustomerController extends Controller
 
             if ($jumlahHariKerja <= $selisih_hari) {
 
+                $customer = CustomerModel::find($id_customer);
                 $idKontrak = $kontrak->id_kontrak;
+
                 $pembayaranTK = new PembayaranTenagaKerjaModel;
                 $pembayaranTK->id_outsourcing = $kontrak->id_outsourcing;
                 $pembayaranTK->id_kontrak = $idKontrak;
@@ -323,6 +328,18 @@ class CustomerController extends Controller
                 $pembayaranTK->bulan_ke = $countPembayaranTK++;
                 $pembayaranTK->status_bayar = "Menunggu Pembayaran";
                 $pembayaranTK->save();
+
+                //---kirim email
+                $outsourcing = OutsourcingModel::find($id_outsourcing);
+                $kontrakJasa = kontrak_jasaModel::find($idKontrak);
+                $details = [
+                'title' => 'Pemberitahuan Pembayaran Tenaga Kerja Outsourcing ',
+                'body' => 'Pembayaran Tenaga Kerja pada jasa'.$kontrakJasa->jasa->nama_jasa.', untuk bulan ke'.$countPembayaranTK.' sudah dapat dibayar, silahkan melakukan pembayaran pada aplikasi outsourcing',
+                ];
+            
+                 \Mail::to($customer->email)->send(new \App\Mail\MyTestMail($details));
+                //Kirim Email
+
             } else {
             }
         } else {
