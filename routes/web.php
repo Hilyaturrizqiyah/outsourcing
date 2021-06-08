@@ -198,7 +198,7 @@ Route::get('/customer/komplainDetail{id_komplain}', 'CustomerController@tampilDe
 Route::get('/customer/KontrakOsr{id_outsourcing}', 'CustomerController@formKontrakOutsourcing');
 Route::post('/ajukan/{id_outsourcing}','CustomerController@tambahFormKontrakOsr');
 Route::post('/customer/uploadPembayaranPerlengkapan','CustomerController@uploadPembayaranPerlengkapan');
-Route::post('/customer/uploadPembayaranTenaga','CustomerController@uploadPembayaranTenaga');
+Route::post('/customer/uploadPembayaranTenaga/{id_kontrak}','CustomerController@uploadPembayaranTenaga');
 // Route::get('/customer/cetak_pdf/{id_kontrak}', 'CustomerController@cetak_pdf');
 // Route::get('customer/riwayatSewaDetail/{id_kontrak}',[
 //     'as' => 'suratKontrak.download', 'uses' => 'CustomerController@downloadImage']);

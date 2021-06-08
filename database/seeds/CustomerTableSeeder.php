@@ -21,11 +21,11 @@ class CustomerTableSeeder extends Seeder
             $customer->save();
 
             $customer2 = new CustomerModel();
-            $customer2->nama_customer = "Hilya";
+            $customer2->nama_customer = "Polindra";
             $customer2->alamat = "Indramayu";
             $customer2->no_telp = "089123456456";
-            $customer2->email = "hilyaC@gmail.com";
-            $customer2->password = bcrypt('hilya123');
+            $customer2->email = "polindra@gmail.com";
+            $customer2->password = bcrypt('123456789');
             $customer2->save();
 
             $customer3 = new CustomerModel();

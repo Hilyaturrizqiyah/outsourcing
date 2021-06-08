@@ -351,22 +351,24 @@ class CustomerController extends Controller
         return redirect('/customer/riwayatSewaDetail' . $idKontrak)->with('alert-success', 'Bukti Pembayaran Perlengkapan Berhasil di Upload');
     }
 
-    public function uploadPembayaranTenaga(Request $request)
+    public function uploadPembayaranTenaga($id_kontrak, Request $request)
     {
-        $idKontrak = $request->id_kontrak;
+        // $idKontrak = $request->id_kontrak;
+        // $now = Carbon::now()->format('y-m-d');
 
-        $now = Carbon::now()->format('y-m-d');
-        $pembayaranTK = PembayaranTenagaKerjaModel::where('id_kontrak', $idKontrak)->where('status_bayar', 'Menunggu Pembayaran')->first();
-        dd($pembayaranTK);
-        $file = $request->file('bukti_tfTenagaKerja'); // menyimpan data gambar yang diupload ke variabel $file
+
+        $pembayaranTeKa = PembayaranTenagaKerjaModel::where('id_kontrak', $id_kontrak)->where('status_bayar', 'Menunggu Pembayaran')->first();
+
+
+        $file = $request->file('bukti_tf'); // menyimpan data gambar yang diupload ke variabel $file
         $nama_file = time() . "_" . $file->getClientOriginalName();
         $file->move('pengguna/assets/images/bukti_tf', $nama_file); // isi dengan nama folder tempat kemana file diupload
-        $pembayaranTK->bukti_tf = $nama_file;
-        $pembayaranTK->waktu_bayar = $now;
-        $pembayaranTK->status_bayar = 'Menunggu Validasi';
-        $pembayaranTK->update();
 
-        return redirect('/customer/riwayatSewaDetail' . $idKontrak)->with('alert-success', 'Bukti Pembayaran Tenaga Kerja Berhasil di Upload');
+        $pembayaranTeKa->bukti_tf = $nama_file;
+        $pembayaranTeKa->status_bayar = 'Menunggu Validasi';
+        $pembayaranTeKa->update();
+
+        return redirect('/customer/riwayatSewaDetail'.$id_kontrak)->with('alert-success', 'Pembayaran Berhasil di Upload');
     }
 
     // public function downloadImage($imageId){
