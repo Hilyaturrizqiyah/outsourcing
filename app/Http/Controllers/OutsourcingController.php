@@ -30,6 +30,8 @@ class OutsourcingController extends Controller
         return view('/outsourcing/DashboardOutsourcing', compact('osr'));
     }
 
+
+    
     public function ubahProfil()
     {
         $id_outsourcing = Session::get('id_outsourcing');
@@ -94,24 +96,29 @@ class OutsourcingController extends Controller
 
     }
 
-    public function store(Request $request)
+    public function registerOsr()
+    {
+        return view('/outsourcing/register');
+    }
+
+    public function registerOsrPost(Request $request)
     {
 
         $messages = [
-            'required' => ':attribute masih kosong',
-            'min' => ':attribute diisi minimal :min karakter',
-            'max' => ':attribute diisi maksimal :max karakter',
-            'numeric' => ':attribute harus berupa angka',
-            'unique' => ':attribute sudah ada',
-            'email' => ':attribute harus berupa email',
-            'image' => ':attribute harus berupa gambar',
+            // 'required' => ':attribute masih kosong',
+            // 'min' => ':attribute diisi minimal :min karakter',
+            // 'max' => ':attribute diisi maksimal :max karakter',
+            // 'numeric' => ':attribute harus berupa angka',
+            // 'unique' => ':attribute sudah ada',
+            // 'email' => ':attribute harus berupa email',
+            // 'image' => ':attribute harus berupa gambar',
         ];
 
         $this->validate($request, [
-            'nama_outsourcing' => 'required|max:50',
-            'no_ktp' => 'required|numeric|digits_between:0,17',
-            'email' => 'required|email|max:50',
-            'password' => 'required|max:255'
+            // 'nama_outsourcing' => 'required|max:50',
+            // 'no_ktp' => 'required|numeric|digits_between:0,17',
+            // 'email' => 'required|email|max:50',
+            // 'password' => 'required|max:255'
         ], $messages);
 
         $data = new OutsourcingModel();
@@ -122,7 +129,7 @@ class OutsourcingController extends Controller
         $data->status_outsourcing = "Menunggu Validasi";
         $data->save();
 
-        return redirect('/outsourcing/RegisterOutsourcing')->with('alert-success', 'Data Akun berhasil ditambahkan!');
+        return redirect('/customer/loginCustomer')->with('alert-success', 'Data Akun berhasil ditambahkan!');
     }
 
 
@@ -228,6 +235,12 @@ class OutsourcingController extends Controller
         $outsourcing = OutsourcingModel::all();
 
         return view('/outsourcing/MengelolaDataKomplain', compact('komplain', 'kontrak', 'outsourcing'));
+    }
+
+    public function delete($id_komplain) {
+    	$datas = komplainModel::find($id_komplain);
+    	$datas->delete();
+    	return redirect('/outsourcing/MengelolaDataKomplain')->with('alert-success','Data berhasil dihapus!');
     }
 
     public function tampilDetailKomplain($id_komplain)

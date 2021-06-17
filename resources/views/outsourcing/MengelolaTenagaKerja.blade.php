@@ -39,9 +39,8 @@
             <thead class="thead-light">
               <tr>
                 <th>No</th>
-                <th>Nama</th>
+                <th>Nama Tenaga Kerja</th>
                 <th>No. KTP</th>
-                <th>Area</th>
                 <th>Status</th>
                 <!-- <th>Bukti Transfer</th>
                 <th>Tanggal Pembayaran</th>
@@ -55,13 +54,12 @@
               @php
               $no=1;
               @endphp
-              {{-- @foreach($kontraks as $kontrak) --}}
+              @foreach($datas as $data)
               <tr>
-                <th>1</th>
-                <th>Maks</th>
-                <th>1234567890123456</th>
-                <th>1</th>
-                <th>Pelamar</th>
+                <th>{{$no++}}</th>
+                <th>{{$data->nama_tenagaKerja}}</th>
+                <th>{{$data->no_ktp}}</th>
+                <th>{{$data->status_tenagaKerja}}</th>
                 <!-- <th>Bukti Transfer</th>
                 <th>Tanggal Pembayaran</th>
                 <th>Bulan Ke</th>
@@ -70,13 +68,13 @@
                         <a href=# class="btn btn-warning">
                             <i class="fas fa-pencil-alt"></i>
                         </a>
-                        <a href=# class="btn btn-danger" onclick="return confirm('Anda yakin mau menghapus item ini ?')">
+                        <a href="/outsourcing/HapusTenagaKerja{{$data->id_tenagaKerja}}" class="btn btn-danger" onclick="return confirm('Anda yakin mau menghapus item ini ?')">
                             <i class="fas fa-trash"></i>
                         </a>
                 </th>
               </tr>
             </tbody>
-            {{-- @endforeach --}}
+            @endforeach
           </table>
         </div>
       </div>

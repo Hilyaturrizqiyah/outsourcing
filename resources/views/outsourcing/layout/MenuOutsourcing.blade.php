@@ -55,11 +55,19 @@
                         <span> Data Komplain</span>
                     </a>
                 </li>
-                <li class="sidebar-item {{ Request::is('/customer/riwayatKomplain') ? "active" : "" }} ">
-                    <a href="{{('/customer/riwayatKomplain')}}" class='sidebar-link'>
+                <li class="sidebar-item  has-sub">
+                    <a href="#" class='sidebar-link'>
                         <i class="fas fa-book"></i>
-                        <span> Data Transaksi</span>
+                        <span>Data Transaksi</span>
                     </a>
+                    <ul class="submenu ">
+                        <li class="submenu-item {{ Request::is('/outsourcing/TransaksiPerlengkapan') ? "active" : "" }}">
+                            <a href="{{url ('/outsourcing/TransaksiPerlengkapan')}}">Perlengkapan</a>
+                        </li>
+                        <li class="submenu-item {{ Request::is('/outsourcing/TransaksiTenagaKerja') ? "active" : "" }}">
+                            <a href="{{url ('/outsourcing/TransaksiTenagaKerja')}}">Tenaga Kerja</a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
 

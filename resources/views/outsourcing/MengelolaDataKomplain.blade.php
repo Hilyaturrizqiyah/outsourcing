@@ -59,7 +59,7 @@
                         <td>{{$komplains->customer->nama_customer}}</td>
                         <td>{{$komplains->alasan}}</td>
                         <td>
-                          <a href="/outsourcing/HapusJasa{{$komplains->id_komplain}}" class="btn btn-danger" onclick="return confirm('Anda yakin mau menghapus item ini ?')">
+                          <a href="/outsourcing/HapusDataKomplain{{$komplains->id_komplain}}" class="btn btn-danger" onclick="return confirm('Anda yakin mau menghapus item ini ?')">
                             <i class="fas fa-trash"></i>
                           </a>
                         </td>
