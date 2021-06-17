@@ -33,16 +33,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
                         <li>
-                            <h6 class="dropdown-header">Hello, John!</h6>
-                        </li>
-                        <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-person me-2"></i> My
-                                Profile</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-gear me-2"></i>
-                                Settings</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-wallet me-2"></i>
-                                Wallet</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
+                            <h6 class="dropdown-header">Hello!</h6>
                         </li>
                         <li><a class="dropdown-item" href="{{ url ('logoutTenagaKerja') }}"><i
                                     class="icon-mid bi bi-box-arrow-left me-2"></i> Logout</a></li>

@@ -121,8 +121,8 @@ class TenagaKerjaController extends Controller
 
     	$this->validate($request, [
     		'nama_tenagaKerja' => 'required|max:50',
-    		'no_ktp' => 'required|numeric|digits_between:0,50',
-            'email' => 'required|email|max:50',
+    		'no_ktp' => 'required|numeric|digits_between:0,16|unique:tenaga_kerja',
+            'email' => 'required|email|max:50|unique:tenaga_kerja',
     		'password' => 'required|max:255'
     	], $messages);
 
@@ -130,11 +130,52 @@ class TenagaKerjaController extends Controller
         $data->nama_tenagaKerja = $request->nama_tenagaKerja;
         $data->no_ktp = $request->no_ktp;
         $data->email = $request->email;
-        $data->password = bcrypt($request->password);
-        $data->status_tenagaKerja = "Pelamar";
+        $data->password = "";
+        $data->status_tenagaKerja = "Menunggu Validasi";
     	$data->save();
+        $data->id_tenagaKerja;
 
-    	return redirect('/tenagakerja/RegisterTenagakerja')->with('alert-success','Data Akun berhasil ditambahkan!');
+        //---kirim email
+                $tenagaKerja = tenaga_kerjaModel::find($data->id_tenagaKerja);
+                $id_tenagaKerja = $data->id_tenagaKerja;
+                $pass = $request->password;
+                //$jasa = jasaModel::find($tenagaKerja->id_jasa);
+                $link = 'http://127.0.0.1:8000/tenagakerja/ValidasiAkunTenagaKerja/'.$id_tenagaKerja.'/'.$pass;
+                $details = [
+                'title' => 'Pemberitahuan validasi Register Tenaga Kerja ',
+                'body' => 'Silahkan Tekan link,',
+                'link' => $link,
+                'ket' => ' untuk validasi akun',
+                ];
+            
+                 \Mail::to($request->email)->send(new \App\Mail\MailValidasiTenagaKerja($details));
+                //Kirim Email
+
+    	return redirect('/tenagakerja/RegisterTenagakerja')->with('alert-success','Register berhasil, silahkan validasi melalui link email!');
+    }
+
+    public function validasiAkunTenagaKerja($id_tenagaKerja, $pass) {
+
+        if(Session::get('loginTenagaKerja')){
+            return redirect('/tenagakerja')->with('alert-success','Maaf Halaman tidak bisa diakses');
+        }
+        else{
+            $tenagaKerja = tenaga_kerjaModel::find($id_tenagaKerja);
+            if ($tenagaKerja->password == "") {
+                $validasi = tenaga_kerjaModel::find($id_tenagaKerja);
+                $validasi->password = bcrypt($pass);
+                $validasi->status_tenagaKerja = "Pelamar";
+                $validasi->save();
+
+                return redirect('tenagakerja/LoginTenagakerja')->with('alert-success','Akun berhasil divalidasi, silahkan Login');
+
+            }else{
+                return redirect()->back()->with('alert','Maaf tidak bisa diakses');
+            }
+            
+            
+        }
+        
     }
 
     public function edit() {
