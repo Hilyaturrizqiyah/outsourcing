@@ -16,7 +16,7 @@
     <!-- Style -->
     <link rel="stylesheet" href="{{asset('assets/login/css/style.css')}}">
 
-    <title>Login #7</title>
+    <title>Outsourcing | Login Tenaga Kerja</title>
   </head>
   <body>
 
@@ -30,10 +30,19 @@
         </div>
         <div class="col-md-6 contents">
           <div class="row justify-content-center">
+            @if(\Session::has('alert-success'))
+            <div class="alert alert-success color-success alert-dismissible show fade"><i class="bi bi-check-circle"></i>
+                {{Session::get('alert-success')}}
+            </div>
+            @endif
+            @if(\Session::has('alert'))
+            <div class="alert alert-danger color-danger alert-dismissible show fade"><i class="bi bi-check-circle"></i>
+                {{Session::get('alert')}}
+            </div>
+            @endif
             <div class="col-md-8">
               <div class="mb-4">
-              <h3>Sign In</h3>
-              <p class="mb-4">Lorem ipsum dolor sit amet elit. Sapiente sit aut eos consectetur adipisicing.</p>
+              <h3>Log In Tenaga Kerja</h3>
             </div>
             <form action="{{url('tenagakerja/AksiLoginTenagakerja')}}" method="post">
                 {{csrf_field()}}
@@ -48,29 +57,8 @@
 
               </div>
 
-              <div class="d-flex mb-5 align-items-center">
-                <label class="control control--checkbox mb-0"><span class="caption">Remember me</span>
-                  <input type="checkbox" checked="checked"/>
-                  <div class="control__indicator"></div>
-                </label>
-                <span class="ml-auto"><a href="#" class="forgot-pass">Forgot Password</a></span>
-              </div>
-
               <input type="submit" value="Log In" class="btn btn-block btn-primary">
 
-              <span class="d-block text-left my-4 text-muted">&mdash; or login with &mdash;</span>
-
-              <div class="social-login">
-                <a href="#" class="facebook">
-                  <span class="icon-facebook mr-3"></span>
-                </a>
-                <a href="#" class="twitter">
-                  <span class="icon-twitter mr-3"></span>
-                </a>
-                <a href="#" class="google">
-                  <span class="icon-google mr-3"></span>
-                </a>
-              </div>
             </form>
             </div>
           </div>

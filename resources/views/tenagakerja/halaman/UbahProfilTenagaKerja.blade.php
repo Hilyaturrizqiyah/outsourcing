@@ -727,12 +727,20 @@
                                                                         <div class="col-md-8 form-group">
                                                                             <input type="text" class="form-control" name="nama_keluarga" placeholder="Nama Keluarga">
                                                                         </div>
+                                                                        @if ($errors->has('nama_keluarga'))
+                                                                            <span class="text-danger"><p class="text-right">* {{ $errors->first('nama_keluarga') }}</p></span>
+                                                                        @endif
+
                                                                         <div class="col-md-4">
                                                                             <label><strong>Pekerjaan</strong></label>
                                                                         </div>
                                                                         <div class="col-md-8 form-group">
                                                                             <input type="text" class="form-control" name="pekerjaan" placeholder="Pekerjaan">
                                                                         </div>
+                                                                        @if ($errors->has('pekerjaan'))
+                                                                            <span class="text-danger"><p class="text-right">* {{ $errors->first('pekerjaan') }}</p></span>
+                                                                        @endif
+
                                                                         <div class="col-md-4">
                                                                             <label><strong>Tempat Tanggal Lahir</strong></label>
                                                                         </div>
@@ -740,6 +748,12 @@
                                                                             <input type="text" class="form-control" name="tempat_lahir" placeholder="Tempat Lahir">
                                                                             <input type="date" class="form-control" name="tanggal_lahir" >
                                                                         </div>
+                                                                        @if ($errors->has('tempat_lahir'))
+                                                                            <span class="text-danger"><p class="text-right">* {{ $errors->first('tempat_lahir') }}</p></span>
+                                                                        @endif
+                                                                        @if ($errors->has('tanggal_lahir'))
+                                                                            <span class="text-danger"><p class="text-right">* {{ $errors->first('tanggal_lahir') }}</p></span>
+                                                                        @endif
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -793,12 +807,20 @@
                                                     <div class="col-md-8 form-group">
                                                         <input type="text" class="form-control" name="nama_institusi" placeholder="Nama Institusi" value="{{$formal->nama_institusi}}">
                                                     </div>
+                                                    @if ($errors->has('nama_institusi'))
+                                                        <span class="text-danger"><p class="text-right">* {{ $errors->first('nama_institusi') }}</p></span>
+                                                    @endif
+
                                                     <div class="col-md-4">
                                                         <label><strong>Jurusan</strong></label>
                                                     </div>
                                                     <div class="col-md-8 form-group">
                                                         <input type="text" class="form-control" name="jurusan" placeholder="Jurusan" value="{{$formal->jurusan}}">
                                                     </div>
+                                                    @if ($errors->has('jurusan'))
+                                                        <span class="text-danger"><p class="text-right">* {{ $errors->first('jurusan') }}</p></span>
+                                                    @endif
+
                                                     <div class="col-md-4">
                                                         <label><strong>Periode</strong></label>
                                                     </div>
@@ -806,12 +828,22 @@
                                                         <input type="text" class="form-control" name="periode_masuk" placeholder="Periode Masuk" value="{{$formal->periode_masuk}}">
                                                         <input type="text" class="form-control" name="periode_keluar" placeholder="Periode Keluar" value="{{$formal->periode_keluar}}">
                                                     </div>
+                                                    @if ($errors->has('periode_masuk'))
+                                                        <span class="text-danger"><p class="text-right">* {{ $errors->first('periode_masuk') }}</p></span>
+                                                    @endif
+                                                    @if ($errors->has('periode_keluar'))
+                                                        <span class="text-danger"><p class="text-right">* {{ $errors->first('periode_keluar') }}</p></span>
+                                                    @endif
+
                                                     <div class="col-md-4">
                                                         <label><strong>Lokasi</strong></label>
                                                     </div>
                                                     <div class="col-md-8 form-group">
                                                         <input type="text" class="form-control" name="lokasi" placeholder="Lokasi" value="{{$formal->lokasi}}">
                                                     </div>
+                                                    @if ($errors->has('lokasi'))
+                                                        <span class="text-danger"><p class="text-right">* {{ $errors->first('lokasi') }}</p></span>
+                                                    @endif
                                                    
                                                     <div class="col-sm-12 d-flex justify-content-end">
                                                         <button type="submit" class="btn btn-primary me-1 mb-1">Ubah</button>
@@ -868,12 +900,20 @@
                                                                         <div class="col-md-8 form-group">
                                                                             <input type="text" class="form-control" name="nama_institusi" placeholder="Nama Institusi">
                                                                         </div>
+                                                                        @if ($errors->has('nama_institusi'))
+                                                                            <span class="text-danger"><p class="text-right">* {{ $errors->first('nama_institusi') }}</p></span>
+                                                                        @endif
+
                                                                         <div class="col-md-4">
                                                                             <label><strong>Jurusan</strong></label>
                                                                         </div>
                                                                         <div class="col-md-8 form-group">
                                                                             <input type="text" class="form-control" name="jurusan" placeholder="Jurusan">
                                                                         </div>
+                                                                        @if ($errors->has('jurusan'))
+                                                                            <span class="text-danger"><p class="text-right">* {{ $errors->first('jurusan') }}</p></span>
+                                                                        @endif
+
                                                                         <div class="col-md-4">
                                                                             <label><strong>Periode</strong></label>
                                                                         </div>
@@ -881,12 +921,23 @@
                                                                             <input type="text" class="form-control" name="periode_masuk" placeholder="Periode Masuk">
                                                                             <input type="text" class="form-control" name="periode_keluar" placeholder="Periode Keluar">
                                                                         </div>
+                                                                        @if ($errors->has('periode_masuk'))
+                                                                            <span class="text-danger"><p class="text-right">* {{ $errors->first('periode_masuk') }}</p></span>
+                                                                        @endif
+                                                                        @if ($errors->has('periode_keluar'))
+                                                                            <span class="text-danger"><p class="text-right">* {{ $errors->first('periode_keluar') }}</p></span>
+                                                                        @endif
+
                                                                         <div class="col-md-4">
                                                                             <label><strong>Lokasi</strong></label>
                                                                         </div>
                                                                         <div class="col-md-8 form-group">
                                                                             <input type="text" class="form-control" name="lokasi" placeholder="Lokasi">
                                                                         </div>
+                                                                        @if ($errors->has('lokasi'))
+                                                                            <span class="text-danger"><p class="text-right">* {{ $errors->first('lokasi') }}</p></span>
+                                                                        @endif
+
                                                                     </div>
                                                                 </div>
                                                             </div>

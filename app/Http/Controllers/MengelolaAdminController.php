@@ -122,7 +122,7 @@ class MengelolaAdminController extends Controller
         $data->alamat = $request->alamat;
         $data->no_telp = $request->no_telp;
         $data->email = $request->email;
-        $data->password = $request->password;
+        $data->password = bcrypt($request->password);
 
     	$data->save();
     	return redirect('/admin/MengelolaAdmin')->with('alert-success','Data berhasil ditambahkan!');
@@ -168,7 +168,7 @@ class MengelolaAdminController extends Controller
         $datas->alamat = $request->alamat;
         $datas->no_telp = $request->no_telp;
         $datas->email = $request->email;
-        $datas->password = $request->password;
+        $datas->password = bcrypt($request->password);
         $datas->save();
 
         return redirect('/admin/MengelolaAdmin')->with('alert-success','Data berhasil diubah!');

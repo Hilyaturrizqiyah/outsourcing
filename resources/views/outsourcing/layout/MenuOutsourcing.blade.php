@@ -61,6 +61,13 @@
                         <span> Data Transaksi</span>
                     </a>
                 </li>
+
+                <li class="sidebar-item {{ Request::is('/outsourcing/MengelolaLamaran') ? "active" : "" }} ">
+                    <a href="{{('/outsourcing/MengelolaLamaran')}}" class='sidebar-link'>
+                        <i class="fas fa-book"></i>
+                        <span> Lamaran Jasa</span>
+                    </a>
+                </li>
             </ul>
 
         </div>

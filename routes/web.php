@@ -77,11 +77,12 @@ Route::get('/chained_dopdown/getKotaKabupaten/{param}', 'AreaController@getKotaK
 
 Route::get('/chained_dopdown/getArea/{param}', 'AreaController@getArea');
 
-Route::get('/tenagakerja', 'TenagakerjaController@index');
-Route::get('/tenagakerja/LoginTenagakerja', 'TenagakerjaController@login');
-Route::post('/tenagakerja/AksiLoginTenagakerja', 'TenagakerjaController@postLogin');
-Route::get('/tenagakerja/RegisterTenagakerja', 'TenagakerjaController@tambah');
-Route::get('/logoutTenagaKerja', 'TenagakerjaController@logout');
+Route::get('/tenagakerja','TenagakerjaController@index');
+Route::get('/tenagakerja/LoginTenagakerja','TenagakerjaController@login');
+Route::post('/tenagakerja/AksiLoginTenagakerja','TenagakerjaController@postLogin');
+Route::get('/tenagakerja/RegisterTenagakerja','TenagakerjaController@tambah');
+Route::get('/tenagakerja/ValidasiAkunTenagaKerja/{id_tenagaKerja}/{pass}','TenagakerjaController@validasiAkunTenagaKerja');
+Route::get('/logoutTenagaKerja','TenagakerjaController@logout');
 
 Route::get('/tenagakerja/UbahProfilTenagaKerja', 'TenagaKerjaController@edit');
 
@@ -150,6 +151,9 @@ Route::get('/outsourcing/DataKomplain', 'OutsourcingController@riwayatKomplain')
 // Route::get('/customer/dataOutsourcing', 'CustomerController@tampilPenyediaJasa');
 // Route::get('/customer/detailOutsourcing{id_outsourcing}', 'CustomerController@tampilDetailOutsourcing');
 Route::get('/outsourcing/ubahProfil', 'OutsourcingController@ubahProfil');
+Route::get('/outsourcing/MengelolaLamaran', 'OutsourcingController@lamaranJasa');
+Route::get('/outsourcing/TerimaLamaran{id_lamaran}', 'OutsourcingController@terimaLamaran');
+Route::get('/outsourcing/GagalLamaran{id_lamaran}', 'OutsourcingController@gagalLamaran');
 // Route::get('/customer/formUbah', 'CustomerController@formUbah');
 // Route::get('/customer/riwayatSewa', 'CustomerController@tampilRiwayatPengajuan');
 // Route::get('/customer/riwayatSewaProgress', 'CustomerController@tampilRiwayatProgress');
