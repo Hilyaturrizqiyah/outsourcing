@@ -46,13 +46,16 @@
                                         <small>Tanggal Pengajuan : {{$kontraks->tgl_mulai_kontrak}}</small> <br>
                                         <p>Lama Kontrak : {{$kontraks->lama_kontrak}}</p>
                                         <p>Jumlah Tenaga Kerja : {{$kontraks->jumlah_tenagaKerja}}</p>
-                                        <p>Jumlah Biaya Perlengkapan : Rp. {{number_format($kontraks->jumlah_biayaPerlengkapan)}}</p>
-                                        <p>Jumlah Biaya Tenaga Kerja : Rp. {{number_format($kontraks->jumlah_biayaTenagaKerja)}}</p>
+                                        <p>Jumlah Biaya Perlengkapan : Rp.
+                                            {{number_format($kontraks->jumlah_biayaPerlengkapan)}}</p>
+                                        <p>Jumlah Biaya Tenaga Kerja : Rp.
+                                            {{number_format($kontraks->jumlah_biayaTenagaKerja)}}</p>
 
                                         <small style="color: purple">Status : {{$kontraks->status_kontrak}}</small> <br>
                                     </div>
                                     <div class="col-6">
-                                        <small class="float-end" style="color: red">Note : Pembayaran tenaga kerja <br> dapat
+                                        <small class="float-end" style="color: red">Note : Pembayaran tenaga kerja <br>
+                                            dapat
                                             dilakukan dari awal sampai akhir
                                             bulan</small>
                                         {{-- <a href="{{('/customer/komplain')}}" class="btn btn-primary float-end"><i
@@ -110,9 +113,29 @@
                                         <b class="float-end">{{$kontraks->outsourcing->nama_outsourcing}}</b>
                                         <small class="float-end" style="color: red">Note : Pembayaran dilakukan per
                                             bulan <br> selama masa kontrak</small>
+                                        {{-- <p>Download Surat Pengajuan Kontrak Kerja</p>
+                                            <a href="{{ route('suratKontrak.download', $kontraks->id_kontrak) }}"
+                                        class="btn btn-primary"><i class="fas fa-file-pdf"></i> PDF</a> --}}
                                         {{-- <a href="{{('/customer/komplain')}}" class="btn btn-primary float-end"><i
                                             class="fas fa-eye"></i> Ajukan Komplain</a> --}}
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="card text-center">
+                            <div class="card-header"
+                                style="border-bottom-left-radius: 20px !important; border-bottom-right-radius: 20px !important">
+                                <div class="row">
+                                    <div class="col">
+                                        <img src="{{ url('pengguna/assets/images/bukti_tf/'.$kontraks->foto_kontrak) }}"
+                                            alt="Image" width="500px" height="550px">
+
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -189,10 +212,16 @@
                                         <td>{{$pembayaranTK->bulan_ke}}</td>
                                         <td>{{$pembayaranTK->status_bayar}}</td>
                                         <td>
+                                            @if ($pembayaranTK->status_bayar == 'Menunggu Validasi')
+                                            <button type="button" class="btn btn-primary" >
+                                                <i class="fas fa-clock"></i>
+                                            </button>
+                                            @else
                                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                                 data-bs-target="#uploadBukti">
                                                 Upload Bukti Pembayaran
                                             </button>
+                                            @endif
                                         </td>
                                     </tr>
                                 </tbody>
@@ -201,6 +230,24 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="card text-center">
+                            <div class="card-header"
+                                style="border-bottom-left-radius: 20px !important; border-bottom-right-radius: 20px !important">
+                                <div class="row">
+                                    <div class="col">
+                                        <img src="{{ url('pengguna/assets/images/bukti_tf/'.$kontraks->foto_kontrak) }}"
+                                            alt="Image" width="500px" height="550px">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 @else
                 <div class="col">
                     <div class="card">
@@ -238,11 +285,12 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{url('customer/uploadPembayaranTenaga')}}" method="POST" enctype="multipart/form-data">
+                <form action="{{url('customer/uploadPembayaranTenaga')}}/{{$kontraks->id_kontrak}}" method="POST"
+                    enctype="multipart/form-data">
                     {{csrf_field()}}
                     <div class="form-group">
                         <label><b>Upload Bukti</b></label>
-                        <input type="file" class="form-control" name="bukti_tfTenagaKerja">
+                        <input type="file" class="form-control" name="bukti_tf">
                         @if ($errors->has('bukti_tf'))
                         <span class="text-danger">
                             <p class="text-right">* {{ $errors->first('bukti_tf') }}</p>

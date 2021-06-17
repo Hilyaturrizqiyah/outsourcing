@@ -26,7 +26,7 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url ('outsourcing/DashboardOutsourcing')}}">Dashboard</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Data Kontrak</li>
-                        
+
                     </ol>
                 </nav>
             </div>
@@ -77,7 +77,7 @@
                         @endif
                     </td>
                     <td>
-                        <a href="/outsourcing/UbahStatus{{$kontrak->id_kontrak}}" class="btn btn-warning">
+                        <a href="/outsourcing/ubahKontrak{{$kontrak->id_kontrak}}" class="btn btn-warning">
                             <i class="fas fa-pencil-alt"></i>
                         </a>
                         <a href="/outsourcing/HapusJasa{{$kontrak->id_kontrak}}" class="btn btn-danger" onclick="return confirm('Anda yakin mau menghapus item ini ?')">

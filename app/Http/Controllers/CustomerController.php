@@ -15,6 +15,7 @@ use App\tenaga_kerjaModel;
 use App\PembayaranTenagaKerjaModel;
 use App\PembayaranPerlengkapanModel;
 use Carbon\Carbon;
+use PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -150,12 +151,9 @@ class CustomerController extends Controller
 
 
         foreach ($progres as $mulai) {
-            if ($mulai->tgl_mulai_kontrak < $now) {
-                $mulai->status_kontrak = "In Progress";
-                $mulai->save();
-            }
+
             $selisih_hari = $mulai->created_at->diffInDays($now);
-            if ($selisih_hari >= 1 && $mulai->status_kontrak == "Kontrak Disetujui") {
+            if ($selisih_hari > 1 && $mulai->status_kontrak == "Kontrak Disetujui") {
                 $update_mulai = kontrak_jasaModel::find($mulai->id_kontrak);
                 $update_mulai->status_kontrak = "In Progress";
                 $update_mulai->save();
@@ -166,12 +164,12 @@ class CustomerController extends Controller
 
 
         foreach ($btl as $batal) {
-            if ($now > $batal->tgl_mulai_kontrak) {
-                $batal->status_kontrak = "Cancel";
-                $batal->save();
-            }
+            // if ($now > $batal->tgl_mulai_kontrak) {
+            //     $batal->status_kontrak = "Cancel";
+            //     $batal->save();
+            // }
             $selisih_hari = $batal->created_at->diffInDays($now);
-            if ($selisih_hari >= 1 && $batal->status_kontrak == "Pending") {
+            if ($selisih_hari > 1 && $batal->status_kontrak == "Pending") {
                 $update_batal = kontrak_jasaModel::find($batal->id_kontrak);
                 $update_batal->status_kontrak = "Cancel";
                 $update_batal->save();
@@ -370,22 +368,30 @@ class CustomerController extends Controller
         return redirect('/customer/riwayatSewaDetail' . $idKontrak)->with('alert-success', 'Bukti Pembayaran Perlengkapan Berhasil di Upload');
     }
 
-    public function uploadPembayaranTenaga(Request $request)
+    public function uploadPembayaranTenaga($id_kontrak, Request $request)
     {
-        $idKontrak = $request->id_kontrak;
-        $now = Carbon::now()->format('y-m-d');
+        // $idKontrak = $request->id_kontrak;
+        // $now = Carbon::now()->format('y-m-d');
 
 
-        $pembayaranTK = PembayaranTenagaKerjaModel::where('status_bayar', 'Menunggu Pembayaran')->first();
+        $pembayaranTeKa = PembayaranTenagaKerjaModel::where('id_kontrak', $id_kontrak)->where('status_bayar', 'Menunggu Pembayaran')->first();
 
-        $file = $request->file('bukti_tfTenagaKerja'); // menyimpan data gambar yang diupload ke variabel $file
+
+        $file = $request->file('bukti_tf'); // menyimpan data gambar yang diupload ke variabel $file
         $nama_file = time() . "_" . $file->getClientOriginalName();
         $file->move('pengguna/assets/images/bukti_tf', $nama_file); // isi dengan nama folder tempat kemana file diupload
-        $pembayaranTK->bukti_tf = $nama_file;
-        $pembayaranTK->waktu_bayar = $now;
-        $pembayaranTK->status_bayar = 'Menunggu Validasi';
-        $pembayaranTK->update();
 
-        return redirect('/customer/riwayatSewaDetail' . $idKontrak)->with('alert-success', 'Bukti Pembayaran Tenaga Kerja Berhasil di Upload');
+        $pembayaranTeKa->bukti_tf = $nama_file;
+        $pembayaranTeKa->status_bayar = 'Menunggu Validasi';
+        $pembayaranTeKa->update();
+
+        return redirect('/customer/riwayatSewaDetail'.$id_kontrak)->with('alert-success', 'Pembayaran Berhasil di Upload');
     }
+
+    // public function downloadImage($imageId){
+    //     $surat = kontrak_jasaModel::where('id_kontrak', $imageId)->firstOrFail();
+    //     $path = public_path(). '\pengguna\assets\images\bukti_tf'. $surat->filename;
+    //     return response()->download($path, $surat
+    //              ->original_filename, ['Content-Type' => $surat->mime]);
+    //  }
 }

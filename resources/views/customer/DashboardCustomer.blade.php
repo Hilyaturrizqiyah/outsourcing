@@ -37,7 +37,7 @@
     <section class="row">
         <p class="text-subtitle text-muted">Temukan Jasa Outsourcing Terbaik</p>
         @foreach ($jasa as $jasa)
-        <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-12">
             <a href="{{url('/customer/detailJasa'.$jasa->id_jasa)}}">
                 <div class="card">
                     <div class="card-body">
