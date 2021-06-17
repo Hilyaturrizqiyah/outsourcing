@@ -66,6 +66,8 @@
                     <td>
                         @if($kontrak->status_kontrak == "Pending")
                         <small style="color: orange">{{$kontrak->status_kontrak}}</small>
+                        @elseif($kontrak->status_kontrak == "Menunggu Pembayaran")
+                        <small style="color: purple">{{$kontrak->status_kontrak}}</small>
                         @elseif($kontrak->status_kontrak == "Kontrak Disetujui")
                         <small style="color: green">{{$kontrak->status_kontrak}}</small>
                         @elseif($kontrak->status_kontrak == "In Progress")

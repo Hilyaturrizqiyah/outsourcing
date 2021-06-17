@@ -94,24 +94,29 @@ class OutsourcingController extends Controller
 
     }
 
-    public function store(Request $request)
+    public function registerOsr()
+    {
+        return view('/outsourcing/register');
+    }
+
+    public function registerOsrPost(Request $request)
     {
 
         $messages = [
-            'required' => ':attribute masih kosong',
-            'min' => ':attribute diisi minimal :min karakter',
-            'max' => ':attribute diisi maksimal :max karakter',
-            'numeric' => ':attribute harus berupa angka',
-            'unique' => ':attribute sudah ada',
-            'email' => ':attribute harus berupa email',
-            'image' => ':attribute harus berupa gambar',
+            // 'required' => ':attribute masih kosong',
+            // 'min' => ':attribute diisi minimal :min karakter',
+            // 'max' => ':attribute diisi maksimal :max karakter',
+            // 'numeric' => ':attribute harus berupa angka',
+            // 'unique' => ':attribute sudah ada',
+            // 'email' => ':attribute harus berupa email',
+            // 'image' => ':attribute harus berupa gambar',
         ];
 
         $this->validate($request, [
-            'nama_outsourcing' => 'required|max:50',
-            'no_ktp' => 'required|numeric|digits_between:0,17',
-            'email' => 'required|email|max:50',
-            'password' => 'required|max:255'
+            // 'nama_outsourcing' => 'required|max:50',
+            // 'no_ktp' => 'required|numeric|digits_between:0,17',
+            // 'email' => 'required|email|max:50',
+            // 'password' => 'required|max:255'
         ], $messages);
 
         $data = new OutsourcingModel();
@@ -122,13 +127,14 @@ class OutsourcingController extends Controller
         $data->status_outsourcing = "Menunggu Validasi";
         $data->save();
 
-        return redirect('/outsourcing/RegisterOutsourcing')->with('alert-success', 'Data Akun berhasil ditambahkan!');
+        return redirect('/customer/loginCustomer')->with('alert-success', 'Data Akun berhasil ditambahkan!');
     }
 
 
     public function tampilRiwayatPengajuan()
     {
-        $kontraks    = kontrak_jasaModel::with('jasa')->where('id_outsourcing', Auth::guard('outsourcing')->user()->id_outsourcing)->where('status_kontrak', 'Pending')->orWhere('status_kontrak', 'Kontrak Disetujui')->where('id_outsourcing', Auth::guard('outsourcing')->user()->id_outsourcing)->get();
+        $kontraks    = kontrak_jasaModel::with('jasa')->where('id_outsourcing', Auth::guard('outsourcing')->user()->id_outsourcing)->where('status_kontrak', 'Pending')->orWhere('status_kontrak', 'Kontrak Disetujui')->where('id_outsourcing', Auth::guard('outsourcing')->user()->id_outsourcing)
+        ->orWhere('status_kontrak', 'Menunggu Pembayaran')->where('id_outsourcing', Auth::guard('outsourcing')->user()->id_outsourcing)->get();
         //Proses pembatalan dalam 1 hari
         // $now = Carbon::now();
         // $progres = kontrak_jasaModel::with('jasa')->where('id_outsourcing', Auth::guard('outsourcing')->user()->id_outsourcing)->where('status_kontrak', 'Kontrak Disetujui')->get();
@@ -187,6 +193,20 @@ class OutsourcingController extends Controller
         // $pembayaranP = PembayaranPerlengkapanModel::where('id_kontrak', $id_kontrak)->first();
 
         return view('/outsourcing/ubahKontrak', compact('kontraks'));
+    }
+
+    public function validasiBayarPerlengkapan($id_kontrak)
+    {
+        // $id_outsourcing = Session::get('id_outsourcing');
+        // $datas = OutsourcingModel::find($id_outsourcing);
+        $kontraks     = kontrak_jasaModel::where('id_kontrak', $id_kontrak)->where('status_kontrak', 'Menunggu Pembayaran')->first();
+
+        $kontraks = new PembayaranPerlengkapanModel();
+        $kontraks->status_bayar = "Tervalidasi";
+        $kontraks->update();
+        // $pembayaranP = PembayaranPerlengkapanModel::where('id_kontrak', $id_kontrak)->first();
+
+        return view('/outsourcing/ubahKontrak/'.$id_kontrak, compact('kontraks'));
     }
 
     public function cetak_pdf($id_kontrak)

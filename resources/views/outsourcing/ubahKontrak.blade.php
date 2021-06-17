@@ -57,6 +57,33 @@
                         </div>
                     </div>
                 </div>
+                @elseif($kontraks->status_kontrak == 'Menunggu Pembayaran')
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header"
+                                style="border-bottom-left-radius: 20px !important; border-bottom-right-radius: 20px !important">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h6>{{$kontraks->jasa->nama_jasa}}</h6>
+                                        <small>Tanggal Pengajuan : {{$kontraks->tgl_mulai_kontrak}}</small> <br>
+                                        <p>Lama Kontrak : {{$kontraks->lama_kontrak}}</p>
+                                    </div>
+                                    {{-- <div class="col-6">
+                                        <form enctype="multipart/form-data"
+                                            action="{{url('outsourcing/validasiBayarPerlengkapan')}}/{{$kontraks->id_kontrak}}" method="post">
+                                            {{csrf_field()}}
+                                            <small class="float-end" style="color: red">Validasi Pembayaran
+                                                Perlengkapan</small> <br>
+                                            <input type="submit"
+                                                class="btn btn-primary float-end" value="Validasi Pembayaran">
+                                        </form>
+                                    </div> --}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- DataTable with Hover -->
                 @elseif($kontraks->status_kontrak == 'In Progress')
@@ -101,18 +128,17 @@
                                     {{-- @foreach($kontraks as $kontrak)
                                     <tr>
                                         <td>{{$no++}}</td>
-                                        <td>{{$kontrak->tgl_mulai_kontrak}}</td>
-                                        <td>{{$kontrak->jumlah_harga}}</td>
-                                        <td>foto bukti tf</td>
-                                        <td>tgl</td>
-                                        <td>bulan</td>
-                                        <td>
-                                            <a href="/admin/HapusCustomer{{$kontrak->id_kontrak}}"
-                                                class="btn btn-danger"
-                                                onclick="return confirm('Anda yakin mau menghapus item ini ?')">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
-                                        </td>
+                                    <td>{{$kontrak->tgl_mulai_kontrak}}</td>
+                                    <td>{{$kontrak->jumlah_harga}}</td>
+                                    <td>foto bukti tf</td>
+                                    <td>tgl</td>
+                                    <td>bulan</td>
+                                    <td>
+                                        <a href="/admin/HapusCustomer{{$kontrak->id_kontrak}}" class="btn btn-danger"
+                                            onclick="return confirm('Anda yakin mau menghapus item ini ?')">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
                                     </tr>
                                 </tbody>
                                 @endforeach --}}
@@ -132,7 +158,8 @@
                                     <p>Lama Kontrak : {{$kontraks->lama_kontrak}}</p>
 
                                     <p>Download Surat Pengajuan Kontrak Kerja</p>
-                                <a href="{{url ('/outsourcing/cetak_pdf')}}/{{$kontraks->id_kontrak}}" class="btn btn-primary"><i class="fas fa-file-pdf"></i> PDF</a>
+                                    <a href="{{url ('/outsourcing/cetak_pdf')}}/{{$kontraks->id_kontrak}}"
+                                        class="btn btn-primary"><i class="fas fa-file-pdf"></i> PDF</a>
 
                                 </div>
                                 <div class="col-6">
@@ -158,7 +185,7 @@
                                 {{-- <input type="text" name="id_kontrak" value="{{$kontraks->id_kontrak}}" hidden> --}}
                                 <input type="file" name="foto_kontrak">
                                 <hr>
-                                <input type="submit" class="btn btn-primary" value="Kirim" >
+                                <input type="submit" class="btn btn-primary" value="Kirim">
 
                             </form>
                         </div>

@@ -19,7 +19,7 @@ class MengelolaJenisJasaController extends Controller
         	return view('admin.halaman.MengelolaJenisJasa',compact('datas'));
         }
     }
-    
+
 
     public function tambah() {
 
@@ -27,7 +27,7 @@ class MengelolaJenisJasaController extends Controller
             return redirect('/admin/MengelolaAdmin')->with('alert','Anda harus login dulu');
         }
         else{
-		
+
         	return view('admin.halaman.tambah_data.TambahJenisJasa');
         }
     }

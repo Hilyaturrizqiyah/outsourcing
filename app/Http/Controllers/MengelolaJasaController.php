@@ -21,14 +21,14 @@ class MengelolaJasaController extends Controller
         $datas = jasaModel::get();
         	return view('outsourcing.MengelolaJasa',compact('datas', 'jenis_jasa'));
     }
-    
+
     // public function chained_dopdown(){
 
     //     $jenis_jasa = JenisJasaModel::all();
-    
-    
+
+
     //     return view('outsourcing.tambah.chained_dopdown')->with('jenis_jasa',$jenis_jasa);
-    
+
     // }
 
     public function tambah() {
@@ -76,7 +76,7 @@ class MengelolaJasaController extends Controller
 
         $file = $request->file('foto_profil'); // menyimpan data gambar yang diupload ke variabel $file
         $nama_file = time()."_".$file->getClientOriginalName();
-        $file->move('pengguna/assets/images/bukti_tf',$nama_file); // isi dengan nama folder tempat kemana file diupload   
+        $file->move('assets/img/jasa',$nama_file); // isi dengan nama folder tempat kemana file diupload
         $data->foto_profil = $nama_file;
     	$data->save();
 
@@ -124,7 +124,7 @@ class MengelolaJasaController extends Controller
 
         $file = $request->file('foto_profil'); // menyimpan data gambar yang diupload ke variabel $file
         $nama_file = time()."_".$file->getClientOriginalName();
-        $file->move('pengguna/assets/images/bukti_tf',$nama_file); // isi dengan nama folder tempat kemana file diupload   
+        $file->move('pengguna/assets/images/bukti_tf',$nama_file); // isi dengan nama folder tempat kemana file diupload
         $data->foto_profil = $nama_file;
     	$data->save();
 
