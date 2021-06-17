@@ -41,18 +41,27 @@
                   <div class="col-sm-9">
                     <input type="text" name="nama_tenagaKerja" class="form-control" id="nama">
                   </div>
+                  @if ($errors->has('nama_tenagaKerja'))
+                    <span class="text-danger"><p class="text-right">* {{ $errors->first('nama_tenagaKerja') }}</p></span>
+                  @endif
                 </div>
                 <div class="mb-3 row">
                   <label for="no_ktp" class="col-sm-3 col-form-label"><strong>Nomor KTP</strong></label>
                   <div class="col-sm-9">
                     <input type="text" name="no_ktp" class="form-control" id="no_ktp">
                   </div>
+                  @if ($errors->has('no_ktp'))
+                    <span class="text-danger"><p class="text-right">* {{ $errors->first('no_ktp') }}</p></span>
+                  @endif
                 </div>
                 <div class="mb-3 row">
                   <label for="email" class="col-sm-3 col-form-label"><strong>Email</strong></label>
                   <div class="col-sm-9">
                     <input type="text" name="email" class="form-control" id="email">
                   </div>
+                  @if ($errors->has('email'))
+                    <span class="text-danger"><p class="text-right">* {{ $errors->first('email') }}</p></span>
+                  @endif
                 </div>
                 <div class="mb-3 row">
                   <label for="Password" class="col-sm-3 col-form-label"><strong>Password</strong></label>
@@ -66,6 +75,8 @@
                     <input type="submit" class="btn btn-outline-primary" value="Mendaftar">
                   </div>
                 </div>
+                <p>sudah punya akun, Login <a href="{{url('tenagakerja/LoginTenagakerja')}}">Login Tenaga Kerja</a></p>
+
 
               </form>
           </div>
