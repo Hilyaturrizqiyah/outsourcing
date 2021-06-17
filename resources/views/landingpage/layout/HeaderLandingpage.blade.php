@@ -10,14 +10,14 @@
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li class="active"><a href="#index.html">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
+          <li class="active"><a href="#index.html">Beranda</a></li>
+          <li><a href="#about">Tentang</a></li>
+          <li><a href="#services">Layanan</a></li>
           <li><a href="#team">Perusahaan</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="#contact">Kontak</a></li>
           <li><a disabled>||</a></li>
 
-          <li><a href="{{url ('/Register')}}" style="color: darkblue"><strong>Register</strong></a></li>
+          <li><a href="{{url ('/Register')}}" style="color: darkblue"><strong>Daftar</strong></a></li>
           <li class="get-started"><a href="{{url ('customer/loginCustomer')}}">Login</a></li>
         </ul>
       </nav><!-- .nav-menu -->

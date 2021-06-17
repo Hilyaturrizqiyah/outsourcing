@@ -23,10 +23,10 @@ class PddkNonFormalController extends Controller
         ];
 
     	$this->validate($request, [
-    		'kursus' => 'required|max:50',
+    		'kursus' => 'required|max:20',
             'nama_institusi' => 'required|max:50',
-            'periode_masuk' => 'required|max:50',
-            'periode_keluar' => 'required|max:50',
+            'periode_masuk' => 'required|numeric',
+            'periode_keluar' => 'required|numeric',
             'lokasi' => 'required|max:100',
     	], $messages);
 
@@ -54,10 +54,10 @@ class PddkNonFormalController extends Controller
         ];
 
     	$this->validate($request, [
-    		'kursus' => 'required|max:50',
+    		'kursus' => 'required|max:20',
             'nama_institusi' => 'required|max:50',
-            'periode_masuk' => 'required|max:50',
-            'periode_keluar' => 'required|max:50',
+            'periode_masuk' => 'required|numeric',
+            'periode_keluar' => 'required|numeric',
             'lokasi' => 'required|max:100',
     	], $messages);
 

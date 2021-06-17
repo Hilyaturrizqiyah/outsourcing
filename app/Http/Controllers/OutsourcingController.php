@@ -15,10 +15,13 @@ use App\detail_komplainModel;
 use App\tenaga_kerjaModel;
 use App\PembayaranTenagaKerjaModel;
 use App\PembayaranPerlengkapanModel;
+use App\lamaran_kerjaModel;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use App\Mail\MyTestMail;
+use Illuminate\Support\Facades\Mail;     
 use PDF;
 
 class OutsourcingController extends Controller
@@ -135,7 +138,8 @@ class OutsourcingController extends Controller
 
     public function tampilRiwayatPengajuan()
     {
-        $kontraks    = kontrak_jasaModel::with('jasa')->where('id_outsourcing', Auth::guard('outsourcing')->user()->id_outsourcing)->where('status_kontrak', 'Pending')->orWhere('status_kontrak', 'Kontrak Disetujui')->where('id_outsourcing', Auth::guard('outsourcing')->user()->id_outsourcing)->get();
+        $kontraks    = kontrak_jasaModel::with('jasa')->where('id_outsourcing', Auth::guard('outsourcing')->user()->id_outsourcing)->where('status_kontrak', 'Pending')->orWhere('status_kontrak', 'Kontrak Disetujui')->where('id_outsourcing', Auth::guard('outsourcing')->user()->id_outsourcing)
+        ->orWhere('status_kontrak', 'Menunggu Pembayaran')->where('id_outsourcing', Auth::guard('outsourcing')->user()->id_outsourcing)->get();
         //Proses pembatalan dalam 1 hari
         // $now = Carbon::now();
         // $progres = kontrak_jasaModel::with('jasa')->where('id_outsourcing', Auth::guard('outsourcing')->user()->id_outsourcing)->where('status_kontrak', 'Kontrak Disetujui')->get();
@@ -196,6 +200,20 @@ class OutsourcingController extends Controller
         return view('/outsourcing/ubahKontrak', compact('kontraks'));
     }
 
+    public function validasiBayarPerlengkapan($id_kontrak)
+    {
+        // $id_outsourcing = Session::get('id_outsourcing');
+        // $datas = OutsourcingModel::find($id_outsourcing);
+        $kontraks     = kontrak_jasaModel::where('id_kontrak', $id_kontrak)->where('status_kontrak', 'Menunggu Pembayaran')->first();
+
+        $kontraks = new PembayaranPerlengkapanModel();
+        $kontraks->status_bayar = "Tervalidasi";
+        $kontraks->update();
+        // $pembayaranP = PembayaranPerlengkapanModel::where('id_kontrak', $id_kontrak)->first();
+
+        return view('/outsourcing/ubahKontrak/'.$id_kontrak, compact('kontraks'));
+    }
+
     public function cetak_pdf($id_kontrak)
     {
         // $obat             = ModelObat::all();
@@ -250,4 +268,63 @@ class OutsourcingController extends Controller
 
         return view('/customer/komplainDetail', compact('komplain', 'detail_komplain'));
     }
+  
+    public function lamaranJasa()
+    {
+        $id_outsourcing = Auth::guard('outsourcing')->user()->id_outsourcing;
+
+        $datas     = lamaran_kerjaModel::all();
+
+        return view('/outsourcing/MengelolaLamaran', compact('datas'));
+    }
+
+    public function terimaLamaran($id_lamaran)
+    {
+        $lamaran = lamaran_kerjaModel::find($id_lamaran);
+
+        $datas = lamaran_kerjaModel::find($id_lamaran);
+        $datas->status_lamaran = "Diterima";
+        $datas->save();
+
+        $data = tenaga_kerjaModel::find($lamaran->id_tenagaKerja);
+        $data->id_jasa = $lamaran->id_jasa;
+        $data->status_tenagaKerja = "TenagaKerja";
+        $data->save();
+
+        //---kirim email
+            $tenagaKerja = tenaga_kerjaModel::find($lamaran->id_tenagaKerja);
+            $jasa = jasaModel::find($lamaran->id_jasa);
+            $details = [
+                'title' => 'Pemberitahuan Lamaran Tenaga Kerja ',
+                'body' => 'Selamat anda diterima di Jasa '.$jasa->nama_jasa.' pada Outsourcing '.$jasa->outsourcing->nama_outsourcing,
+                ];
+            
+                 \Mail::to($tenagaKerja->email)->send(new \App\Mail\MyTestMail($details));
+        //Kirim Email
+
+        return redirect('/outsourcing/MengelolaLamaran')->with('alert-success','Berhasil menyimpan data, TenagaKerja berhasil diterima!');
+    }
+
+    public function gagalLamaran($id_lamaran)
+    {
+        $lamaran = lamaran_kerjaModel::find($id_lamaran);
+
+        $datas = lamaran_kerjaModel::find($id_lamaran);
+        $datas->status_lamaran = "Tidak Diterima";
+        $datas->save();
+
+        //---kirim email
+            $tenagaKerja = tenaga_kerjaModel::find($lamaran->id_tenagaKerja);
+            $jasa = jasaModel::find($lamaran->id_jasa);
+            $details = [
+                'title' => 'Pemberitahuan Lamaran Tenaga Kerja ',
+                'body' => 'Maaf anda tidak diterima di Jasa '.$jasa->nama_jasa.' pada Outsourcing '.$jasa->outsourcing->nama_outsourcing,
+                ];
+            
+                 \Mail::to($tenagaKerja->email)->send(new \App\Mail\MyTestMail($details));
+        //Kirim Email
+
+        return redirect('/outsourcing/MengelolaLamaran')->with('alert-success','Berhasil menyimpan data, TenagaKerja gagal diterima!');
+    }
 }
+

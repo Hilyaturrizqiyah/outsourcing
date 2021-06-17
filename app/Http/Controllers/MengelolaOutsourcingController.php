@@ -1,9 +1,11 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\OutsourcingModel;
 use Illuminate\Http\Request;
+use App\Mail\MyTestMail;
+use Illuminate\Support\Facades\Mail;
+
 use Session;
 use DB;
 
@@ -36,6 +38,17 @@ class MengelolaOutsourcingController extends Controller
     	$datas=OutsourcingModel::find($id_outsourcing);
         $datas->status_outsourcing = 'Tervalidasi';
         $datas->save();
+
+        //---kirim email
+                $outsourcing = OutsourcingModel::find($id_outsourcing);
+                //$jasa = jasaModel::find($tenagaKerja->id_jasa);
+                $details = [
+                'title' => 'Pemberitahuan Validasi akun Outsourcing ',
+                'body' => 'Selamat anda sudah di validasi, selamat datang di Outsourcing',
+                ];
+            
+                 \Mail::to($outsourcing->email)->send(new \App\Mail\MyTestMail($details));
+        //Kirim Email
 
         return redirect('/admin/DetailOutsourcing'.$id_outsourcing)->with('alert-success','Outsourcing berhasil divalidasi!');
 

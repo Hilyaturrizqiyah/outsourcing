@@ -19,8 +19,8 @@
                 </nav>
             </div>
         </div>
-    </div> 
-    
+    </div>
+
         @if(\Session::has('alert-success'))
             <div class="alert alert-light-success color-success alert-dismissible show fade"><i class="bi bi-check-circle"></i>
                 {{Session::get('alert-success')}}
@@ -36,13 +36,13 @@
 
     <section class="section">
         <div class="card">
-            <div class="card-header">
+            {{-- <div class="card-header">
                 <h4 class="card-title">Cari Jasa</h4>
             </div>
             <div class="card-content">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-4 mb-4">
+                        {{-- <div class="col-md-4 mb-4">
                             <div class="form-group">
                                 <select class="choices form-select">
                                     <option value="">Semua Area</option>
@@ -60,8 +60,8 @@
                                     </optgroup>
                                 </select>
                             </div>
-                        </div>
-                        <div class="col-md-4 mb-4">
+                        </div> --}}
+                        {{-- <div class="col-md-4 mb-4">
                             <div class="form-group">
                                 <select class="choices form-select">
                                     <option value="">Semua Jasa</option>
@@ -71,8 +71,8 @@
                                     @endforeach
                                 </select>
                             </div>
-                        </div>
-                        <div class="col-md-4 mb-4">
+                        </div> --}}
+                        {{-- <div class="col-md-4 mb-4">
                             <button type="button" class="btn btn-outline-primary btn-icon btn-lg action-icon">
                                 <span class="fonticon-wrap">
                                     <svg class="bi" >
@@ -80,11 +80,11 @@
                                     </svg>
                                 </span>
                             </button>
-                        </div>
+                        </div> 
 
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
         <div class="card">
             <div class="card-header">
@@ -118,7 +118,7 @@
                                 </td>
                             </tr>
                         @endforeach
-                        
+
                     </tbody>
                 </table>
             </div>

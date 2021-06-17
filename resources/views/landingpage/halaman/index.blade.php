@@ -8,16 +8,17 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
-                <h1 data-aos="fade-up">Jasa Tenaga Kerja Outsourcing</h1>
-                <h2 class="mt-3" style="line-height: 180%;" data-aos="fade-up" data-aos-delay="400">Kami menyediakan
-                    informasi mengenai jasa pihak ketiga dari perusahaan-perusahaan Outsourcing yang ada di daerah
-                    Indramayu</h2>
+                <h4 data-aos="fade-up">Jasa Tenaga Kerja Outsourcing</h4>
+                <h6 class="mt-3" style="line-height: 180%;" data-aos="fade-up" data-aos-delay="400">Outsourcing merupakan sistem yang diberlakukan perusahaan
+                    dimana mereka menyerahkan beberapa kegiatan perusahaan atau pekerjaan mereka kepada pihak luar.
+                    Pihak ini disebut dengan outside provider. Seluruh pengalihan tugas, hak, serta kewajiban masing-masing
+                    pihak biasanya diatur dalam sebuah perjanjian kerjasama atau kontrak kerja.</h6>
                 <div data-aos="fade-up" data-aos-delay="800">
                     <a href="#about" class="btn-get-started scrollto"><i class="fas fa-phone-alt"></i> Hubungi Kami</a>
                 </div>
             </div>
             <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="fade-left" data-aos-delay="200">
-                <img src="assets/img/hero-img.png" class="img-fluid animated" alt="">
+                <img src="assets/img/osr-depan.jpg" class="img-fluid animated" alt="">
             </div>
         </div>
     </div>
@@ -32,12 +33,12 @@
         <div class="container">
 
             <div class="section-title" data-aos="fade-up">
-                <h2>About Us</h2>
+                <h2>Tentang Kami</h2>
             </div>
 
             <div class="row content">
                 <div class="col-lg-6 " data-aos="fade-up" data-aos-delay="150">
-                    <img src="assets/img/about.jpg" alt="" class="img-fluid">
+                    <img src="assets/img/osr11.jpg" alt="" class="img-fluid">
                 </div>
                 <div class="col-lg-6 mt-5 pt-4 pt-lg-0" data-aos="fade-up" data-aos-delay="300">
                     <p>
@@ -50,6 +51,7 @@
                         <li><i class="ri-check-double-line"></i> Website kami menyediakan penyewaan atau melakukan
                             kontrak jasa tenaga kerja dengan perusahaan outsourcing</li>
                     </ul>
+                   
                 </div>
             </div>
 
@@ -61,7 +63,7 @@
         <div class="container">
 
             <div class="section-title" data-aos="fade-up">
-                <h2>Services</h2>
+                <h2>Layanan</h2>
                 <p>Jasa Ketenagakerjaan yang tersedia</p>
             </div>
 
@@ -86,7 +88,7 @@
         <div class="container">
 
             <div class="section-title" data-aos="fade-up">
-                <h2>Mitra Kami</h2>
+                <h2>Perusahaan Penyedia Jasa</h2>
                 <p>Perusahaan - perusahaan Outsourcing yang ada di daerah Indramayu</p>
             </div>
 
@@ -126,13 +128,12 @@
         <div class="container">
 
             <div class="section-title" data-aos="fade-up">
-                <h2>Contact Us</h2>
+                <h2>Kontak Kami</h2>
             </div>
             <div class="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="100">
                 <div class="contact-about">
                     <h3>Outsourcing</h3>
-                    <p>Cras fermentum odio eu feugiat. Justo eget magna fermentum iaculis eu non diam phasellus.
-                        Scelerisque felis imperdiet proin fermentum leo. Amet volutpat consequat mauris nunc congue.</p>
+                    <p>Kami menyediakan jasa pihak ketiga</p>
                     <div class="social-links">
                         <a href="#" class="twitter"><i class="icofont-twitter"></i></a>
                         <a href="#" class="facebook"><i class="icofont-facebook"></i></a>
@@ -151,7 +152,7 @@
 
                     <div>
                         <i class="ri-mail-send-line"></i>
-                        <p>info@example.com</p>
+                        <p>osr@example.com</p>
                     </div>
 
                     <div>
